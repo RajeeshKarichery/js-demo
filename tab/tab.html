@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>Notification Types</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="demonstration of some noty capabilities">
+    
+
+    <link rel="stylesheet" href="../dist/bootstrap.min.css">
+	
+	
+	<style>
+	
+	<!--	.nav-tabs > li.rounded.active > a,
+	.nav-tabs > li.rounded.active > a:hover,
+	.nav-tabs > li.rounded.active > a:focus
+	 {
+		background-color:cadetblue;
+		font-weight:bolder;
+		border-top-left-radius:10px;
+		border-top-right-radius:10px;
+	   color:orange;
+	}
+	.nav-tabs > li.rounded > a
+	 {
+		background-color:cadetblue;
+		font-weight:bolder;
+		border-top-left-radius:10px;
+		border-top-right-radius:10px;
+	   color:white;
+	}-->
+	
+	
+	.nav-tabs > li.active > a,
+	.nav-tabs > li.active > a:hover,
+	.nav-tabs > li.active > a:focus
+	 {
+		background-color:#E4E4E1;
+		font-weight:bolder;
+		border-top-left-radius:7px;
+		border-top-right-radius:7px;
+	    color:orange;
+	}
+	.nav-tabs > li > a
+	 {
+		background-color:#E4E4E1;
+		font-weight:bolder;
+		border-top-left-radius:7px;
+		border-top-right-radius:7px;
+	    color:white;
+	}
+	
+		.tab-content{
+				border-left: 1px solid #ddd;
+				border-right: 1px solid #ddd;
+				border-bottom: 1px solid #ddd;
+				border-radius: 0px 0px 5px 5px;
+				padding: 10px;
+		}
+	</style>
+	
+	
+	<script src="../dist/jquery.min.js"></script>
+	<script src="../dist/bootstrap.min.js"></script>	
+	
+	<script src="mytab.js"></script>
+	
+    
+</head>
+<body>
+			
+		<div class="container">  
+			<button id="btn1">click</button>
+			<button id="btn2">click2</button>
+			
+			
+			<button id="btn1Show">Show1</button>
+			<button id="btn2Show">Show2</button>
+			
+			<button id="btn1Hide">Hide1</button>
+			<button id="btn2Hide">Hide2</button>
+			
+			
+			<button id="btn1Title1">setTitle1</button>
+			
+				<myTab></myTab>
+				
+			<!--  <ul class="nav nav-tabs">
+				<li id="s1_li" class="active"><a href="#home"> <span class="rk1"></span> Home</a></li>
+				<li id="s2_li"><a href="#menu1"><span class="rk2"></span>Menu 1</a></li>				
+			  </ul>-->
+			 
+			  <div class="tab-content">
+				<div id="home" class="tab-pane fade in active">
+				  <h5>HOME</h5>
+				  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+				</div>
+				<div id="menu1" class="tab-pane fade">
+				  <h5>Menu 1</h5>
+				  <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+				</div>				
+			  </div>
+		</div>
+
+
+
+
+		
+		
+    <script type="text/javascript">   
+        $(document).ready(function (){
+		
+				$("#btn1").on("click",function(){
+					//alert(myTab.selectedIndex);
+					myTab.setPopoverTemplate('<button class="btn btn-primary btn-xs" type="button"> Message <span class="badge">1</span></button>');
+				});
+				
+				$("#btn2").on("click",function(){
+					//alert(myTab.selectedIndex);
+					myTab.setPopoverTemplate('<button class="btn btn-warning btn-xs" type="button"> Messages <span class="badge">2</span></button>');
+				});
+				
+				$("#btn1Show").on("click",function(){
+					
+					myTab.setPopoverShow(true);
+				});
+				
+				$("#btn2Show").on("click",function(){
+					
+					myTab.setPopoverShow(true);
+				});
+				
+				$("#btn1Hide").on("click",function(){				
+					myTab.setPopoverShow(false);
+				});
+				
+				$("#btn2Hide").on("click",function(){					
+					myTab.setPopoverShow(false);
+				});
+				
+				
+				$("#btn1Title1").on("click",function(){					
+					//myTab.setTabTitle("oko");
+					var dp =['AA','VV'];
+					myTab.setTabTitleAll(dp);
+				});
+				
+				
+				
+				var myTab = mytab({
+									tag_name:'att',
+									popover:{ 
+										//titleDp:['A1','B1'],
+										title:"Apop",
+										enable:true,
+										template:'<button class="btn btn-default btn-xs" type="button"> Default <span class="badge">0</span></button>'
+										/*templateDp:['<button class="btn btn-default btn-xs" type="button"> Default <span class="badge">100</span></button>',
+										'<button class="btn btn-primary btn-xs" type="button"> primary <span class="badge">200</span></button>']*/
+									}
+								  });
+				var dp = [{'id':'home','label':'Home' },
+						  {'id':'menu1','label':'Menu1' }	
+						]
+				myTab.dataProvider(dp);	
+				
+				
+				
+			
+						
+		      
+		});//document close
+		
+	</script>
+
+
+</body>
+</html>
