@@ -18,6 +18,9 @@
 			animation:false,
 			template:null,
 			templateDp:null
+		},
+		callback:{
+			snTabChangeEvent:null
 		}
     };
 	
@@ -32,12 +35,13 @@
 				if(!this.options.popover.placement)
 					this.options.popover.placement = "bottom";	
 			}
-			globTabObj.popoverList = [];					
+			globTabObj.popoverList = [];
+			globTabObj.options = this.options;		
             return this;
         },
         dataProvider: function (dp) {
 			globTabObj.selectedIndex =1;
-			var element  = '<div id="Tabs">';
+			var element  = '<div id="'+this.options.tag_name+'_Tabs">';
 				element += '<ul class="nav nav-tabs">';			
 			for (var i=0;i<dp.length;i++) {
 				var li_id = 'li_'+this.options.tag_name+'_'+(i+1);
@@ -74,7 +78,14 @@
 			});
 			
 			$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {				
-				globTabObj.selectedIndex = $(e.target).closest('li').index()+1;			
+				globTabObj.selectedIndex = $(e.target).closest('li').index()+1;	
+				/*var _resp = Object();
+				_resp['name'] = "oko";
+				$( document ).trigger("snTabChangeEvent", _resp );*/				
+				if(globTabObj.options.callback.snTabChangeEvent){					
+					globTabObj.options.callback.snTabChangeEvent.apply();
+				}
+				
 			});
 
 			//PopOver	
@@ -161,17 +172,17 @@
 				}				
 			});
 		},
-		setTabTitle:function(title){
-			$('#Tabs .nav-tabs li a span').each( function() {
+		setTabTitle:function(title){			
+			$('#'+this.options.tag_name+'_Tabs .nav-tabs li a span').each( function() {
 				var str_class =$(this).attr('class');				
 				if(globTabObj.selectedIndex == str_class.slice(-1)){
 					$('.'+str_class+'').html(title);
 				}				
 			} );
 		},
-		setTabTitleAll:function(dp){
-			$('#Tabs .nav-tabs li a span').each( function(i) {
-				var str_class =$(this).attr('class');				
+		setTabTitleAll:function(dp){			
+			$('#'+this.options.tag_name+'_Tabs .nav-tabs li a span').each( function(i) {				
+				var str_class =$(this).attr('class');					
 				$('.'+str_class+'').html(dp[i]);								
 			} );
 		}

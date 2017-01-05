@@ -92,15 +92,16 @@
 				<li id="s2_li"><a href="#menu1"><span class="rk2"></span>Menu 1</a></li>				
 			  </ul>-->
 			 
-			  <div class="tab-content">
-				<div id="home" class="tab-pane fade in active">
+			  <div class="tab-content" >
+				<!--<div id="home" class="tab-pane fade in active">
 				  <h5>HOME</h5>
 				  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 				</div>
 				<div id="menu1" class="tab-pane fade">
 				  <h5>Menu 1</h5>
 				  <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-				</div>				
+				</div>-->
+				
 			  </div>
 		</div>
 
@@ -142,29 +143,46 @@
 				
 				
 				$("#btn1Title1").on("click",function(){					
-					//myTab.setTabTitle("oko");
-					var dp =['AA','VV'];
-					myTab.setTabTitleAll(dp);
-				});
-				
-				
+					myTab.setTabTitle("oko");
+					//var dp =['AA','VV'];
+					//myTab.setTabTitleAll(dp);
+				});			
 				
 				var myTab = mytab({
 									tag_name:'att',
 									popover:{ 
-										//titleDp:['A1','B1'],
-										title:"Apop",
+										titleDp:['A1','B1'],
+										//title:"Apop",
 										enable:true,
-										template:'<button class="btn btn-default btn-xs" type="button"> Default <span class="badge">0</span></button>'
-										/*templateDp:['<button class="btn btn-default btn-xs" type="button"> Default <span class="badge">100</span></button>',
-										'<button class="btn btn-primary btn-xs" type="button"> primary <span class="badge">200</span></button>']*/
+										//template:'<button class="btn btn-default btn-xs" type="button"> Default <span class="badge">0</span></button>'
+										templateDp:['<button class="btn btn-default btn-xs" type="button"> Default <span class="badge">100</span></button>',
+										'<button class="btn btn-primary btn-xs" type="button"> primary <span class="badge">200</span></button>']
+									},
+									callback:{
+										 snTabChangeEvent:function(){
+											console.log("okkk");
+										}
 									}
 								  });
-				var dp = [{'id':'home','label':'Home' },
-						  {'id':'menu1','label':'Menu1' }	
+				var dp = [{'id':'home','label':'Home','description':'home page' },
+						  {'id':'menu1','label':'Menu1','description':'Testing Menu' }	
 						]
-				myTab.dataProvider(dp);	
+				myTab.dataProvider(dp);				
 				
+				$.each(dp, function( index, value ) {
+					var el ='';
+					if(index ==0)
+						el = '<div id="'+value['id']+'" class="tab-pane fade in active"><h5>'+value['label']+'</h5><p>'+value['description']+'</p></div>';
+					else
+						el = '<div id="'+value['id']+'" class="tab-pane fade"><h5>'+value['label']+'</h5><p>'+value['description']+'</p></div>';
+					$(".tab-content").append(el);				
+				});
+				
+								
+				/*$( document ).on( "snTabChangeEvent",function( event, resp ) {
+					console.log( resp );					
+				});*/
+								
 				
 				
 			
