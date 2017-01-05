@@ -184,8 +184,8 @@
 
     $.tabRenderer = {};
     $.tabRenderer.init = function (options) {
-        var _pop = Object.create(tabsObject).init(options);
-        return _pop;
+        var _tab = Object.create(tabsObject).init(options);
+        return _tab;
     };
     function mytab(options){
         return $.tabRenderer.init(options);
