@@ -69,8 +69,8 @@
                 }
             }
             element    += '</ul>';
-            element    += '</div>';
-            var sntab = $("sntab");
+            element    += '</div>';          
+			var sntab = $(''+this.options.tag_name+'');
             $(sntab).replaceWith(element);
             var self = this;
             $(".nav-tabs a").click(function(e){
