@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../dist/bootstrap.min.css" >
+  
+  <style>
+	.alert-danger-v2{
+        background-color: #d9534f;
+        color: #ffffff;
+        font-family: Verdana;
+        font-size: 90%;
+        font-weight: 700;
+        height: 22px;
+        margin-left: 0px;
+        padding-left: 10px;
+        border: 0px solid;
+        border-radius: 0.25em;
+    }
+
+
+    .alert-danger hr{border-top-color:#e6c1c7}.alert-danger .alert-link{color:#953b39}
+  </style>
+  
+ <script src="jquery.min.js"></script>
+ </script>
+ <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/js/bootstrapValidator.min.js"></script>
+
+<script src="jquery.validate-json.js"></script>
+ </script> 
+ <script src="../dist/bootstrap.min.js"></script>
+ 
+ 
+ 
+</head>
+<body>
+ 
+<button  id="btn">open</button>
+
+<textarea  id="ta">open</textarea>
+<span id="err" class="alert alert-danger" style="display:none"></span>
+<!--<div class="alert alert-danger-v2"  >Required!</div>-->
+
+
+<!--
+<form id="contactForm" method="post" class="form-horizontal">
+    <div class="form-group">
+        <label class="col-xs-3 control-label">Full name</label>
+        <div class="col-xs-6">
+            <input type="text" class="form-control" name="fullName" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-xs-3 control-label">Email</label>
+        <div class="col-xs-6">
+            <input type="text" class="form-control" name="email" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-xs-3 control-label">Title</label>
+        <div class="col-xs-6">
+            <input type="text" class="form-control" name="title" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-xs-3 control-label">Content</label>
+        <div class="col-xs-6">
+            <textarea class="form-control" name="content" rows="5"></textarea>
+        </div>
+    </div>
+
+    
+    <div class="form-group">
+        <div class="col-xs-9 col-xs-offset-3">
+            <div id="messages"></div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-xs-9 col-xs-offset-3">
+            <button type="submit" class="btn btn-default">Validate</button>
+        </div>
+    </div>
+</form>-->
+
+<script>
+$(document).ready(function() {
+    /*$('#contactForm').bootstrapValidator({
+        framework: 'bootstrap',
+        err: {
+            container: '#messages'
+        },
+        icon: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            fullName: {
+                validators: {
+                    notEmpty: {
+                        message: 'The full name is required and cannot be empty'
+                    }
+                }
+            },
+            email: {
+                validators: {
+                    notEmpty: {
+                        message: 'The email address is required and cannot be empty'
+                    },
+                    emailAddress: {
+                        message: 'The email address is not valid'
+                    }
+                }
+            },
+            title: {
+                validators: {
+                    notEmpty: {
+                        message: 'The title is required and cannot be empty'
+                    },
+                    stringLength: {
+                        max: 100,
+                        message: 'The title must be less than 100 characters long'
+                    }
+                }
+            },
+            content: {
+                validators: {
+                    notEmpty: {
+                        message: 'The content is required and cannot be empty'
+                    },
+                    stringLength: {
+                        max: 50,
+                        message: 'The content must be less than 500 characters long'
+                    }
+					 
+                }
+            }
+        }
+    });
+	
+	
+});*/
+</script>
+ 
+ 
+  <script>
+ 
+	$(document).ready(function(){
+	
+		$("#btn").click(function(){
+				/*var param = { 'uid' : '1234'};		    		
+				OpenWindowWithPost("http://helium.pupilpod.in/workspace/javascript/js-demo/kum/testme.php", 
+				"width=730,height=345,left=100,top=100,resizable=yes,scrollbars=yes", 
+				"NewFile", param);*/
+				
+				var enStr = $('#ta').val();
+				
+				
+				/*var response=jQuery.parseJSON(enStr);
+				if(typeof response =='object')
+				{				  
+					alert('Yes');
+				}
+				else
+				{
+					alert('not');
+				}*/
+				
+				var jsonInput = $("#ta");
+
+				jsonInput.validateJSON({
+				  'onSuccess': function(json) {
+					console.log(json);
+					//jsonResults.removeClass('ui-state-error').text('Valid JSON');
+					$('#err').hide();
+				  },
+				  'onError': function(error) {
+					//jsonResults.addClass('ui-state-error').text(error.message || "Invalid");
+					var error = JSON.parse(error);
+					console.log(error.message);
+					$('#err').show();
+					$('#err').text(error.message);
+					
+				  }
+				});
+				
+				
+				/*$("#ta").validateJSON({
+				  // Compress the result
+				  // default: false
+				  compress: false, 
+
+				  // Prettify the result
+				  // default: true
+				  reformat: true, 
+
+				  // Call on valid
+				  // default: noop
+				  onSuccess: function (json) {
+					console.log(json);
+					//alert("ok");
+				  },
+
+				  // Call on invalid
+				  // default: noop
+				  onError: function (error) {
+					//alert("error");
+					// error.message
+					console.log(error.message);
+				  }
+				})*/
+				
+				
+				
+		});		
+		
+	   function OpenWindowWithPost(url, windowoption, name, params)
+	   {
+				var form = document.createElement("form");
+				form.setAttribute("method", "post");
+				form.setAttribute("action", url);
+				form.setAttribute("target", name);
+	 
+				for (var i in params) {
+					if (params.hasOwnProperty(i)) {
+						var input = document.createElement('input');
+						input.type = 'hidden';
+						input.name = i;
+						input.value = params[i];
+						form.appendChild(input);
+					}
+				}
+				
+				document.body.appendChild(form);         
+				window.open("post.htm", name, windowoption);            
+				form.submit();            
+				document.body.removeChild(form);
+		}
+ 
+  
+		
+		
+	});
+	
+  </script>
+ 
+</body>
+</html>
