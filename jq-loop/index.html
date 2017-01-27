@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+ <script src="../dist/jquery.min.js"></script>
+    
+ 
+</head>
+<body>
+ 
+
+ 
+ 
+  <script>
+ 
+	var _dt = ['<td ><div data-field="fname"> myname </div> </td>' ];
+	
+	
+	$(document).ready(function(){
+	
+	
+		for (let row of _dt) {
+			console.log(row);
+			var ele = row;
+			var attr = $(ele).children('div').attr('data-field'); 
+			//alert(attr);
+			var _v = $(ele).children('div').text(); 
+			alert(_v);
+		}
+		
+		
+	
+	});
+	
+	
+  </script>
+ 
+</body>
+</html>
