@@ -4,10 +4,16 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title></title>
+  <link rel="stylesheet" type="text/css" href="../dist/bootstrap.min.css">
  <script src="../dist/jquery.min.js"></script>
+ <script src="../dist/bootstrap.min.js"></script>
     
  
 </head>
+
+	<div class="row" id="insertHere">		
+	</div>
+	
 <body>
  
 
@@ -22,13 +28,61 @@
 	
 	
 		for (let row of _dt) {
-			console.log(row);
+			//console.log(row);
 			var ele = row;
 			var attr = $(ele).children('div').attr('data-field'); 
 			//alert(attr);
 			var _v = $(ele).children('div').text(); 
-			alert(_v);
+			//alert(_v);
 		}
+		
+		var _items = [{'id':'1','name':'AAA'},{'id':'2','name':'BBB'}]
+		PopulateEmployeeArray();		
+		
+		function PopulateEmployeeArray(){			
+			var f_items =FindDepartmentEmployees(2);
+			$.each(f_items, function (index, row) {
+				console.log(row);				
+			});
+			console.log("orginal.........")
+			$.each(_items, function (index, row) {
+				console.log(row);
+			});
+		}
+		
+		function FindDepartmentEmployees(id) {	
+			/*return jQuery.grep(_items, function (a) {
+				return a['id'] == id;
+			});*/
+			
+			return _items.filter(function (a) {
+				console.log("filter"+a['id']);
+				return a['id'] == id;
+			});
+		}
+		
+		loadBtn();		
+		function loadBtn(){			
+			for (var i=0;i<5;i++) {
+				id = "cbtn-"+i;
+				//$(selector).attr({attribute:value, attribute:value,...})
+				var btnObj = $('<button class="btn btn-default" ></button>');
+				btnObj.attr({"id":id});
+				btnObj.text(i);
+				btnObj.val(i);
+				$('#insertHere').append(btnObj);	
+			}
+			$("#insertHere button").after(" ");
+		}
+		
+		$('.buttons').on('click', 'button', function(e){
+			console.log(e);
+		});
+		
+		$('#insertHere').on('click','button', function(e){
+			console.log(e.target.value);
+		});
+		
 		
 		
 	
