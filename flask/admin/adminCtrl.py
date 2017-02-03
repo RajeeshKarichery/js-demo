@@ -2,6 +2,9 @@ from flask import Blueprint,request,json
 from werkzeug import secure_filename
 from admin.Resp import Resp,HeroSon,HeroDaughter,Child,TimestampLogger,Third
 from admin.MLevel import Dog
+from admin.MFactory import ButtonFactory
+from admin.MAFactory import SocialShareFactory
+
 from werkzeug.datastructures import ImmutableMultiDict
 
 from admin.MyError import ValueTooSmallError
@@ -34,12 +37,22 @@ def index():
 	#lo = TimestampLogger()
 	#lo.log("testing log")
 	
-	t = Third()  
-	t.get_name()
+	#t = Third()  
+	#t.get_name()
 	
 	#ob = Dog()
 	#ob.getMe()
 	
+	
+	#factory
+	
+	'''button_obj = ButtonFactory()
+	button = ['image', 'input', 'flash']
+	for b in button:
+		print button_obj.create_button(b).get_html()  		'''
+		
+	obj = SocialShareFactory.get_share_obj("facebook")  
+	obj.share(farg=1, myarg2="two", myarg3=3)
 	return "index.../page"
 	
 @admin.route('/upload', methods=['GET', 'POST'])
@@ -117,13 +130,14 @@ def test3():
 		#ob = Route()
 		#resp = ob.hello()
 		#mymethod = getattr(importlib.import_module("wflow.Route"), "hello")
-		module = importlib.import_module('wflow.Route1')
-		my_class = getattr(module, 'Route1')
+		#module = importlib.import_module('wflow.Route1')
+		#my_class = getattr(module, 'Route1')
 		#ob = my_class()
 		#methodToCall = getattr(ob, "hello")
 		#resp = methodToCall()	
 		#return "Test3==="+resp
-		return "oko"
+		
+		return "test3"
 	except Exception as e:  
 		error = "Error occured in test3" + repr(e)  
 		return error

@@ -1,0 +1,21 @@
+DROP TABLE IF EXISTS `demo1`.`tnet_workflow_transition`;
+CREATE TABLE `demo1`.`tnet_workflow_transition` (
+  `workflow_guid` varchar(36) DEFAULT NULL,
+  `from_state` varchar(36) DEFAULT NULL,
+  `to_state` varchar(36) DEFAULT NULL,
+  `transition_guid` varchar(36) DEFAULT NULL,
+  `transition_name` varchar(200) DEFAULT NULL,
+  `transition_description` varchar(500) DEFAULT NULL,
+  `action_name` varchar(250) DEFAULT NULL,
+  `system` tinyint(4) DEFAULT '0',
+  `tab_open` tinyint(4) DEFAULT '0',
+  `is_auto_invoice` char(1) DEFAULT 'N'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS `demo1`.`tnet_action_master`;
+CREATE TABLE `demo1`.`tnet_action_master` (
+  `action_name` varchar(250) DEFAULT NULL,
+  `action_file_name` varchar(250) DEFAULT NULL,
+  `action_type` char(100) DEFAULT NULL,
+  `is_visibe` char(1) DEFAULT 'Y'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
