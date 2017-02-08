@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>Notification Types</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="demonstration of some noty capabilities">
+    
+
+    <link rel="stylesheet" href="../dist/bootstrap.min.css">
+	
+	
+	<style>
+	
+	
+	
+	</style>
+	
+	
+	<script src="../dist/jquery.min.js"></script>
+	<script src="../dist/bootstrap.min.js"></script>	
+	
+    
+</head>
+<body>
+			
+		<div class="container">  
+			
+			<button id="btn1Show">Enable1</button>
+			<button id="btn1Hide">Disable1</button>
+
+			
+			<ul class="nav nav-tabs">
+			  <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
+			  <li><a href="#profile" data-toggle="tab">Profile</a></li>
+			  <li><a href="#messages" data-toggle="tab">Messages</a></li>
+			</ul>
+
+			<div id='content' class="tab-content">
+			  <div class="tab-pane active" id="home">
+				<ul>
+					<li>home</li>				   
+				</ul>
+				<button>submit</button>
+			  </div>
+			  <div class="tab-pane fade" id="profile">
+				<ul>
+					<li>profile</li>           
+				</ul>
+				<button>submit</button>
+			  </div>
+			  <div class="tab-pane fade" id="messages">
+				  Testing
+			  </div>
+			</div>    
+			  
+			  
+			  
+		</div>
+
+
+
+
+		
+		
+    <script type="text/javascript">   
+        $(document).ready(function (){
+		
+
+				$('.nav li').not('.active').addClass('disabled');
+				$('.nav li').not('.active').find('a').removeAttr("data-toggle");
+				
+					
+	
+				$("#btn1Show").on("click",function(){
+					$('.nav li.active').next('li').removeClass('disabled');
+					$('.nav li.active').next('li').find('a').attr("data-toggle","tab");
+					
+					$('.nav li:eq(2) ').removeClass('disabled');
+					$('.nav li:eq(2) a').attr("data-toggle","tab");
+				});
+				
+				
+			
+				$("#btn1Hide").on("click",function(){
+					$('.nav li:eq(1) ').addClass('disabled');
+					$('.nav li:eq(1) a').removeAttr('data-toggle');
+					
+					$('.nav li:eq(2) ').addClass('disabled');
+					$('.nav li:eq(2) a').removeAttr('data-toggle');
+				});
+
+
+
+
+						
+		      
+		});//document close
+		
+	</script>
+
+
+</body>
+</html>
