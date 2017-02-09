@@ -1,9 +1,11 @@
 from flask import Blueprint,request,json
 from werkzeug import secure_filename
-from admin.Resp import Resp,HeroSon,HeroDaughter,Child,TimestampLogger,Third
+from admin.Resp import Resp,HeroSon,HeroDaughter,Child,TimestampLogger
 from admin.MLevel import Dog
 from admin.MFactory import ButtonFactory
 from admin.MAFactory import SocialShareFactory
+from admin.MAFactory import AbstractSocialShare
+from admin.MInherit import Third
 
 from werkzeug.datastructures import ImmutableMultiDict
 
@@ -40,20 +42,16 @@ def index():
 	#t = Third()  
 	#t.get_name()
 	
-	#ob = Dog()
-	#ob.getMe()
-	
-	
-	#factory
-	
-	'''button_obj = ButtonFactory()
-	button = ['image', 'input', 'flash']
-	for b in button:
-		print button_obj.create_button(b).get_html()  		'''
-		
-	obj = SocialShareFactory.get_share_obj("facebook")  
-	obj.share(farg=1, myarg2="two", myarg3=3)
+	ob = Dog(10)
+	ob.getMe()
 	return "index.../page"
+	
+@admin.route('/factory')
+def factory():
+	obj = SocialShareFactory.get_share_obj("facebook",10)  
+	obj.share(farg=1, myarg2="two", myarg3=3)	
+	return "/factory"
+
 	
 @admin.route('/upload', methods=['GET', 'POST'])
 def upload_file():

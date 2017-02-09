@@ -90,6 +90,12 @@
 					$('.nav li:eq(2) ').addClass('disabled');
 					$('.nav li:eq(2) a').removeAttr('data-toggle');
 				});
+				
+				
+				$(".nav").on('click', "li.disabled a", function(event) {					
+					event.stopImmediatePropagation();
+					return false;
+				});
 
 
 

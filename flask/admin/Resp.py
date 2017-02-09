@@ -50,7 +50,7 @@ class Child(Parent,Base):
 
 	def get_value(self):		
 		#super(Child, self).get_value()
-		Parent.get_value(self)
+		Base.get_value(self)
 		print "overide get value"
 		
 #return self.value + 1
@@ -66,29 +66,3 @@ class TimestampLogger(Logger):
         message = "{ts} {msg}".format(ts= datetime.now(),msg=message)
         super(TimestampLogger, self).log(message)
 		
-class First(object):
-	
-    def __init__(self):
-		super(First, self).__init__()
-		print ">>>>>>>>>>first"	
-		
-		def get_name(self):
-			print "from ------- First"
-		
-		
-class Second(object):
-    def __init__(self):
-		#super(Second, self).__init__()
-		print ">>>>>>>>>second"
-	
-		def get_name(self):
-			print "from ------- Second"
-	
-class Third(First,Second):
-	
-    def __init__(self):  
-		super(Third, self).__init__()  
-			
-		def get_name(self):
-			print "from ------- Third"
-	

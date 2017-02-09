@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+  
+  <style>
+	tr {
+		border:1px inset white;
+	}
+	tr.focused {
+		border:1px solid red; 
+	}
+  </style>
+  
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/rowreorder/1.2.0/css/rowReorder.dataTables.min.css"> 
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.2.4/css/buttons.dataTables.min.css"> 
+  
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>  
+  <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/rowreorder/1.2.0/js/dataTables.rowReorder.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/1.2.4/js/dataTables.buttons.min.js"></script>
+  
+ 
+</head>
+<body>
+ 
+  <script>
+	 $(document).ready(function() {
+    var counter = 1;
+ 
+    /*$('#example').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                text: 'Add new button',
+                action: function ( e, dt, node, config ) {
+                    dt.button().add( 1, {
+                        text: 'Button '+(counter++),
+                        action: function () {
+                            this.remove();
+                        }
+                    } );
+                }
+				
+            }
+        ]
+    } );*/
+	
+	var table = $('#example').DataTable();
+ 
+	table.button().add( 2, {
+		action: function ( e, dt, button, config ) {
+			dt.ajax.reload();
+		},
+		text: 'Reload table'
+	} );
+	
+	
+	
+	
+} );
+	
+  </script>
+  
+  
+  <table id="example" class="display" cellspacing="0" width="100%">  
+		<thead>
+            <tr> 
+				<th></th>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Office</th>
+                <th>Start date</th>
+                <th>Salary</th>
+            </tr>
+        </thead>       
+        <tbody>
+            <tr> 
+				<td>1</td>
+                <td>Tiger Nixon</td>
+                <td>System Architect</td>
+                <td>Edinburgh</td>
+                <td>2011/04/25</td>
+                <td>$320,800</td>
+            </tr>
+            <tr>  
+				<td>2</td>
+                <td>Garrett Winters</td>
+                <td>Accountant</td>
+                <td>Tokyo</td>
+                <td>2011/07/25</td>
+                <td>$170,750</td>
+            </tr>
+            <tr>     
+				<td>3</td>			
+                <td>Ashton Cox</td>
+                <td>Junior Technical Author</td>
+                <td>San Francisco</td>
+                <td>2009/01/12</td>
+                <td>$86,000</td>
+            </tr>
+            <tr> 
+				<td>4</td>
+                <td>Cedric Kelly</td>
+                <td>Senior Javascript Developer</td>
+                <td>Edinburgh</td>
+                <td>2012/03/29</td>
+                <td>$433,060</td>
+            </tr>
+            <tr>         
+				<td>5</td>
+                <td>Airi Satou</td>
+                <td>Accountant</td>
+                <td>Tokyo</td>
+                <td>2008/11/28</td>
+                <td>$162,700</td>
+            </tr>
+            <tr>         
+				<td>6</td>	
+                <td>Brielle Williamson</td>
+                <td>Integration Specialist</td>
+                <td>New York</td>
+                <td>2012/12/02</td>
+                <td>$372,000</td>
+            </tr>
+            <tr>         
+				<td>7</td>
+                <td>Herrod Chandler</td>
+                <td>Sales Assistant</td>
+                <td>San Francisco</td>
+                <td>2012/08/06</td>
+                <td>$137,500</td>
+            </tr>
+            <tr>         
+				<td>8</td>
+                <td>Rhona Davidson</td>
+                <td>Integration Specialist</td>
+                <td>Tokyo</td>
+                <td>2010/10/14</td>
+                <td>$327,900</td>
+            </tr>
+		</tbody>       
+    </table>
+ 
+</body>
+</html>
