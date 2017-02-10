@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>Notification Types</title>
+        
+</head>
+<body>		
+		
+    <script type="text/javascript">
+
+		function Animal(name){ 
+			return {
+				run: function() {
+				  alert(name + " is running!")
+				}
+			}
+		}
+		function Rabbit(name) {    
+		  var rabbit = Animal(name) // make animal
+		  rabbit.bounce = function() { // mutate
+			this.run()
+			alert(name + " bounces to the skies! :)")
+		  }
+		  return rabbit // return the result
+		}
+		var rabbit = Rabbit("rab")
+		rabbit.bounce()
+       		
+	</script>
+</body>
+</html>
