@@ -16,9 +16,9 @@ class FacebookShare(AbstractSocialShare):
     def __init__(self, *args, **kwargs):
         pass
 
-    def share(self, *args, **kwargs):		
+    """def share(self, *args, **kwargs):		
         for key in kwargs:
-			print kwargs[key]
+			print kwargs[key]"""
 			#print "another keyword arg: %s: %s" % (key, kwargs[key])
 
 

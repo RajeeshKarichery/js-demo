@@ -11,6 +11,9 @@ from werkzeug.datastructures import ImmutableMultiDict
 
 from admin.MyError import ValueTooSmallError
 
+from admin.waction.ActionFactory import ActionFactory
+from admin.waction_inheritance.v1.ActionBase import ActionBase
+
 #from wflow.Route import Route
 
 import importlib
@@ -45,11 +48,23 @@ def index():
 	ob = Dog(10)
 	ob.getMe()
 	return "index.../page"
+
+@admin.route('/action')
+def action():
+	obj = ActionFactory.get_instance('v2')
+	#obj.convert()	
+	return "/action"
+	
+@admin.route('/action2')
+def action2():
+	obj = ActionBase()
+	obj.do_generate_invoice()
+	return "/action2"	
 	
 @admin.route('/factory')
 def factory():
 	obj = SocialShareFactory.get_share_obj("facebook",10)  
-	obj.share(farg=1, myarg2="two", myarg3=3)	
+	#obj.share(farg=1, myarg2="two", myarg3=3)	
 	return "/factory"
 
 	
