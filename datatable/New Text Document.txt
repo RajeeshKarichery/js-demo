@@ -1,0 +1,258 @@
+function datatable_init(options,callBack){
+    var defaults = {
+        bSort : false,
+        paging: false,
+        searching: false,
+        bInfo:false,
+        mapKey: 'field_name',
+        colRender : null,
+        cols:null,
+        tag_name:"sn_datagrid_table",
+		editable:false,
+		selectable:true,
+		enable_checkbox:true,
+        reorder:false,
+        buttons:false,
+        toolbar:false
+    };
+    defaults = $.extend(defaults,options);
+    var tag_name =  defaults.tag_name;
+    var dgObject = new Object;
+	dgObject.tag_name = tag_name;
+	dgObject.defaults = defaults;
+    dgObject.setCols = function(cols){
+        defaults.cols = cols;
+        $("#sndt_inbox_dtgrid_box").remove();
+        execDownloadTemplate();
+    }
+    dgObject.setDp = function(results){
+        dgObject.results = results;
+        var rows = [];
+        var i=1;
+        for(let result of results){
+            var row = [];
+            row.push('<td>'+i+'</td>');
+            i++;
+			if(this.defaults.enable_checkbox)
+				row.push('<td><div class="checkbox"><label> <input type="checkbox" class="'+tag_name+'_guid" value="'+result[this.defaults.mapKey]+'" aria-label="..."></label></div></td>');
+            for(let col of this.cols){
+				if(result[col.field_name] == null)
+					result[col.field_name] == "";
+				if(col.is_itemrenderer){
+					if(col.item_renderer == "sn_text_input_renderer"){
+						row.push(Mustache.render(this.sn_text_input_renderer,$.extend(col,{"field_value":result[col.field_name]})));
+					}
+					else if(col.item_renderer == "sn_image_download_file_renderer"){
+						row.push(Mustache.render(this.sn_image_download_file_renderer,$.extend(col,{"field_value":result[col.field_name],"file_link":result[col.field_name+"_link"]})));
+					}
+                    else if(col.item_renderer == "sn_image_renderer"){
+                        var _keyVal="";
+                        if(col.dp){
+                            for(let _item of col.dp){
+                                if(_item['key'] == result[col.field_name]){
+                                    _keyVal = _item['value'];
+                                    break;
+                                }
+                            }
+                        }
+                        row.push(Mustache.render(this.sn_image_renderer,$.extend(col,{"field_value":_keyVal})));
+                    }
+				}
+                else{
+					row.push(Mustache.render(this.sn_default_renderer,$.extend(col,{"field_value":result[col.field_name]})));
+				}	
+            }
+            rows.push(row);
+        }
+        this.datagrid.clear();
+        this.datagrid.rows.add(rows).draw();
+    }
+    dgObject.getSelectedInstances = function(){
+        instance_guids = [];
+        $("#"+tag_name+"_datagrid tbody input[type='checkbox']."+tag_name+"_guid:checked").each(function(){
+            instance_guids.push($(this).val());
+        });
+        return instance_guids;
+    }
+    dgObject.getSelectedObjects = function(){
+        instance_objects = [];
+        $("#"+tag_name+"_datagrid tbody input[type='checkbox']."+tag_name+"_guid:checked").each(function(){
+            var selected_guid = $(this).val();
+            for(let result of dgObject.results){
+                if(selected_guid == result[defaults.mapKey]){
+                    instance_objects.push(result);
+                    break;
+                }
+            }
+        });
+        return instance_objects;
+    }
+
+    dgObject.setSelectedIndex = function(data_guid){
+        $("#"+tag_name+"_datagrid tbody input[type='checkbox']."+tag_name+"_guid").each(function(){
+            var selected_guid = $(this).val();
+            $(this).closest('tr').removeClass("selected");
+            $(this).prop('checked', false);
+            if(selected_guid == data_guid){
+                $(this).closest('tr').addClass("selected");
+                $(this).prop('checked', true);
+            }
+        });
+    }
+
+    dgObject.clearCheckBox = function(){
+        $("#"+tag_name+"_dt_select_all_btn").prop('checked', false);
+        $("#"+tag_name+"_datagrid tbody input[type='checkbox']."+tag_name+"_guid").each(function(){
+            $(this).prop('checked', false);
+        });
+        $("#"+tag_name+" tbody tr").removeClass("selected");
+    }
+    dgObject.clearRowSelected = function(){
+        dgObject.datagrid.$('tr.selected').removeClass('selected');
+    }
+    dgObject.isRowSelected = function(){
+        var $row =  dgObject.datagrid.$('tr.selected');
+        return $row.length>0?true:false;
+    }
+
+    dgObject.createToolButtons = function(){
+        var _btn = [{id:1,label:"Created",key:"actionCreated"},{id:2,label:"Submitted",key:"actionSub"}]
+        $.each(_btn,function(i,row){
+            dgObject.datagrid.button().add(i, {
+                'text': row['label'],
+                'id':row['key'],
+                'className': 'btn-xs',
+                'action': function(e, dt, node, config) {
+                    //table.buttons.info( 'Please wait', 'Processing data...' );
+                    //table.buttons.info( 'Complete', 'Data processing complete', 2000 );
+                    //console.log(e.target.id);
+                    //console.log(this.text());
+                    //console.log(config.id);
+                    $( document ).trigger(tag_name+"ButtonsChangeEvent",config);
+                }
+            });
+        })
+    }
+
+    init();
+    function init(){
+        if(defaults.cols==undefined || defaults.cols.length<1)
+            return callBack(dgObject);
+        execDownloadTemplate();
+    }
+    function execDownloadTemplate(){
+        downloadTemplate("/scripts/components/sn-datatable/resources/custom_datatable_comps.mst",function(template){
+            var sn_datagrid = $(template).filter('#sn_datagrid').html();
+            dgObject.sn_text_input_renderer = $(template).filter('#sn_datagrid_text_input_renderer').html();
+            dgObject.sn_default_renderer = $(template).filter('#sn_default_renderer').html();
+            dgObject.sn_image_renderer = $(template).filter('#sn_datagrid_image_renderer').html();
+            dgObject.sn_image_download_file_renderer = $(template).filter('#sn_datagrid_image_download_file_renderer').html();
+            var params = new Object;
+            columns = defaults.cols;
+            var datagrid_str = '<div class="form-inline" id="'+tag_name+'_dtgrid_box">';
+            dgObject.cols = columns;
+            datagrid_str += Mustache.render(sn_datagrid,dgObject);
+            datagrid_str += "</div>";
+            $(tag_name).replaceWith(datagrid_str);
+            if(dgObject.defaults.reorder == true){
+                dgObject.datagrid = $("#"+tag_name+"_datagrid").DataTable({
+                    /*columnDefs: [{orderable: false, className: 'select-checkbox',targets: 1} ],*/
+                    columnDefs: [{ targets: 0, visible: false },{orderable: false, className: 'select-checkbox',targets: 1}  ],
+                    select: {style: 'os', selector: 'td:first-child'},
+                    /*order: [[ 1, 'asc' ]],*/
+                    bSort : dgObject.defaults.bSort,
+                    paging: dgObject.defaults.paging,
+                    searching: dgObject.defaults.searching,
+                    bInfo:dgObject.defaults.bInfo,
+                    rowReorder: {
+                        selector: 'td:not(:first-child)'
+                    }
+                });
+            }
+            else{
+                if(dgObject.defaults.buttons == true){
+
+                    dgObject.datagrid = $("#"+tag_name+"_datagrid").DataTable({
+                        columnDefs: [{ targets: 0, visible: false },{orderable: false, className: 'select-checkbox',targets: 1}  ],
+                        select: {style: 'os', selector: 'td:first-child'},
+                        order: [[ 1, 'asc' ]],
+                        bSort : dgObject.defaults.bSort,
+                        paging: dgObject.defaults.paging,
+                        searching: dgObject.defaults.searching,
+                        bInfo:dgObject.defaults.bInfo,
+                        dom: '<"toolbar">Bfrtlip',
+                        buttons: []
+                    });
+                }
+                else{
+                    dgObject.datagrid = $("#"+tag_name+"_datagrid").DataTable({
+                        columnDefs: [{ targets: 0, visible: false },{orderable: false, className: 'select-checkbox',targets: 1}  ],
+                        select: {style: 'os', selector: 'td:first-child'},
+                        order: [[ 1, 'asc' ]],
+                        bSort : dgObject.defaults.bSort,
+                        paging: dgObject.defaults.paging,
+                        searching: dgObject.defaults.searching,
+                        bInfo:dgObject.defaults.bInfo
+                    });
+                }
+            }
+            if(dgObject.defaults.toolbar == true){
+                $( document ).trigger(tag_name+"ToolBarInitialize","");
+            }
+
+            //implement any item_renderer callBacks here
+            $("#"+tag_name+"_datagrid tbody").on("change","input.text_input_renderer",function(){
+                var currentRow = $(this).closest("tr").index();
+                var method = "on_"+$(this).attr("data_field")+"_changed";
+                dgObject.results[currentRow][$(this).attr("data_field")] = $(this).val();
+                dgObject[method]($(this));
+            });
+
+
+            $("#"+tag_name+"_datagrid tbody").on("click","tr",function(){
+                if(dgObject.defaults.selectable == false)
+                    return;
+                if($(this).hasClass("selected")){
+                    $(this).removeClass("selected");
+                    $(this).find("input[type='checkbox']").prop('checked', false);
+                    $("#"+tag_name+"_dt_select_all_btn").prop('checked', false);
+                }
+                else{
+                    $(this).addClass("selected");
+                    $(this).find("input[type='checkbox']").prop('checked', true);
+                    if($("#"+tag_name+"_datagrid tbody tr td input[type='checkbox']:not(:checked)").length == 0)
+                        $("#"+tag_name+"_dt_select_all_btn").prop('checked', true);
+                }
+                $( document ).trigger(tag_name+"ChangeEvent","");
+            });
+            $("#"+tag_name+"_datagrid tbody tr").on("click","td:first-child input[type='checkbox']",function(){
+                if(dgObject.defaults.selectable == false)
+                    return;
+                if($(this).is(":checked")){
+                    $(this).parent("tr").addClass("selected");
+                    $("#"+tag_name+"_dt_select_all_btn").prop('checked', false);
+                }
+                else{
+                    $(this).parent("tr").removeClass("selected");
+                    if($("#"+tag_name+"_datagrid tbody tr td:first-child input[type='checkbox']:not(:checked)").length == 0)
+                        $("#"+tag_name+"_dt_select_all_btn").prop('checked', true);
+                }
+            });
+            $("#"+tag_name+"_datagrid thead").on("click","#"+tag_name+"_dt_select_all_btn",function(){
+                if($(this).is(":checked")){
+                    if(dgObject.defaults.selectable == true)
+                        $("#"+tag_name+"_datagrid tbody tr").addClass("selected");
+                    $("#"+tag_name+"_datagrid tbody tr td:first-child input[type='checkbox']").prop('checked', true);
+                }
+                else{
+                    if(dgObject.defaults.selectable == true)
+                        $("#"+tag_name+"_datagrid tbody tr").removeClass("selected");
+                    $("#"+tag_name+"_datagrid tbody tr td:first-child input[type='checkbox']").prop('checked', false);
+                }
+                $( document ).trigger(tag_name+"ChangeEvent","");
+            });
+            callBack(dgObject);
+
+        });
+    }
+}

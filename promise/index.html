@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>ooTypes</title>
+	
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <!--<script src="mine.js"></script>-->
+    
+        
+</head>
+<body>		
+
+
+	<button id="myButton">Click</button>
+	<button id="myButton2">Click2</button>
+		
+		
+    <script type="text/javascript">
+	
+	
+		 $(document).ready(function() {
+		 
+			
+			document.addEventListener("myEvent",myEventHandler);		
+			function myEventHandler(e){
+				alert(e.foo);
+			}			
+			var evt = document.createEvent("Event");
+			evt.initEvent("myEvent",true,true);
+			evt.foo = "bar";
+			document.dispatchEvent(evt);
+			
+			
+			
+			/*$(document).on('somethingInteresting', function(e){
+				alert('v');
+
+			});			
+			$(document).trigger('somethingInteresting');*/
+			
+			
+			
+			
+		});
+			
+		/*	$(document).trigger('beforeShowEvent');
+			
+			var beforeShowEvent = $.Event('beforeshow.tab');
+			
+			$(document).on('beforeshow.tab', '.special', function(){
+				return confirm('Are you ready to show this special tab?');
+			});
+			
+			$(document).trigger('somethingInteresting');
+			
+			$(document).on('somethingInteresting', function(e){
+				alert('v');
+
+			});
+			
+		 });
+	
+	
+		
+		
+		
+		var openPanel = $( "#myButton" ).firstClick();
+		var openPanel2 = $( "#myButton2" );
+		
+		//openPanel.done( initializeData );
+		
+		/*openPanel.done(function() {
+			alert("ok"); 
+		});*/
+		
+		/*openPanel.done(function() {
+			alert("ok");				
+		});*/
+		
+
+		
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</script>
+</body>
+</html>

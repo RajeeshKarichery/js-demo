@@ -37,7 +37,7 @@
 		}
 		
 		var _items = [{'id':'1','name':'AAA'},{'id':'2','name':'BBB'}]
-		PopulateEmployeeArray();		
+		//PopulateEmployeeArray();		
 		
 		function PopulateEmployeeArray(){			
 			var f_items =FindDepartmentEmployees(2);
@@ -61,7 +61,7 @@
 			});
 		}
 		
-		loadBtn();		
+		//loadBtn();		
 		function loadBtn(){			
 			for (var i=0;i<5;i++) {
 				id = "cbtn-"+i;
@@ -82,6 +82,33 @@
 		$('#insertHere').on('click','button', function(e){
 			console.log(e.target.value);
 		});
+		
+		stringTest();
+		function stringTest(){
+			var org_str = '<span><div id="my">Hello</div></span>';
+			
+			var $ch = $(org_str).find('div#my').html('Hello222').parent().get(0).outerHTML;
+			console.log($ch);
+			
+			
+			
+			
+			
+			var org_str1 = '<span><div id="my">Hello222</div></span>';
+			
+			
+			
+			
+			
+			//alert($c_str.get(0).outerHTML);			
+			//var a ='<td><div>This is some text </div></td>';					
+			//var w = $(a).wrap('<td></td>');
+			//var $txt = $(w).html();			
+			//alert($txt.get(0).outerHTML);
+			
+			
+		}
+		
 		
 		
 		

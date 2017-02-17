@@ -1,16 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
-    <title>Notification Types</title>
+    <title>ooTypes</title>
+	
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="my_button.js"></script>
+  <script src="my_custom.js"></script>
+  
+   
         
 </head>
 <body>		
+
+
+	<button id="btn-1">Click</button>
+	<m_button></my_button>
+	
 		
     <script type="text/javascript">
-
-		function Animal(name){ 
+	
+		var _dt;
+		$("#btn-1").click(function(){
+			//_dt.getName2();
+			//rabbit.getName()
+			//a1.run();
+			//ob.getNameOver();
+			
+		});
+		
+		//var a1 = new ChildClass({tag_name:"m_button"});
+		//var rabbit = Rabbit({tag_name:"m_button",label:"Test1"})		
+	
+	
+		/*child_button_init({tag_name:"m_button",label:"Test1"},function(dgObject){
+			_dt = dgObject;		
+			
+		});*/
+		
+		//var ob = child_button_init({tag_name:"m_button",label:"Test1"});
+		//ob.init();
+		
+		//var ob = new child_button_init();
+		//ob.build();
+		
+		//var rect = new Rectangle();
+		//rect.move(1, 1);
+		
+		//ob = new ChildClass();
+		//ob.run();
+		
+		//ob = BaseButton({tag_name:"m_button",label:"Test1"});
+		ob = ChildButton({tag_name:"m_button",label:"Test1"});
+		ob.build();
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		/*function Animal(name){ 
 			return {
 				run: function() {
 				  alert(name + " is running!")
@@ -24,9 +80,9 @@
 			alert(name + " bounces to the skies! :)")
 		  }
 		  return rabbit // return the result
-		}
-		var rabbit = Rabbit("rab")
-		rabbit.bounce()
+		}*/
+		//var rabbit = Rabbit("rab")
+		//rabbit.bounce()
        		
 	</script>
 </body>

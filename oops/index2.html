@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>ooTypes</title>
+	
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    
+        
+</head>
+<body>		
+
+
+	<button id="btn-1">Click</button>
+
+		
+    <script type="text/javascript">
+	
+		$(document).ready(function() {
+		
+			
+			
+			function Person(name,age){
+				this.name = name;
+				this.age = age;				
+			}
+			
+			$("#btn-1").click(function(){			
+				var person1 = new Person('Rk',23);				
+				//var person2 = person1;			
+				var person2 = $.extend(true, {}, person1);			
+				person1.name = "chanhed..Rk";
+				
+				alert(person2.name);	
+				
+			});
+			
+			
+			/*var bob = {
+				name: "Bob",
+				age: 32
+			};
+			 
+			var bill = $.extend(true, {}, bob);
+			bill.name = "Bill";
+			 
+			console.log(bob);
+			console.log(bill);*/
+			
+								
+			
+			
+			
+		});
+	
+		
+		
+		
+	
+		
+       		
+	</script>
+</body>
+</html>
