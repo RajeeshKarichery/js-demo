@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>Notification Types</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="demonstration of some noty capabilities">
+    
+	
+	<style>
+	
+	.nav-tabs { 
+		border-bottom: 2px solid #DDD;
+	}
+    .nav-tabs > li.active > a,
+	.nav-tabs > li > a:hover{
+		background-color:#C0C5CE;
+	}
+	.nav-tabs > li.active > a:focus{
+		border-width: 0;
+		background-color:#C0C5CE;
+		font-weight:bolder;
+		border-top-left-radius:7px;
+		border-top-right-radius:7px;
+		color:#ffffff;		
+	}
+    .nav-tabs > li > a {		
+		background-color:#C0C5CE;
+		font-weight:bolder;		
+	    color:#767676;
+		border-color:#d8d8d8;
+		border-radius:3px 3px 0 0
+	}	
+	
+    .nav-tabs > li > a::after {
+		content: ""; 
+		background: #FCA600;
+		height: 2px;
+		position: absolute; 
+		width: 100%; 
+		left: 0px; 
+		bottom: -1px;
+		transition: all 250ms ease 0s;
+		transform: scale(0); 
+	}
+    .nav-tabs > li.active > a::after,
+	.nav-tabs > li:hover > a::after {
+		transform: scale(1);
+		color:#000000;		
+	}
+	
+	
+	
+	
+		.tab-content{
+				border-left: 1px solid #ddd;
+				border-right: 1px solid #ddd;
+				border-bottom: 1px solid #ddd;
+				border-radius: 0px 0px 5px 5px;
+				padding: 10px;
+		}
+	</style>
+	
+	
+	
+	
+	
+   	<link rel="stylesheet" type="text/css" href="../dist/css/bootstrap/bootstrap.min.css" >  
+	<link rel="stylesheet" type="text/css" href="../dist/libs/datatable/css/dataTables.bootstrap.min.css" >
+	<link rel="stylesheet" type="text/css" href="../dist/libs/datatable/css/responsive.dataTables.min.css" >
+	<link rel="stylesheet" type="text/css" href="../dist/libs/datatable/css/buttons.dataTables.min.css" >
+  
+	<script src="../dist/jquery.min.js"></script>
+	<script src="../dist/bootstrap.min.js"></script>	
+	<script src="../dist/libs/mustache.min.js"></script>
+	<script src="../dist/libs/datatable/js/jquery.dataTables.min.js"></script>
+	<script src="../dist/libs/datatable/js/dataTables.responsive.min.js"></script>
+	<script src="../dist/libs/datatable/js/dataTables.bootstrap.min.js"></script>
+	<script src="../dist/libs/datatable/js/dataTables.buttons.min.js"></script>
+  
+  
+	<script src="../datatable/BaseTable.js"></script>
+	<script src="../datatable/ButtonTable.js"></script>
+  
+  	
+  <script src="mytab.js"></script>
+	
+    
+</head>
+<body>
+			
+		<div class="container">  
+			<button id="btn1">click</button>
+			<button id="btn2">click2</button>
+			
+			
+			<button id="btn1Show">Show1</button>
+			<button id="btn2Show">Show2</button>
+			
+			<button id="btn1Hide">Hide1</button>
+			<button id="btn2Hide">Hide2</button>
+			
+			
+			<button id="btn1Title1">setTitle1</button>
+			<button id="btnDp">Dp</button>
+			<button id="btnDp2">GetArrayDp</button>
+			<button id="btnCreateTab">createTab</button>
+			
+				<myTab></myTab>
+				
+				
+				
+			<!--  <ul class="nav nav-tabs">
+				<li id="s1_li" class="active"><a href="#home"> <span class="rk1"></span> Home</a></li>
+				<li id="s2_li"><a href="#menu1"><span class="rk2"></span>Menu 1</a></li>				
+			  </ul>-->
+			 
+			  <!--<div class="tab-content" >				
+				
+			  </div>-->
+		</div>
+
+
+
+
+		
+		
+    <script type="text/javascript">   
+        $(document).ready(function (){
+		
+				var dpArr = [];		
+		
+				$("#btnCreateTab").on("click",function(){
+										
+					var dp = [{'id':'home','label':'Home','description':'home page' },
+							  {'id':'menu1','label':'Menu1','description':'Testing Menu1' },
+							  {'id':'menu2','label':'Menu2','description':'Testing Menu2' },
+							  {'id':'menu3','label':'Menu3','description':'Testing Menu3' } 
+							]
+					myTab.dataProvider(dp);		
+					myTab.removeAllChild();					
+					$.each(dp, function( index, value ) {
+							if(index ==0){
+								myTab.createTab(value['id'],'<button id="'+value['id']+'" class="app-btn">'+value['id']+'</button>');
+							}
+							else{
+								var tabelId = 'rk_table_'+value['id'];
+								var childNode ='';
+								childNode +='<'+tabelId+'></'+tabelId+'>';	
+								if(index ==1){	
+									var dataSet2 = [ {'game':'Football', 'count':'11','country':'Brazil'} ,{'game':'Tennis', 'count':'1','country':'Aus'} ];
+									var buttonColsDp =[{'field_label':'Game' ,'field_name':'game'},
+									{'field_label':'Count' ,'field_name':'count'},								
+									{'field_label':'Country' ,'field_name':'country'}	];
+								}
+								else{	
+									var dataSet2 = [ {'game':'Football', 'count':'11'} ,{'game':'Tennis', 'count':'1'},{'game':'Volley', 'count':'7'} ];	
+									var buttonColsDp =[{'field_label':'Game' ,'field_name':'game'}, {'field_label':'Count' ,'field_name':'count'} ];
+								}							
+								var _dt2 = eval('_dt2');							
+								_dt2 = new ButtonTable({tag_name:tabelId,cols:buttonColsDp,buttons:true,mapKey:'field_name',bSort:false,paging:false,searching:true,bInfo:false ,
+									callback:{
+										creationComplete:function(){		
+											_dt2.setDp(dataSet2);		
+										}
+									} });
+								_dt2.init();
+								dpArr.push(_dt2);
+								myTab.createTab(value['id'],childNode);
+							}
+					});
+					myTab.setTabFocus('first');
+					
+				});
+		
+				$("#btnDp2").on("click",function(){
+					/*$.each(dpArr, function( index, row ) {
+						console.log(row);						
+					});*/
+					//$('#myTab_Tabs').tabs("option", "active", 1);
+					
+					//$('#myTab_Tabs ul li.active a').trigger('click');
+					
+					myTab.setTabFocus('first');
+					
+				});	
+		
+				$("#btn1").on("click",function(){
+					//alert(myTab.selectedIndex);
+					myTab.setPopoverTemplate('<button class="btn btn-primary btn-xs" type="button"> Message <span class="badge">1</span></button>');
+				});
+				
+				$("#btn2").on("click",function(){
+					//alert(myTab.selectedIndex);
+					myTab.setPopoverTemplate('<button class="btn btn-warning btn-xs" type="button"> Messages <span class="badge">2</span></button>');
+				});
+				
+				$("#btn1Show").on("click",function(){
+					
+					myTab.setPopoverShow(true);
+				});
+				
+				$("#btn2Show").on("click",function(){
+					
+					myTab.setPopoverShow(true);
+				});
+				
+				$("#btn1Hide").on("click",function(){				
+					myTab.setPopoverShow(false);
+				});
+				
+				$("#btn2Hide").on("click",function(){					
+					myTab.setPopoverShow(false);
+				});
+				
+				
+				$("#btn1Title1").on("click",function(){					
+					myTab.setTabTitle("oko");
+					//var dp =['AA','VV'];
+					//myTab.setTabTitleAll(dp);
+				});	
+
+
+				
+
+				$("#btnDp").on('click',function(){
+					var dp = [{'id':'home','label':'Home','description':'home page' },
+							  {'id':'menu1','label':'Menu1','description':'Testing Menu1' },
+							  {'id':'menu2','label':'Menu2','description':'Testing Menu2' },
+							  {'id':'menu3','label':'Menu3','description':'Testing Menu3' } 
+							]
+					myTab.dataProvider(dp);		
+					
+					$( ".tab-content" ).empty();
+					$.each(dp, function( index, value ) {
+						var el ='';
+						if(index ==0){
+						
+							el = '<div id="'+value['id']+'" class="tab-pane fade in active"><h5>'+value['label']+'</h5><p>'+value['description']+'</p>';
+							//el +='<button id="'+value['id']+'" class="app-btn">App</button>';
+							//el +='<rk_table2></rk_table2>';							
+							el +='</div>';
+													
+							
+							
+								
+						}
+						else{
+							
+							el = '<div id="'+value['id']+'" class="tab-pane fade"><h5>'+value['label']+'</h5><p>'+value['description']+'</p>';
+							el +='<button id="'+value['id']+'" class="app-btn">App</button>';
+							
+							var tabelId = 'rk_table_'+value['id'];
+							el +='<'+tabelId+'></'+tabelId+'>';	
+							
+							
+									el +='<div class="modal fade" id="tab_'+value['id']+'" role="dialog">';
+										el +='<div class="modal-dialog">';
+											el +='<div class="modal-content">';
+												el +='<div class="modal-header">';
+													el +='<button type="button" class="close" data-dismiss="modal">&times;</button>';
+													el +='<h4 class="modal-title">Modal Header</h4>';
+												el +='</div>';
+												el +='<div class="modal-body">';
+													el +='<p>Some text in the modal. '+value['id']+'</p>';													
+												el +='</div>';
+												el +='<div class="modal-footer">';
+													el +='<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>';
+												el +='</div>';
+										  el +='</div>';								  
+										el +='</div>';
+									el +='</div>';
+									
+							el +='</div>';
+
+
+							if(index ==1){	
+								var dataSet2 = [ {'game':'Football', 'count':'11','country':'Brazil'} ,{'game':'Tennis', 'count':'1','country':'Aus'} ];
+								var buttonColsDp =[{'field_label':'Game' ,'field_name':'game'},
+								{'field_label':'Count' ,'field_name':'count'},								
+								{'field_label':'Country' ,'field_name':'country'}	];
+							}
+							else{	
+								var dataSet2 = [ {'game':'Football', 'count':'11'} ,{'game':'Tennis', 'count':'1'},{'game':'Volley', 'count':'7'} ];	
+								var buttonColsDp =[{'field_label':'Game' ,'field_name':'game'}, {'field_label':'Count' ,'field_name':'count'} ];
+							}							
+							var _dt2 = eval('_dt2');							
+							_dt2 = new ButtonTable({tag_name:tabelId,cols:buttonColsDp,buttons:true,mapKey:'field_name',bSort:false,paging:false,searching:true,bInfo:false ,
+								callback:{
+									creationComplete:function(){		
+										_dt2.setDp(dataSet2);		
+									}
+								} });
+							_dt2.init();
+							dpArr.push(_dt2);
+							
+						}	
+						$(".tab-content").append(el);	
+									
+					});
+					myTab.setTabFocus('menu1');
+					
+				});
+				
+				var myTab = SNTab({
+									tag_name:'myTab',
+									callback:{
+										 snTabChangeEvent:function(){
+											console.log("okkk");
+										}
+									}
+								  });
+				
+				$(document).on("click","button.app-btn",function(e) {					
+					//alert(e.target.id);					
+					open(e.target.id);
+					e.stopImmediatePropagation();
+				});
+				function open(id){
+					$("#tab_"+id).modal("show");
+				}
+	
+				
+				
+				
+				
+				
+				
+								
+				/*$( document ).on( "snTabChangeEvent",function( event, resp ) {
+					console.log( resp );					
+				});*/
+								
+				
+				
+			
+						
+		      
+		});//document close
+		
+	</script>
+
+
+</body>
+</html>

@@ -27,7 +27,6 @@ function BaseTable(options){
 	dgObject.defaults = defaults;
 	this.setCols = function(cols){
         defaults.cols = cols;
-		dgObject.cols = cols;
         //$("#"+tag_name+"_dtgrid_box").remove();
         execDownloadTemplate();
     }    
@@ -64,8 +63,7 @@ function BaseTable(options){
                         row.push(Mustache.render(dgObject.rk_image_renderer,$.extend(col,{"field_value":_keyVal})));
                     }
 					else if(col.item_renderer == "rk_datagrid_select_renderer"){
-						var sf_id = col.field_name;
-						var ele ='<td> <div class="default_renderer" data_field="'+sf_id+'"> <select id="rk_sel_box" class="form-control"><option value="-1">Select</option>';
+						var ele ='<td><select id="rk_sel_box" class="form-control"><option value="-1">Select</option>';
 							$.each(col.dp,function(i,row){	
 								if(row['key_val'] == result[col.field_name]){
 									ele +='<option value="'+row['key_val']+'" selected>'+row['key_label']+'</option>';
@@ -75,7 +73,7 @@ function BaseTable(options){
 								}
 								
 							});
-						ele +='</select></div></td>';	
+						ele +='</select></td>';	
 												
 						row.push(Mustache.render(ele,$.extend(col,{"field_value":result[col.field_name]})));
 						//dgObject.defaults.callback.rkSelectBox.call(this,_reponse);						
@@ -100,18 +98,14 @@ function BaseTable(options){
 			execDownloadTemplate();
     }
 	this.getSelectedObjects = function(){
-        /*var instance_objects = [];
+        var instance_objects = [];
 		for(let result of dgObject.results){
 			alert(result['name']);
 		}
-        return instance_objects;*/
-		return dgObject.results;
+        return instance_objects;
     }
 	this.getBaseObject = function(){
 		return dgObject;
-	}
-	this.getTableData = function(){
-		return dgObject.datagrid.rows().data();
 	}
 	
     function execDownloadTemplate(){
@@ -150,7 +144,7 @@ function BaseTable(options){
 			
 			if(dgObject.defaults.buttons == true){
 				dgObject.datagrid = $("#"+tag_name+"_datagrid").DataTable({
-					columnDefs: [{ targets: 0, visible: true },{orderable: false, className: 'select-checkbox',targets: 1} /*,
+					columnDefs: [{ targets: 0, visible: false },{orderable: false, className: 'select-checkbox',targets: 1} /*,
 						{
 							"render": function ( data, type, row ) {
 								return '<td><select class="form-control"><option value="one">One</option><option value="two">Two</option></select></td>';
@@ -195,80 +189,42 @@ function BaseTable(options){
 			$("#"+tag_name+"_datagrid tbody").on("change","td select",function(e){
 				var _reponse = new Object();
 				//_reponse['data'] =  $("#"+e.target.id).val();	
-				var fSelFname = $(this).parents().attr('data_field');
+				var value = $(this).val();				
+				_reponse['data'] =  value;	
 				
-				
-				var cb_value = $(this).val();				
-				_reponse['data'] =  cb_value;				
 				var data = dgObject.datagrid.row( $(this).parents('tr') ).data();
+				var org_str = '<td><div class="default_renderer " data_field="name">FootballChanged</div></td>';							
 				
-				var slno = $(data[0]).text();
-				slno = slno-1;
-				
-				var s_row = dgObject.results[slno];
-				
-				var sourceDp = []
-				$.each(dgObject.cols,function(i,row){
-					if (row['field_name'] == fSelFname){
-						sourceDp = row['dp'];	
-					}
-				});			
-
-				s_row[fSelFname] = 	cb_value;				
-				if(fSelFname =='dist'){
-					s_row['dist'] = cb_value;
-					dgObject.results[slno] = s_row;
-					dgObject.defaults.callback.rkSelectBox.call(this,_reponse);
-					return;
-				}
-				dgObject.results[slno] = s_row;
-				
-				$.each(dgObject.results,function(i,row){
-					console.log(row);
-				});
-				
-						
-				var ele ='<td> <div class="default_renderer" data_field="'+fSelFname+'">  <select id="rk_sel_box" class="form-control"><option value="-1">Select</option>';
-							$.each(sourceDp,function(i,row){	
-								if(row['key_val'] == cb_value){
-									ele +='<option value="'+row['key_val']+'" selected>'+row['key_label']+'</option>';
-								}
-								else{
-									ele +='<option value="'+row['key_val']+'" >'+row['key_label']+'</option>';
-								}
-								
-							});
-						ele +='</select></div></td>';
-				data[3] = ele;
-				
-				var despDp =[];
-				$.each(sourceDp,function(i,row){
-					if (row['key_val'] == cb_value){
-						despDp = row['dp'];	
-					}
-				});	
-								
-				var ele ='<td> <div class="default_renderer" data_field="dist">  <select id="rk_sel_box" class="form-control"><option value="-1">Select</option>';
-							$.each(despDp,function(i,row){	
-								ele +='<option value="'+row['key_val']+'" >'+row['key_label']+'</option>';
-							});
-						ele +='</select></div></td>';
-				data[4] = ele;
-								
-				/*var org_str = data[3];
-				var $ch = $(org_str).find('div.default_renderer').html(cb_value).parent().get(0).outerHTML;
-				data[3] = $ch;*/
-				
+				var org_str = data[2];
+				var $ch = $(org_str).find('div.default_renderer').html('Hello222').parent().get(0).outerHTML;
+				data[2] = $ch;
 				dgObject.datagrid.row($(this).parents('tr')).data(data).draw();
 				
 				
-				
 				//console.log($ch);
+				
+				//var $elem = $(item2).html("Testq");
+				//item2 = Obj_item2[0];
+				//alert( $elem.get(0).outerHTML);
+				//item2 = $elem.get(0).outerHTML;
+				
+				
+				
+				//var str = $item2.text("Cricket");
+				//data[2] = str;							
+				//alert(str);
+				
+				//data[2] = item2;
+				
+				
 				//dataType.row().data(data).draw();
 				//$(this).find("td").html();
 				//alert($(item).html());
-				//dgObject.datagrid.row(0).invalidate().draw();				
-				dgObject.defaults.callback.rkSelectBox.call(this,_reponse);
+				//alert(customerId);
+				
+				//dgObject.datagrid.row(0).invalidate().draw();
+				
+				//dgObject.defaults.callback.rkSelectBox.call(this,_reponse);
 				e.preventDefault();
 			});
 								

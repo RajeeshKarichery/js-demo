@@ -1,0 +1,29 @@
+<script id="rk_datagrid" type="text/html">
+	<table id="{{tag_name}}_datagrid" class="table table-striped table-bordered" cellspacing="0" width="100%">
+		<thead>
+			<tr>
+			    <th>Sl.No</th>
+				{{#defaults.enable_checkbox}}
+					<th><div class="checkbox"><label><input type="checkbox" id="{{tag_name}}_dt_select_all_btn" aria-label="..."/></label></div></th>
+				{{/defaults.enable_checkbox}}
+                {{#cols}}
+					<th column="{{field_name}}">{{field_label}}</th>
+				{{/cols}}
+			</tr>
+		</thead>
+		<tbody id="{{tag_name}}_datagrid_body">
+
+		</tbody>
+	</table>	
+</script>
+<script id="rk_default_renderer" type="text/html">
+	<td><div class="default_renderer {{textAlign}}" data_field="{{field_name}}">{{field_value}}</div></td>
+</script>
+<script id="rk_datagrid_text_input_renderer" type="text/html">
+	<td><input type="text" value="{{field_value}}" class="text_input_renderer text-center" data_field="{{field_name}}"/></td>
+</script>
+<script id="rk_datagrid_image_renderer" type="text/html">
+	<td><image src="{{field_value}}" /></td>
+</script>
+<script id="rk_datagrid_select_renderer" type="text/html">	
+</script>

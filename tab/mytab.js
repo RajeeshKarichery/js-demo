@@ -37,6 +37,7 @@
             }
             globTabObj.popoverList = [];
             globTabObj.options = this.options;
+			globTabObj.numberOfTabChildren =[];
             return this;
         },
         dataProvider: function (dp) {
@@ -69,7 +70,10 @@
                 }
             }
             element    += '</ul>';
-            element    += '</div>';          
+            element    += '</div>'; 
+			
+			element    += '<div class="tab-content"></div>'; 
+			
 			var sntab = $(''+this.options.tag_name+'');
             $(sntab).replaceWith(element);
             var self = this;
@@ -156,7 +160,20 @@
                         }, 300);
                     });
             }//popoverEnable Close
-        },
+        },		
+		createTab: function(tabId,childNode){
+			var el ='';
+			if(globTabObj.numberOfTabChildren ==0)
+				el = '<div id="'+tabId+'" class="tab-pane fade in active">'+childNode+'</div>';
+			else	
+				el = '<div id="'+tabId+'" class="tab-pane fade">'+childNode+'</div>';
+			$(".tab-content").append(el);
+			globTabObj.numberOfTabChildren++;
+		},
+		removeAllChild:function(){
+			$( ".tab-content" ).empty();
+			globTabObj.numberOfTabChildren=0;
+		},		
         selectedIndex: function(){
             return globTabObj.selectedIndex;
         },
@@ -199,7 +216,38 @@
                 $(this).removeClass(defaultStyle);
                 $(this).addClass(dp[i]);
             } );
-        }
+        },
+		setTabFocus(index){
+			/*$('#'+this.options.tag_name+'_Tabs .nav-tabs li ').each( function(i) {
+				if(i == index)
+					$(this).addClass('active');					
+				else
+					$(this).removeClass('active');				
+			});*/
+			//$('.tab-content div').find('li.active a').trigger('click');
+			
+						
+			if(index =='first')
+				$('.nav-tabs a:first').tab('show');
+			else if(index =='last')
+				$('.nav-tabs a:last').tab('show');
+			else{
+				var isnum = /^\d+$/.test(index);
+				if(isnum)
+					$('.nav-tabs li:eq('+index+') a').tab('show')
+				else
+					$('.nav-tabs a[href="#'+index+'"]').tab('show')
+			}	
+			
+			/*$('.tab-content div').each( function(i) {
+				$(this).removeClass('tab-pane fade active in');
+				if(i == index)
+					$(this).addClass('tab-pane fade active in');					
+				else
+					$(this).addClass('tab-pane fade');	
+			});*/
+		}
+		
 
 
     }; //end tabsObject

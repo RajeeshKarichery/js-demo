@@ -108,15 +108,9 @@
 		
 		
 		
-	/*var dataSet2 = [{'name':'Football','count':11,'key_val':'one'},{'name':'Tennis','count':2,'key_val':'two'}];	
-	var buttonColsDp =[{'field_label':'Game' ,'field_name':'name' },{'field_label':'Player Count' ,'field_name':'count' },{'field_label':'Select' ,'field_name':'key_val' ,is_itemrenderer:true,item_renderer:'rk_datagrid_select_renderer',dp:[{'key_val':'one','key_label':'One'},{'key_val':'two','key_label':'Two'}] } ];*/
-	
-	var dataSet2 = [ {'name':'Football', 'state':'','dist':'' } ,{'name':'Cricket', 'state':'','dist':'' } ];	
-	var buttonColsDp =[{'field_label':'Game' ,'field_name':'game'}, 
-						{'field_label':'State' ,'field_name':'state' ,is_itemrenderer:true,item_renderer:'rk_datagrid_select_renderer',
-							dp:[{'key_val':'KL','key_label':'Kerala' ,dp:[ {'key_val':'KL14','key_label':'Kasaragod' },{'key_val':'KL3','key_label':'Pathanam' } ]   },{'key_val':'KA','key_label':'Karnataka',dp:[ {'key_val':'MANG','key_label':'Mangalore' },{'key_val':'UP','key_label':'Udupi' } ]  }] },{'field_label':'Dist' ,'field_name':'dist',is_itemrenderer:true,item_renderer:'rk_datagrid_select_renderer' } ];
-	
-	
+	var dataSet2 = [{'name':'Football','count':11,'key_val':'one'},{'name':'Tennis','count':2,'key_val':'two'}];
+	//var dataSet2 = [{'name':'Football','count':11,'key_val':'one'}];	
+	var buttonColsDp =[{'field_label':'Game' ,'field_name':'name' },{'field_label':'Player Count' ,'field_name':'count' },{'field_label':'Select' ,'field_name':'key_val' ,is_itemrenderer:true,item_renderer:'rk_datagrid_select_renderer',dp:[{'key_val':'1','key_label':'One'},{'key_val':'2','key_label':'Two'} ,{'key_val':'3','key_label':'Three'}] } ];
 	_dt2 = new ButtonTable({tag_name:"rk_table2",cols:buttonColsDp,buttons:true,mapKey:'field_name',buttons:true,toolbar:true,bSort:true,paging:true,searching:true,bInfo:true ,
 	callback:{
 		creationComplete:function(){		
@@ -127,14 +121,7 @@
 			//alert(e.config.id);
 		},
 		rkSelectBox:function(e){
-			//alert("ok");
-				//var items = _dt2.getTableData();
-				var items = _dt2.getSelectedObjects();
-				console.log(items);
-				$.each(items,function(i,row){
-					console.log(row);
-				});
-			
+			alert("ok");
 		}
 	} });
 	
