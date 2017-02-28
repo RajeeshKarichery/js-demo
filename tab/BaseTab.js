@@ -1,12 +1,5 @@
-/**
- * Created by rejeesh on 04-01-2017.
- */
-;( function( window ) {
-
-    'use strict';
-
-    $.tabs         = {};
-    $.tabs.defaults = {
+function BaseTab(options){
+	var defaults = {
         tag_name:'tag_name',
 		style:'nav nav-tabs',
         popover:{
@@ -24,47 +17,46 @@
             snTabChangeEvent:null
         }
     };
-
-    var globTabObj = Object();
-
-    var tabsObject = {
-        init: function (options) {
-            this.options = $.extend({}, $.tabs.defaults, options);
-            if(this.options.popover.enable){
-                if(!this.options.popover.html)
-                    this.options.popover.html = true;
-                if(!this.options.popover.placement)
-                    this.options.popover.placement = "bottom";
-            }
-            globTabObj.popoverList = [];
-            globTabObj.options = this.options;
-			globTabObj.numberOfTabChildren =[];
-            return this;
-        },
-        dataProvider: function (dp) {
-			var styleClsName = this.options.style;
+    
+	var globTabObj = Object();
+	this.init = function(){		
+		globTabObj.options = $.extend(defaults,options);
+		if(globTabObj.options.popover.enable){
+			if(!globTabObj.options.popover.html)
+				globTabObj.options.popover.html = true;
+			if(!globTabObj.options.popover.placement)
+				globTabObj.options.popover.placement = "bottom";
+		}
+		globTabObj.popoverList = [];		
+		globTabObj.numberOfTabChildren =[];		
+	}
+	this.getBaseObject = function(){
+		return globTabObj;
+	}
+	this.dataProvider = function(dp){
+		var styleClsName = globTabObj.options.style;
             globTabObj.selectedIndex =1;
-            var element  = '<div id="'+this.options.tag_name+'_Tabs">';			
+            var element  = '<div id="'+globTabObj.options.tag_name+'_Tabs">';			
             element += '<ul class="'+styleClsName+'">';
             for (var i=0;i<dp.length;i++) {
-                var li_id = 'li_'+this.options.tag_name+'_'+(i+1);
-                var span_id = 'span_'+this.options.tag_name+'_'+(i+1);
+                var li_id = 'li_'+globTabObj.options.tag_name+'_'+(i+1);
+                var span_id = 'span_'+globTabObj.options.tag_name+'_'+(i+1);
                 var activeClass = i==0?'active':'';
                 var tabId = dp[i]['id'];
                 var tabLabel = dp[i]['label'];
                 element	   += '<li id="'+li_id+'" name="'+li_id+'" class="'+activeClass+'"><a href="#'+tabId+'" data-toggle="tab" class="sntab-default"><span class="'+span_id+'">'+tabLabel+' </a></li>';
 
                 //Check The PopOver Enabled
-                if(this.options.popover.enable){
-                    if(this.options.popover.template)
+                if(globTabObj.options.popover.enable){
+                    if(globTabObj.options.popover.template)
                         globTabObj.popoverList.push({index:i,title:"",content:"" ,li_id:li_id ,show :true});
                     else{
                         var _content ='';
                         var _title ='';
-                        if(this.options.popover.templateDp)
-                            _content = this.options.popover.templateDp[i];
-                        if(this.options.popover.titleDp)
-                            _title = this.options.popover.titleDp[i];
+                        if(globTabObj.options.popover.templateDp)
+                            _content = globTabObj.options.popover.templateDp[i];
+                        if(globTabObj.options.popover.titleDp)
+                            _title = globTabObj.options.popover.titleDp[i];
 
                         var _item = {index:i,title:_title,content:_content ,li_id:li_id ,show :true};
                         globTabObj.popoverList.push(_item);
@@ -76,7 +68,7 @@
 			
 			element    += '<div class="tab-content"></div>'; 
 			
-			var sntab = $(''+this.options.tag_name+'');
+			var sntab = $(''+globTabObj.options.tag_name+'');
             $(sntab).replaceWith(element);
             var self = this;
             $(".nav-tabs a").click(function(e){
@@ -97,10 +89,10 @@
             });
 
             //PopOver
-            if(this.options.popover.enable){
+            if(globTabObj.options.popover.enable){
                 //var _selfIndex = globTabObj.selectedIndex;
 
-                var self = this.options.popover;
+                var self = globTabObj.options.popover;
                 var _selOb ='';
                 $('.nav-tabs li').popover({title:function(){
                     if(self.title !=null){
@@ -162,111 +154,31 @@
                         }, 300);
                     });
             }//popoverEnable Close
-        },		
-		createTab: function(tabId,childNode){
-			var el ='';
-			if(globTabObj.numberOfTabChildren ==0)
-				el = '<div id="'+tabId+'" class="tab-pane fade in active">'+childNode+'</div>';
-			else	
-				el = '<div id="'+tabId+'" class="tab-pane fade">'+childNode+'</div>';
-			$(".tab-content").append(el);
-			globTabObj.numberOfTabChildren++;
-		},
-		removeAllChild:function(){
-			$( ".tab-content" ).empty();
-			globTabObj.numberOfTabChildren=0;
-		},		
-        selectedIndex: function(){
-            return globTabObj.selectedIndex;
-        },
-        setPopoverTemplate:function(template){
-            $.each(globTabObj.popoverList, function(index,node) {
-                if ( index+1 == globTabObj.selectedIndex ) {
-                    node.content = template;
-                }
-            });
-        },
-        setPopoverShow:function(flag){
-            $.each(globTabObj.popoverList, function(index,node) {
-                if ( index+1 == globTabObj.selectedIndex ) {
-                    node.show = flag;
-                }
-            });
-        },
-        setPopoverTemplateAll:function(dp){
-            $.each(globTabObj.popoverList, function(index,node) {
-                node.content = dp[index];
-                node.show = node.content ==""?false:true;
-            });
-        },
-        setTabTitle:function(title){
-            $('#'+this.options.tag_name+'_Tabs .nav-tabs li a span').each( function() {
-                var str_class =$(this).attr('class');
-                if(globTabObj.selectedIndex == str_class.slice(-1)){
-                    $('.'+str_class+'').html(title);
-                }
-            } );
-        },
-        setTabTitleAll:function(dp){
-            $('#'+this.options.tag_name+'_Tabs .nav-tabs li a span').each( function(i) {
-                var str_class =$(this).attr('class');
-                $('.'+str_class+'').html(dp[i]);
-            } );
-        },
-        setTabStyleAll:function(defaultStyle,dp){
-            $('#'+this.options.tag_name+'_Tabs .nav-tabs li a').each( function(i) {
-                $(this).removeClass(defaultStyle);
-                $(this).addClass(dp[i]);
-            } );
-        },
-		setTabFocus(index){
-			/*$('#'+this.options.tag_name+'_Tabs .nav-tabs li ').each( function(i) {
-				if(i == index)
-					$(this).addClass('active');					
-				else
-					$(this).removeClass('active');				
-			});*/
-			//$('.tab-content div').find('li.active a').trigger('click');
-			
-						
-			if(index =='first')
-				$('.nav-tabs a:first').tab('show');
-			else if(index =='last')
-				$('.nav-tabs a:last').tab('show');
-			else{
-				var isnum = /^\d+$/.test(index);
-				if(isnum)
-					$('.nav-tabs li:eq('+index+') a').tab('show')
-				else
-					$('.nav-tabs a[href="#'+index+'"]').tab('show')
-			}	
-			
-			/*$('.tab-content div').each( function(i) {
-				$(this).removeClass('tab-pane fade active in');
-				if(i == index)
-					$(this).addClass('tab-pane fade active in');					
-				else
-					$(this).addClass('tab-pane fade');	
-			});*/
-		}
-		
-
-
-    }; //end tabsObject
-
-
-    $.tabRenderer = {};
-    $.tabRenderer.init = function (options) {
-        var _tab = Object.create(tabsObject).init(options);
-        return _tab;
-    };
-    function SNTab(options){
-        return $.tabRenderer.init(options);
-    }
-    window.SNTab = SNTab;
-
-})( window );
-
-/**
- * Created by rejeesh on 05-01-2017.
- */
+	}
+	this.createTab = function(tabId,childNode){
+		var el ='';
+		if(globTabObj.numberOfTabChildren ==0)
+			el = '<div id="'+tabId+'" class="tab-pane fade in active">'+childNode+'</div>';
+		else	
+			el = '<div id="'+tabId+'" class="tab-pane fade">'+childNode+'</div>';
+		$(".tab-content").append(el);
+		globTabObj.numberOfTabChildren++;
+	}
+	this.removeAllChild=function(){
+		$( ".tab-content" ).empty();
+		globTabObj.numberOfTabChildren=0;
+	}
+	this.setTabFocus = function(index){				
+		if(index =='first')
+			$('.nav-tabs a:first').tab('show');
+		else if(index =='last')
+			$('.nav-tabs a:last').tab('show');
+		else{
+			var isnum = /^\d+$/.test(index);
+			if(isnum)
+				$('.nav-tabs li:eq('+index+') a').tab('show')
+			else
+				$('.nav-tabs a[href="#'+index+'"]').tab('show')
+		}			
+	}
+}
