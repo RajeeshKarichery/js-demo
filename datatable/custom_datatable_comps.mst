@@ -25,5 +25,15 @@
 <script id="rk_datagrid_image_renderer" type="text/html">
 	<td><image src="{{field_value}}" /></td>
 </script>
-<script id="rk_datagrid_select_renderer" type="text/html">	
+<script id="rk_datagrid_select_renderer" type="text/html">
+	<td>
+		<div class="default_renderer" data_field="{{field_name}}"> 
+		<select id="rk_sel_box" class="form-control">
+			<option value="-1">Select</option>
+			{{#_dp}}
+				<option value="{{key_val}}" {{selected}}>{{key_label}}</option>
+			{{/_dp}}	
+		</select>
+		</div>	
+	</td>
 </script>

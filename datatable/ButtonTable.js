@@ -9,8 +9,7 @@ function ButtonTable(options){
 	//obj.init = function() {
 	
 	this.init = function() {
-		init.call();	
-		
+		init.call();		
 	}	
 	
 	this.createToolButtons = function(){

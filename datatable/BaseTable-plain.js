@@ -25,12 +25,6 @@ function BaseTable(options){
     var dgObject = new Object;
 	dgObject.tag_name = tag_name;
 	dgObject.defaults = defaults;
-	this.init = function(){
-        //if(defaults.cols==undefined || defaults.cols.length<1)
-          //  return callBack(dgObject);
-		if(defaults.cols!=undefined && defaults.cols.length>1)	
-			execDownloadTemplate();
-    }
 	this.setCols = function(cols){
         defaults.cols = cols;
 		dgObject.cols = cols;
@@ -70,6 +64,36 @@ function BaseTable(options){
                         row.push(Mustache.render(dgObject.rk_image_renderer,$.extend(col,{"field_value":_keyVal})));
                     }
 					else if(col.item_renderer == "rk_datagrid_select_renderer"){
+						/*var sf_id = col.field_name;
+						var ele ='<td> <div class="default_renderer" data_field="'+sf_id+'"> <select id="rk_sel_box" class="form-control"><option value="-1">Select</option>';
+						var fc_value = result[col.field_name];
+						var _dp = col.dp;
+							
+						if(col.colDepended !=undefined){
+							_dp = jQuery.grep(_dp, function (_item) {
+								return _item['pkey'] == result[col.colDepended];
+							});
+						}								
+						$.each(_dp,function(i,row){
+							if(row['key_val'] == fc_value){
+								ele +='<option value="'+row['key_val']+'" selected>'+row['key_label']+'</option>';
+							}
+							else{
+								ele +='<option value="'+row['key_val']+'" >'+row['key_label']+'</option>';
+							}								
+						});
+						ele +='</select></div></td>';												
+						row.push(Mustache.render(ele,$.extend(col,{"field_value":result[col.field_name]})));
+						*/
+						
+						
+						
+						//dgObject.defaults.callback.rkSelectBox.call(this,_reponse);						
+						//row.push(Mustache.render(dgObject.rk_datagrid_select_renderer,$.extend(col,{"field_value":result[col.field_name]})));
+						
+						
+						//new
+						
 						var _dp = col.dp;
 						if(col.colDepended !=undefined){						
 							_dp = jQuery.grep(_dp, function (_item) {
@@ -86,6 +110,9 @@ function BaseTable(options){
 						});
 						col['_dp'] = _dp;						
 						row.push(Mustache.render(dgObject.rk_datagrid_select_renderer,$.extend(col,{"field_name":col.field_name})));
+						
+						
+										
 					}
 				}
                 else{
@@ -99,7 +126,12 @@ function BaseTable(options){
     }
 	
 	
-   
+    this.init = function(){
+        //if(defaults.cols==undefined || defaults.cols.length<1)
+          //  return callBack(dgObject);
+		if(defaults.cols!=undefined && defaults.cols.length>1)	
+			execDownloadTemplate();
+    }
 	this.getSelectedObjects = function(){
         /*var instance_objects = [];
 		for(let result of dgObject.results){
@@ -221,24 +253,45 @@ function BaseTable(options){
 					}
 				});
 				s_row[fSelFname] = 	cb_value;
-				dgObject.results[slno] = s_row;							
-				$.each(sourceDp,function(i,row){
-					if(row['key_val'] == cb_value){
-						row['selected'] = 'selected';								
-					}
-					else	
-						row['selected'] = '';
-				});
-				colOptions['_dp'] = sourceDp;	
-				var ele = Mustache.render(dgObject.rk_datagrid_select_renderer,$.extend(colOptions,{"field_name":fSelFname}));
-				data[sourceDataIndex] = ele;
+				dgObject.results[slno] = s_row;
+										
+				/*var ele ='<td> <div class="default_renderer" data_field="'+fSelFname+'">  <select id="rk_sel_box" class="form-control"><option value="-1">Select</option>';
+							$.each(sourceDp,function(i,row){	
+								if(row['key_val'] == cb_value){
+									ele +='<option value="'+row['key_val']+'" selected>'+row['key_label']+'</option>';
+								}
+								else{
+									ele +='<option value="'+row['key_val']+'" >'+row['key_label']+'</option>';
+								}
+								
+							});
+						ele +='</select></div></td>';
+				data[sourceDataIndex] = ele;*/
+				
+				//new
+				
+						$.each(sourceDp,function(i,row){
+							if(row['key_val'] == cb_value){
+								row['selected'] = 'selected';								
+							}
+							else	
+								row['selected'] = '';
+						});
+						colOptions['_dp'] = sourceDp;	
+						var ele = Mustache.render(dgObject.rk_datagrid_select_renderer,$.extend(colOptions,{"field_name":fSelFname}));
+						data[sourceDataIndex] = ele;
+				
+				//new close
+				
+				
 				
 				if(colOptions.colTrigger == undefined){					
 					if(dgObject.defaults.callback.rkSelectBox !=undefined){
 						dgObject.defaults.callback.rkSelectBox.call(this,_reponse);
 						return;
 					}
-				}												
+				}		
+												
 				var destColOtions;
 				var destDataIndex=1;
 				$.each(dgObject.cols,function(i,row){
@@ -254,6 +307,16 @@ function BaseTable(options){
 								return _item['pkey'] == cb_value;
 							});
 
+				/*var ele ='<td> <div class="default_renderer" data_field="'+colOptions.colTrigger+'">  <select id="rk_sel_box" class="form-control"><option value="-1">Select</option>';
+							$.each(destDp,function(i,row){	
+								ele +='<option value="'+row['key_val']+'" >'+row['key_label']+'</option>';
+							});
+						ele +='</select></div></td>';
+				data[destDataIndex] = ele;
+				dgObject.datagrid.row($(this).parents('tr')).data(data).draw();*/
+				
+				//new open
+				
 				$.each(destDp,function(i,row){
 					row['selected'] = '';	
 				});
@@ -261,7 +324,15 @@ function BaseTable(options){
 				var ele =  Mustache.render(dgObject.rk_datagrid_select_renderer,$.extend(destColOtions,{"field_name":colOptions.colTrigger}));
 				data[destDataIndex] = ele;
 				dgObject.datagrid.row($(this).parents('tr')).data(data).draw();
-							
+				//new close
+				
+				//console.log($ch);
+				//dataType.row().data(data).draw();
+				//$(this).find("td").html();
+				//alert($(item).html());
+				
+				//dgObject.datagrid.row(0).invalidate().draw();
+				
 				if(dgObject.defaults.callback.rkSelectBox !=undefined)	
 					dgObject.defaults.callback.rkSelectBox.call(this,_reponse);
 				e.preventDefault();
