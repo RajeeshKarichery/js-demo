@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DataTable</title>
+  
+  <style>
+	tr {
+		border:1px inset white;
+	}
+	tr.focused {
+		border:1px solid red; 
+	}
+  </style>
+    
+  <link rel="stylesheet" type="text/css" href="../dist/css/bootstrap/bootstrap.min.css" >  
+  <link rel="stylesheet" type="text/css" href="../dist/libs/datatable/css/dataTables.bootstrap.min.css" >
+  <link rel="stylesheet" type="text/css" href="../dist/libs/datatable/css/responsive.dataTables.min.css" >
+  <link rel="stylesheet" type="text/css" href="../dist/libs/datatable/css/buttons.dataTables.min.css" >  
+  <script src="../dist/libs/jquery.min.js"></script>
+  <script src="../dist/libs/mustache.min.js"></script>
+  <script src="../dist/libs/datatable/js/jquery.dataTables.min.js"></script>
+  <script src="../dist/libs/datatable/js/dataTables.responsive.min.js"></script>
+  <script src="../dist/libs/datatable/js/dataTables.bootstrap.min.js"></script>
+  <script src="../dist/libs/datatable/js/dataTables.buttons.min.js"></script>
+  <script src="r-base-table.js"></script>
+  <script src="r-cus-table.js"></script>
+  
+   
+</head>
+<body>
+
+	<button  id="btn-Tabel2">getSelectedata</button>	
+	<rk_table2></rk_table2>
+ 
+  <script>
+	 $(document).ready(function() {	
+		
+		
+		
+		
+		var dataSet2 = [ {'name':'Football', 'state':'KL','dist':'KL14' } ,{'name':'Cricket', 'state':'','dist':'' } ];
+        var buttonColsDp =[{'field_label':'Game' ,'field_name':'game'},
+            {'field_label':'State' ,'field_name':'state' ,'is_itemrenderer':'true','item_renderer':'cus_sn_datagrid_select_renderer','colTrigger':'dist',
+                'dp':[{'key_val':'KL','key_label':'Kerala'},{'key_val':'KA','key_label':'Karnataka'}] },{'field_label':'Dist' ,'field_name':'dist','is_itemrenderer':'true','item_renderer':'sn_datagrid_select_renderer','colDepended':'state','dp':[ {'pkey':'KL', 'key_val':'KL14','key_label':'Kasaragod' },{'pkey':'KL','key_val':'KL3','key_label':'Pathanam' },{'pkey':'KA','key_val':'MANG','key_label':'Mangalore' },{'pkey':'KA','key_val':'UP','key_label':'Udupi' }  ]  },{'field_label':'Country' ,'field_name':'country','is_itemrenderer':'true','item_renderer':'sn_datagrid_select_renderer','dp':[{'key_val':'IND','key_label':'India'},{'key_val':'SRI','key_label':'Sri Lanka'}] }  ];
+
+
+        _dt2 = new RCusTable({tag_name:"rk_table2",cols:buttonColsDp,enable_checkbox:true,buttons:true,mapKey:'field_name',buttons:true,toolbar:true,bSort:true,paging:true,searching:true,bInfo:true ,
+            callback:{
+                creationComplete:function(){
+                    _dt2.setDp(dataSet2);
+                    //_dt2.createToolButtons();
+                }
+            }
+        });
+		_dt2.init();
+		
+		
+		
+		
+		$('#btn-Tabel2').on('click',function(e){
+			var list = _dt2.getSelectedObjects();
+		});
+		
+
+	});
+	
+  </script>
+   
+</body>
+</html>

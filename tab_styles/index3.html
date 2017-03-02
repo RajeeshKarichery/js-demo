@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1"> 
+		<title>Tab Styles Inspiration</title>
+		<meta name="description" content="Tab Styles Inspiration: A small collection of styles for tabs" />
+		<meta name="keywords" content="tabs, inspiration, web design, css, modern, effects, svg" />
+		<meta name="author" content="Codrops" />
+		
+		<link rel="stylesheet" type="text/css" href="../dist/css/bootstrap/bootstrap.min.css" > 
+		<script src="../dist/libs/jquery.min.js"></script>
+		
+	<!--	<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+		<link rel="stylesheet" type="text/css" href="css/demo.css" />
+		<link rel="stylesheet" type="text/css" href="css/tabs.css" />
+		<link rel="stylesheet" type="text/css" href="css/tabstyles.css" />
+  		<script src="js/modernizr.custom.js"></script>-->
+	</head>
+	<body>
+		
+		<div class="container">
+									
+				<!--<div class="tabs tabs-style-line">
+					<nav>
+						<ul class="setup-panel">
+							<li ><a href="#section-linetriangle-1"><span>All Products</span></a></li>
+							<li class="disabled"><a href="#section-linetriangle-2"><span>Electronics</span></a></li>
+							<li><a href="#section-linetriangle-3"><span>Clothing</span></a></li>
+							
+						</ul>
+					</nav>
+					<div class="content-wrap">
+						<section id="section-linetriangle-1"><p>1</p></section>
+						<section id="section-linetriangle-2"><p>2</p></section>
+						<section id="section-linetriangle-3"><p>3</p></section>
+						
+					</div>
+					
+				</div>-->
+				
+				
+				<ul class="nav nav-tabs">
+				  <li class="active"><a href="#home">Home</a></li>
+				  <li><a href="#menu1">Menu 1</a></li>
+				  <li><a href="#menu2">Menu 2</a></li>
+				</ul>
+
+				<div class="tab-content">
+				  <div id="home" class="tab-pane fade in active">
+					<h3>HOME</h3>
+					<p>Some content.</p>
+				  </div>
+				  <div id="menu1" class="tab-pane fade">
+					<h3>Menu 1</h3>
+					<p>Some content in menu 1.</p>
+				  </div>
+				  <div id="menu2" class="tab-pane fade">
+					<h3>Menu 2</h3>
+					<p>Some content in menu 2.</p>
+				  </div>
+				</div>
+			
+						
+			
+			
+		</div><!-- /container -->
+		<script src="js/cbpFWTabs.js"></script>
+		<script>
+			
+
+				/*[].slice.call( document.querySelectorAll( '.tabs' ) ).forEach( function( el ) {
+					new CBPFWTabs( el );
+					//$('nav ul.setup-panel li:eq(1)').addClass('disabled');
+				});*/
+				
+				
+				
+				
+				
+				 //$('nav ul.setup-panel li:eq(1)').removeClass('disabled');
+				 //$('nav ul.setup-panel li:eq(1)').addClass('disabled');
+
+			
+			
+			$(document).ready(function (){
+			
+				$(".nav-tabs a").click(function(e){
+					$(this).tab('show');
+				});
+			
+				$('ul li a[href="#menu1"]').on('click' ,function(e){
+					//alert("a");
+					
+				});
+			
+			});
+				
+			
+		</script>
+	</body>
+</html>
