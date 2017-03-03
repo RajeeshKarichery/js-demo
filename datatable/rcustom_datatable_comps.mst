@@ -48,10 +48,10 @@
 		</div>
 	</td>
 </script>
-<script id="cus_sn_datagrid_select_renderer" type="text/html">
+<script id="dep_sn_datagrid_select_renderer" type="text/html">
 	<td>
-		<div class="cus_default_renderer" data_field="{{field_name}}">
-		<select id="cus_sn_sel_box" class="form-control">
+		<div class="dep_default_renderer" data_field="{{field_name}}">
+		<select id="dep_sn_sel_box" class="form-control">
 			<option value="-1">Select</option>
 			{{#_dp}}
 				<option value="{{key_val}}" {{selected}}>{{key_label}}</option>

@@ -42,16 +42,19 @@
 		
 		var dataSet2 = [ {'name':'Football', 'state':'KL','dist':'KL14' } ,{'name':'Cricket', 'state':'','dist':'' } ];
         var buttonColsDp =[{'field_label':'Game' ,'field_name':'game'},
-            {'field_label':'State' ,'field_name':'state' ,'is_itemrenderer':'true','item_renderer':'cus_sn_datagrid_select_renderer','colTrigger':'dist',
+            {'field_label':'State' ,'field_name':'state' ,'is_itemrenderer':'true','item_renderer':'dep_sn_datagrid_select_renderer','colTrigger':'dist',
                 'dp':[{'key_val':'KL','key_label':'Kerala'},{'key_val':'KA','key_label':'Karnataka'}] },{'field_label':'Dist' ,'field_name':'dist','is_itemrenderer':'true','item_renderer':'sn_datagrid_select_renderer','colDepended':'state','dp':[ {'pkey':'KL', 'key_val':'KL14','key_label':'Kasaragod' },{'pkey':'KL','key_val':'KL3','key_label':'Pathanam' },{'pkey':'KA','key_val':'MANG','key_label':'Mangalore' },{'pkey':'KA','key_val':'UP','key_label':'Udupi' }  ]  },{'field_label':'Country' ,'field_name':'country','is_itemrenderer':'true','item_renderer':'sn_datagrid_select_renderer','dp':[{'key_val':'IND','key_label':'India'},{'key_val':'SRI','key_label':'Sri Lanka'}] }  ];
 
 
-        _dt2 = new RCusTable({tag_name:"rk_table2",cols:buttonColsDp,enable_checkbox:true,buttons:true,mapKey:'field_name',buttons:true,toolbar:true,bSort:true,paging:true,searching:true,bInfo:true ,
+        _dt2 = new RBaseTable({tag_name:"rk_table2",cols:buttonColsDp,enable_checkbox:true,buttons:true,mapKey:'field_name',buttons:true,toolbar:true,bSort:true,paging:true,searching:true,bInfo:true ,
             callback:{
                 creationComplete:function(){
                     _dt2.setDp(dataSet2);
                     //_dt2.createToolButtons();
-                }
+                },
+				itemRenderSelectTrigger:function(e){
+					alert("ok");
+				}
             }
         });
 		_dt2.init();

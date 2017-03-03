@@ -42,6 +42,12 @@ function RBaseTable(options){
 			this.addEventListenerItemRenderSelectCustomTrigger();
 		}		
 		
+		
+		/**
+		*	Table Functions
+		*/	
+		
+		
 		this.getBaseObject = function(){
 			return dgObject;
 		}
@@ -93,7 +99,7 @@ function RBaseTable(options){
 							$("#"+tag_name+"_datagrid tbody").on("change","td select",function(e){
 							});
 						}
-						else if(col.item_renderer == "sn_datagrid_select_renderer" || col.item_renderer == "cus_sn_datagrid_select_renderer"){
+						else if(col.item_renderer == "sn_datagrid_select_renderer" || col.item_renderer == "dep_sn_datagrid_select_renderer"){
 							var _dp = col.dp;
 							if(col.colDepended !=undefined){
 								_dp = jQuery.grep(_dp, function (_item) {
@@ -112,7 +118,7 @@ function RBaseTable(options){
 							if(col.item_renderer == "sn_datagrid_select_renderer")
 								row.push(Mustache.render(dgObject.sn_datagrid_select_renderer,$.extend(col,{"field_name":col.field_name})));
 							else	
-								row.push(Mustache.render(dgObject.cus_sn_datagrid_select_renderer,$.extend(col,{"field_name":col.field_name})));
+								row.push(Mustache.render(dgObject.dep_sn_datagrid_select_renderer,$.extend(col,{"field_name":col.field_name})));
 						}
 					}
 					else{
@@ -186,16 +192,23 @@ function RBaseTable(options){
 						});
 		}
 
+		/**
+		*	Events Registered
+		*/	
+		
 		this.addEventListenerItemRenderSelectDefaultTrigger = function(){
-			$(document).on("change","#"+dgObject.tag_name+"_datagrid tbody td select#sn_sel_box",function(e){
-				//alert("main");
+			$(document).on("change","#"+dgObject.tag_name+"_datagrid tbody td select#sn_sel_box",function(e){			
 				var fSelFname = $(this).parents().attr('data_field');
 				var cb_value = $(this).val();
 				var data = dgObject.datagrid.row( $(this).parents('tr') ).data();
 				var slno = $(data[0]).text();
 				slno = slno-1;
-				dgObject.results[slno][fSelFname] = cb_value;
-				
+				dgObject.results[slno][fSelFname] = cb_value;				
+				if(dgObject.defaults.callback.itemRenderSelectTrigger !=undefined){
+					var _reponse = new Object();
+					_reponse['data'] =  cb_value;
+					dgObject.defaults.callback.itemRenderSelectTrigger.call(this,_reponse);
+				}				
 			});
 		}	
 		this.addEventListenerRowChangeTrigger = function(){
@@ -258,7 +271,7 @@ function RBaseTable(options){
 				dgObject.sn_image_download_file_renderer = $(template).filter('#sn_datagrid_image_download_file_renderer').html();
 				dgObject.sn_select_box = $(template).filter('#sn_select_box').html();
 				dgObject.sn_datagrid_select_renderer = $(template).filter('#sn_datagrid_select_renderer').html();
-				dgObject.cus_sn_datagrid_select_renderer = $(template).filter('#cus_sn_datagrid_select_renderer').html();
+				dgObject.dep_sn_datagrid_select_renderer = $(template).filter('#dep_sn_datagrid_select_renderer').html();
 
 				var params = new Object;
 				columns = defaults.cols;
