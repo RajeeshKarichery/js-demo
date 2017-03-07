@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+	<link rel="stylesheet" type="text/css" href="../../dist/css/bootstrap/bootstrap.min.css" > 
+    
+    <style>
+          div.vtab-tab-container {
+            z-index: 10;
+            background-color: #ffffff;
+            padding: 0 !important;
+            border-radius: 4px;
+            -moz-border-radius: 4px;           
+            margin-top: 20px;           
+           
+        }
+        
+        div.vtab-tab-menu {
+            padding-right: 0;
+            padding-left: 0;
+            padding-bottom: 0;
+        }
+        
+        div.vtab-tab-menu div.list-group {
+            margin-bottom: 0;
+        }
+        
+        div.vtab-tab-menu div.list-group>a {
+            margin-bottom: 0;
+        }
+        
+        div.vtab-tab-menu div.list-group>a .glyphicon,
+        div.vtab-tab-menu div.list-group>a .fa {
+            color: #5A55A3;
+        }
+        
+        div.vtab-tab-menu div.list-group>a:first-child {
+            border-top-right-radius: 0;
+            -moz-border-top-right-radius: 0;
+        }
+        
+        div.vtab-tab-menu div.list-group>a:last-child {
+            border-bottom-right-radius: 0;
+            -moz-border-bottom-right-radius: 0;
+        }
+        
+        div.vtab-tab-menu div.list-group>a.active,
+        div.vtab-tab-menu div.list-group>a.active .glyphicon,
+        div.vtab-tab-menu div.list-group>a.active .fa {
+            background-color: #5A55A3;
+            background-image: #5A55A3;
+            color: #ffffff;
+        }        
+      
+		div.list-group > a.active:after {
+			z-index: -1;
+	        position: absolute;
+            top: 98.1%;
+            left: 70%;
+            margin-left: -22%;
+            content: '';
+            width: 0;
+            height: 0;
+                        
+            border-top: solid 13px #5A55A3;
+            border-left: solid 13px transparent;
+            border-right: solid 13px transparent;
+		}
+	  
+        div.vtab-tab-content {
+            background-color: #ffffff;           
+            padding-left: 20px;
+            padding-top: 10px;
+        }
+        
+        div.vtab-tab div.vtab-tab-content:not(.active) {
+            display: none;
+        }
+		
+		.list-group-item.active, .list-group{
+			background-color: #5A55A3;
+			border-color: #5A55A3;
+		}
+		
+		.list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {
+			color: #fff;
+			background-color: #5A55A3;
+			border-color: #5A55A3;
+		}
+		
+    </style>
+
+</head>
+
+<body>
+
+  
+		<div class="container" >
+			<div class="row" >
+				<div class="col-md-12 vtab-tab-container"  >	
+					<div class="list-group"  >											
+						<a href="#" class="col-md-4 list-group-item active text-center "  style="height:50px">							
+							<span class="glyphicon glyphicon-plane"></br>Menu1</span>
+						</a>					
+						<a href="#" class="col-md-4 list-group-item text-center " style="height:50px">							
+							<span class="glyphicon glyphicon-plane"></br>Menu2</span>
+						</a>
+						<a href="#" class="col-md-4 list-group-item text-center " style="height:50px">							
+							Menu3
+						</a>
+					</div>						
+				</div>			
+				<div class="row">
+					<div class="col-md-12 vtab-tab" >						
+						<div class="vtab-tab-content active">
+							<center>
+								<h3 style="margin-top: 0;color:#55518a">Menu1</h3>
+							</center>
+						</div>						
+						<div class="vtab-tab-content">
+							<center>
+								<h3 style="margin-top: 0;color:#55518a">Menu2</h3>
+							</center>
+						</div>
+						<div class="vtab-tab-content">
+							<center>
+								<h3 style="margin-top: 0;color:#55518a">Menu3</h3>
+							</center>
+						</div>		
+					</div>
+				</div>			
+			</div>
+		</div>		
+       
+       	
+		
+		<script src="../../dist/jquery.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $("div.vtab-tab-menu>div.list-group>a").click(function (e) {
+                    e.preventDefault();
+                    $(this).siblings('a.active').removeClass("active");
+                    $(this).addClass("active");
+                    var index = $(this).index();
+                    $("div.vtab-tab>div.vtab-tab-content").removeClass("active");
+                    $("div.vtab-tab>div.vtab-tab-content").eq(index).addClass("active");
+                });
+            });
+        </script>
+      
+		
+   
+</body>
+
+</html>
