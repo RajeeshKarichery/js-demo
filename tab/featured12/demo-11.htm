@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+	<link rel="stylesheet" type="text/css" href="../../dist/css/bootstrap/bootstrap.min.css" > 
+    
+    <style>
+        /*  vtab tab */
+        
+        div.vtab-tab-container {
+            z-index: 10;
+            background-color: #ffffff;
+            padding: 0 !important;
+            border-radius: 4px;
+            -moz-border-radius: 4px;
+            border: 1px solid #ddd;
+            margin-top: 20px;
+            margin-left: 50px;
+            -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+            -moz-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+            background-clip: padding-box;
+            opacity: 0.97;
+            filter: alpha(opacity=97);
+        }
+        
+        div.vtab-tab-menu {
+            padding-right: 0;
+            padding-left: 0;
+            padding-bottom: 0;
+        }
+        
+        div.vtab-tab-menu div.list-group {
+            margin-bottom: 0;
+        }
+        
+        div.vtab-tab-menu div.list-group>a {
+            margin-bottom: 0;
+        }
+        
+        div.vtab-tab-menu div.list-group>a .glyphicon,
+        div.vtab-tab-menu div.list-group>a .fa {
+            color: #5A55A3;
+        }
+        
+        div.vtab-tab-menu div.list-group>a:first-child {
+            border-top-right-radius: 0;
+            -moz-border-top-right-radius: 0;
+        }
+        
+        div.vtab-tab-menu div.list-group>a:last-child {
+            border-bottom-right-radius: 0;
+            -moz-border-bottom-right-radius: 0;
+        }
+        
+        div.vtab-tab-menu div.list-group>a.active,
+        div.vtab-tab-menu div.list-group>a.active .glyphicon,
+        div.vtab-tab-menu div.list-group>a.active .fa {
+            background-color: #5A55A3;
+            background-image: #5A55A3;
+            color: #ffffff;
+        }
+        
+        div.vtab-tab-menu div.list-group>a.active:after {
+            content: '';
+            position: absolute;
+            left: 100%;
+            top: 50%;
+            margin-top: -13px;
+            border-left: 0;
+            border-bottom: 13px solid transparent;
+            border-top: 13px solid transparent;
+            border-left: 10px solid #5A55A3;
+        }
+        
+        div.vtab-tab-content {
+            background-color: #ffffff;
+            /* border: 1px solid #eeeeee; */
+            padding-left: 20px;
+            padding-top: 10px;
+        }
+        
+        div.vtab-tab div.vtab-tab-content:not(.active) {
+            display: none;
+        }
+    </style>
+
+</head>
+
+<body>
+
+  
+
+
+    <!-- Page Content -->
+    <div class="container">
+	
+		<button id="btn1">Change</button>
+
+       
+        <!-- First Featurette -->
+        <div class="featurette" id="about">
+            <!------------------------code---------------start---------------->
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-5 col-md-5 col-sm-8 col-xs-9 vtab-tab-container">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 vtab-tab-menu">
+                            <div class="list-group">
+                                <a href="#" class="list-group-item active text-center">                                    
+                                    <br/>Menu1
+                                </a>
+                                <a href="#" class="list-group-item text-center" id="step2">
+                                    <h4 class="glyphicon glyphicon-road"></h4>
+                                    <br/>Menu2
+                                </a>
+                                <a href="#" class="list-group-item text-center" id="step3">                                    
+                                    <br/>Menu3
+                                </a>
+                                <a href="#" class="list-group-item text-center" id="step4">                                    
+                                    <br/>Menu4
+                                </a>
+                                <a href="#" class="list-group-item text-center" id="step5">                                    
+                                    <br/>Menu5
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 vtab-tab">
+                            <!-- flight section -->
+                            <div class="vtab-tab-content active">
+                                <center>                                    
+                                    <h2 style="margin-top: 0;color:#55518a">m1</h2>                                    
+                                </center>
+                            </div>
+                            <!-- train section -->
+                            <div class="vtab-tab-content">
+                                 <center>                                    
+                                    <h2 style="margin-top: 0;color:#55518a">m2</h2>                                    
+                                </center>
+                            </div>
+
+                            <!-- hotel search -->
+                            <div class="vtab-tab-content">
+                                 <center>                                    
+                                    <h2 style="margin-top: 0;color:#55518a">m3</h2>                                    
+                                </center>
+                            </div>
+                            <div class="vtab-tab-content">
+                                <center>                                    
+                                    <h2 style="margin-top: 0;color:#55518a">m4</h2>                                    
+                                </center>
+                            </div>
+                            <div class="vtab-tab-content">
+                                <center>                                    
+                                    <h2 style="margin-top: 0;color:#55518a">m5</h2>                                    
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!----Code------end----------------------------------->
+        </div>
+       
+       	
+		
+		<script src="../../dist/jquery.min.js"></script>
+        <script>
+            $(document).ready(function () {
+				$('div.vtab-tab-menu>div.list-group>a').not('.active').addClass('disabled');
+                $("div.vtab-tab-menu>div.list-group>a").click(function (e) {
+                    e.preventDefault();
+					if ( $( this ).hasClass( "disabled" ) ) {
+						event.stopImmediatePropagation();
+					}
+                    $(this).siblings('a.active').removeClass("active");
+                    $(this).addClass("active");
+                    var index = $(this).index();
+                    $("div.vtab-tab>div.vtab-tab-content").removeClass("active");
+                    $("div.vtab-tab>div.vtab-tab-content").eq(index).addClass("active");
+                });
+				
+				
+				
+				
+				
+				
+				
+				
+				$("#btn1").click(function(e){
+				
+					$('div.list-group >a:eq(1)').removeClass('disabled');
+					$('div.list-group >a:eq(3)').removeClass('disabled');
+					$('div.list-group >a:eq(4)').removeClass('disabled');
+					
+					
+					/*$("#step2").removeClass("disabled");
+					$("#step3").removeClass("disabled");
+					$("#step4").removeClass("disabled");
+					$("#step5").removeClass("disabled");*/
+					
+					
+				});
+				
+				
+				
+            });
+        </script>
+      
+		<script src="../../dist/bootstrap.min.js"></script>
+    </div>
+</body>
+
+</html>
