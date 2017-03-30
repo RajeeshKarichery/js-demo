@@ -121,7 +121,53 @@ function RCusTable(options){
 					}	
                 }
             });
-        })
+			
+			
+			
+			
+			
+        });
+		
+		dgObject.datagrid.button().add(2, {
+                extend: 'excelHtml5',
+				exportOptions: {
+					columns: ':visible',
+					format: {
+						body: function(data, col, row) {
+							
+							/*if(jQuery($(data)).hasClass("default_renderer")) {							
+								console.log("AAA");
+							}
+							else
+								console.log("BBB");*/
+								
+							var ele = $(data).find('div.class');
+							alert(ele);
+							
+							if (row == 2 || row == 3 || row == 4) {
+								/*return table
+										.cell( {row: row, column: col} )
+										.nodes()
+										.to$()
+										.find(':selected')
+										.text()*/
+								
+								
+								return $(data).find(':selected').text();
+									
+							} else {								
+								return $(data).text();
+							}
+						}
+					}				
+				},
+				filename: 'Dataexport'
+								
+            } );
+			
+			
+		dgObject.datagrid.button().add(3,'colvis' );	
+		
     }
 	
 	

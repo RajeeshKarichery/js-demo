@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>Notification Types</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="demonstration of some noty capabilities">
+    
+	<style>		
+		
+	</style>	
+		
+   	<link rel="stylesheet" type="text/css" href="../dist/css/bootstrap/bootstrap.min.css" >	
+	<script src="../dist/jquery.min.js"></script>
+	<script src="../dist/bootstrap.min.js"></script>
+	<!--<script type="text/javascript" src="jquery.redirect.js"></script>-->
+	<script type="text/javascript" src="jquery.serializejson.min.js"></script>
+	
+    
+</head>
+<body>
+			
+		<div class="container">			
+			<button id="btnTest" class="btn btn-default">Test</button>
+			
+			
+			<!--<form style="display: hidden" action="http://127.0.0.1:5000/api/admin/ext" method="POST" id="frm" >
+			  <input type="hidden" id="var1" name="var1" value=""/>
+			  <input type="hidden" id="var2" name="var2" value=""/>
+			</form>-->
+			
+			 <form id="myform" style="display: hidden"  action="http://127.0.0.1:5000/api/admin/ext" method="POST"  >
+				<input type="hidden" id="firstName" name="firstName" value=""/>
+			</form>
+			
+			
+		</div>	
+		
+    <script type="text/javascript">   
+        $(document).ready(function (){
+			$("#btnTest").click(function(e){
+				var url ='http://127.0.0.1:5000/api/admin/ext';
+				//window.location.href = "http://127.0.0.1:5000/api/admin/ext?name='reji'";
+				
+				
+				//$("#var1").val("rejeesh");
+				//$("#var2").val("karich");
+				//$("#frm").submit();
+				
+				 /*$('#myform').submit(function(e) {
+					 var data = $("#myform").serializeJSON();
+					 $.ajax({
+						 type: "POST",
+						 url: "http://127.0.0.1:5000/api/admin/ext",
+						 data: data,
+						 success: function(){},
+						 dataType: "json",
+						 contentType : "application/json"
+					 });
+					 e.preventDefault();
+				});*/
+				
+				
+				
+								
+				$("#firstName").val("rejeesh");
+				//$('#myform').submit();
+				
+				
+				
+				var data = $("#myform").serializeJSON();
+				var request = new XMLHttpRequest;
+					request.method = "post";
+					request.open(request.method, [url] , true); //true is asynchronous
+
+					//this part here matters. regular form data with charset UTF-8
+					request.setRequestHeader("Content-type", "application/json; charset=UTF-8');
+					//request.setRequestHeader("Connection", "close");
+
+					//request.onreadystatechange = [trackingfunction]; //You can see which data is returned from the post.
+
+					//request.send(data); //send the post arguments here!
+				
+				
+				
+				
+				
+				
+				
+				
+				 
+				/*$.ajax({
+				  url: url
+				});*/
+				
+				
+				// $.redirect(ul,"POST", "_blank");
+				
+				/*$.ajax({
+				  dataType: 'native',
+				  url: url,
+				  xhrFields: {
+					responseType: 'blob'
+				  },
+				  success: function(blob){
+					console.log(blob.size);
+					  var link=document.createElement('a');
+					  link.href=window.URL.createObjectURL(blob);
+					  link.download="Dossier_" + new Date() + ".pdf";
+					  link.click();
+				  }
+				});*/
+
+				
+				
+			});
+		      
+		});//document close
+		
+	</script>
+	
+</body>
+</html>

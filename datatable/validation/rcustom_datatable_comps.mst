@@ -1,0 +1,92 @@
+<style>
+	
+</style>	
+<script id="sn_datagrid" type="text/html">
+	<table id="{{tag_name}}_datagrid" class="table table-striped table-bordered" cellspacing="0" width="100%">
+		<thead>
+			<tr>
+			    <th>Sl.No</th>
+				{{#defaults.enable_checkbox}}
+					<th><div class="checkbox"><label><input type="checkbox" id="{{tag_name}}_dt_select_all_btn" aria-label="..."/></label></div></th>
+				{{/defaults.enable_checkbox}}
+                {{#cols}}
+					<th column="{{field_name}}" style="text-align:center"><div id="{{star_req}}" style="border-top-width: 13px;border-left-width: 18px;border-right-width: 13px;"></div> {{field_label}} </th>
+				{{/cols}}
+			</tr>
+		</thead>
+		<tbody id="{{tag_name}}_datagrid_body">
+
+		</tbody>
+	</table>	
+</script>
+<script id="sn_default_renderer" type="text/html">
+	<td>{{field_value}}</td>
+</script>
+
+
+<script id="sn_datagrid_text_input_renderer" type="text/html">
+	<td><input id="txt_render" type="text" value="{{field_value}}" class="{{cls_name}}"  data_field="{{field_name}}" id="{{field_name}}"  /></td>
+</script>
+<script id="sn_datagrid_image_renderer" type="text/html">
+	<td><image src="{{field_value}}" data_field="{{field_value}}"   /></td>
+</script>
+<script id="sn_select_box" type="text/html">
+	<div class="form-group col-sm-12 col-md-4" id="sn_div_select">
+		<select class="form-control entity-rest" name="{{sn_field_id}}" id="{{sn_field_id}}" >
+			<option value="-1">Select</option>
+			{{#dp}}
+				<option value="{{list_key}}">{{list_value}}</option>
+			{{/dp}}
+		</select>
+	</div>
+</script>
+
+<script id="sn_datagrid_select_renderer" type="text/html">
+	<td>
+		<div data_field="{{field_name}}">
+		<select id="sn_sel_box" class="form-control {{cls_name}}" style="width:100%">
+			<option value="-1">Select</option>
+			{{#_dp}}
+				<option value="{{key_val}}" {{selected}}>{{key_label}}</option>
+			{{/_dp}}
+		</select>
+		</div>
+	</td>
+</script>
+<script id="dep_sn_datagrid_select_renderer" type="text/html">
+	<td>
+		<div class="dep_default_renderer" data_field="{{field_name}}">
+		<select id="dep_sn_sel_box" class="form-control">
+			<option value="-1">Select</option>
+			{{#_dp}}
+				<option value="{{key_val}}" {{selected}}>{{key_label}}</option>
+			{{/_dp}}
+		</select>
+		</div>
+	</td>
+</script>
+<script id="datagrid_date_renderer" type="text/html">
+	<td style="border: solid 1px;border-color: #a94442;"></td>
+</script>
+
+<script id="error_default_renderer" type="text/html">
+	<td><input id='ejbeatycelledit' class='my-input-class error' onfocusout='$(this).updateEditableCell(this)'  value="{{field_value}}"></input></td>
+</script>
+<script id="error_datepicker_renderer" type="text/html">
+	<td>
+		<div style = "width:100%">
+			<div  style = "float:left; width: 100px;height:30px; border: solid 1px;border-color: #a94442">				
+			</div>
+			<div style = "float:left; width: 10px;">
+				<img  src="http://jqueryui.com/resources/demos/datepicker/images/calendar.gif" style="margin-top:5px"/>
+			</div>			
+		</div>
+	</td>
+</script>
+<script id="sn_number_input_renderer" type="text/html">
+	<td><input id="num_render" type="text" value="{{field_value}}" class="{{cls_name}}"  data_field="{{field_name}}" id="{{field_name}}"  /></td>
+</script>
+<script id="sn_checkbox_renderer" type="text/html">
+	<td ><div class="checkbox" ><input class="{{cls_name}}" id="checkbox_render" type="checkbox" {{checked}} data_field="{{field_name}}" aria-label="..."/></div></td>
+</script>
+

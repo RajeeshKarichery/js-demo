@@ -35,11 +35,13 @@ function RBaseTable(options){
 		}
 		this.addEvents = function(){
 			//this.addEventListenerItemRenderSelectTrigger();
-			this.addEventListenerRowChangeTrigger();
+			/*this.addEventListenerRowChangeTrigger();
 			this.addEventListenerRowCheckBoxChangeTrigger();
 			this.addEventListenerRowHeaderCheckBoxChangeTrigger();
+			
+			this.addEventListenerItemRenderSelectCustomTrigger();*/
 			this.addEventListenerItemRenderSelectDefaultTrigger();
-			this.addEventListenerItemRenderSelectCustomTrigger();
+			this.addEventListenerTextInput();
 		}		
 		
 		
@@ -53,6 +55,9 @@ function RBaseTable(options){
 		}
 		this.setCols = function(cols){
 			defaults.cols = cols;			
+			//this.execDownloadTemplate();			
+		}
+		this.redrawColumn = function(){
 			this.execDownloadTemplate();			
 		}
 		this.setDp = function(results){
@@ -196,6 +201,15 @@ function RBaseTable(options){
 		*	Events Registered
 		*/	
 		
+		
+		
+		this.addEventListenerTextInput = function(){
+			$(document).on("change","#"+dgObject.tag_name+"_datagrid tbody input",function(e){
+				alert("ppppp");		
+			});
+		}
+		
+		
 		this.addEventListenerItemRenderSelectDefaultTrigger = function(){
 			$(document).on("change","#"+dgObject.tag_name+"_datagrid tbody td select#sn_sel_box",function(e){			
 				var fSelFname = $(this).parents().attr('data_field');
@@ -272,15 +286,27 @@ function RBaseTable(options){
 				dgObject.sn_select_box = $(template).filter('#sn_select_box').html();
 				dgObject.sn_datagrid_select_renderer = $(template).filter('#sn_datagrid_select_renderer').html();
 				dgObject.dep_sn_datagrid_select_renderer = $(template).filter('#dep_sn_datagrid_select_renderer').html();
+				dgObject.datagrid_date_renderer = $(template).filter('#datagrid_date_renderer').html();
+				
+				dgObject.error_default_renderer = $(template).filter('#error_default_renderer').html();
+				dgObject.error_datepicker_renderer = $(template).filter('#error_datepicker_renderer').html();
+				dgObject.sn_number_input_renderer = $(template).filter('#sn_number_input_renderer').html();
+				dgObject.sn_checkbox_renderer = $(template).filter('#sn_checkbox_renderer').html();
+				
+								
 
 				var params = new Object;
 				columns = defaults.cols;
+				
+				
 				var datagrid_str = '<div class="form-inline" id="'+tag_name+'_dtgrid_box">';
 				dgObject.cols = columns;
 
 				datagrid_str += Mustache.render(sn_datagrid,dgObject);
 				datagrid_str += "</div>";
-				$(tag_name).replaceWith(datagrid_str);
+				$(tag_name).html(datagrid_str);
+				//$("#"+tag_name+"_dtgrid_box").remove();
+				//$(tag_name).append(datagrid_str);
 				
 				self.createTable();
 							
@@ -336,12 +362,12 @@ function RBaseTable(options){
 				}
 
 				//implement any item_renderer callBacks here
-				$("#"+tag_name+"_datagrid tbody").on("change","input.text_input_renderer",function(){
+				/*$("#"+tag_name+"_datagrid tbody").on("change","input.text_input_renderer",function(){
 					var currentRow = $(this).closest("tr").index();
 					var method = "on_"+$(this).attr("data_field")+"_changed";
 					dgObject.results[currentRow][$(this).attr("data_field")] = $(this).val();
 					dgObject[method]($(this));
-				});
+				});*/
 
 				
 			});				

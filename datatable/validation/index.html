@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DataTable</title>
+  
+  <style>
+	tr {
+		border:1px inset white;
+	}
+	tr.focused {
+		border:1px solid #a94442; 
+	}
+	
+	
+	
+	#rk_table2_datagrid.dataTable tr.odd { background-color: white;  border:1px lightgrey;}
+    #rk_table2_datagrid.dataTable tr.even{ background-color: white; border:1px lightgrey; }
+	
+	
+	
+	.error {
+            border: solid 1px;
+            border-color: #a94442;
+    }
+		
+
+	#triangle-topleft { 
+	   width: 0; 
+	   height: 0; 
+	   border-top: 100px solid red; 
+	   border-right: 100px solid transparent; 
+	}
+		
+	
+	
+	
+  </style>
+    
+  <link rel="stylesheet" type="text/css" href="../../dist/css/bootstrap/bootstrap.min.css" >  
+  <link rel="stylesheet" type="text/css" href="../../dist/libs/datatable/css/dataTables.bootstrap.min.css" >
+  <link rel="stylesheet" type="text/css" href="../../dist/libs/datatable/css/responsive.dataTables.min.css" >
+  <link rel="stylesheet" type="text/css" href="../../dist/libs/datatable/css/buttons.dataTables.min.css" >  
+  
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  
+  <link rel="stylesheet" type="text/css" href="val.css" >  
+  
+  
+  
+  <script src="../../dist/libs/jquery.min.js"></script>
+  <script src="../../dist/libs/mustache.min.js"></script>
+  <script src="../../dist/libs/datatable/js/jquery.dataTables.min.js"></script>
+  <script src="../../dist/libs/datatable/js/dataTables.responsive.min.js"></script>
+  <script src="../../dist/libs/datatable/js/dataTables.bootstrap.min.js"></script>
+  <script src="../../dist/libs/datatable/js/dataTables.buttons.min.js"></script>
+  <script src="../../dist/bootstrap.min.js"></script>
+  
+  
+       
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  
+  <script src="../r-base-table.js"></script>
+  <script src="CellEdit.js"></script>
+  <script src="r-vali-table.js"></script>
+  
+   
+</head>
+<body class="container">
+
+	<button  id="btn-Tabel2">getSelectedata</button>	
+	<rk_table2></rk_table2>
+	
+	
+	
+
+	
+ 
+  <script>
+	 $(document).ready(function() {	
+	 			
+		//var dataSet2 = [ {'game':'Football' } ,{'game':'' ,'count':10,'active' :"Y"} ];
+        /*var buttonColsDp =[{'field_label':'Game' ,'field_name':'game','is_required':true,'star_req':'triangle-topleft','is_itemrenderer':'true','item_renderer' :'sn_text_input_renderer' },
+							{'field_label':'Count' ,'field_name':'count','is_required':true,'is_itemrenderer':'true','item_renderer' :'sn_number_input_renderer' },
+							{'field_label':'Country' ,'field_name':'country','is_required':true,'is_itemrenderer':'true','item_renderer':'sn_datagrid_select_renderer',
+								'dp':[{'key_val':'IND','key_label':'India'},{'key_val':'SRI','key_label':'Sri Lanka'}] } ,
+								{'field_label':'DOB' ,'field_name':'dob','is_required':true,'is_itemrenderer':'true','item_renderer' :'datagrid_date_renderer' },
+								{'field_label':'DOJ' ,'field_name':'doj','is_required':true,'is_itemrenderer':'true','item_renderer' :'datagrid_date_renderer' },
+								{'field_label':'Active' ,'field_name':'active','is_required':true,'is_itemrenderer':'true','item_renderer' :'sn_checkbox_renderer'}
+								
+								];*/
+								
+		var dataSet2 = [ {'game':'Football', 'status':'Y'} ,{'game':'' ,'status' :'N'} ];
+		var buttonColsDp =[{'field_label':'Game' ,'field_name':'game','is_itemrenderer':true ,'item_renderer' :'sn_text_input_renderer' },
+			{'field_label':'Status' ,'field_name':'status','is_itemrenderer':true ,'item_renderer' :'sn_image_renderer',
+			'dp':[{'key':'Y','value':'tick_circle.png'},{'key':'N','value':'red_x_mark.png'} ]  }];
+		
+		$('#btn-Tabel2').on('click',function(e){
+			
+			
+			//var list = _dt2.getSelectedObjects();
+			
+			
+			
+			_dt2 = new RValiTable({tag_name:"rk_table2",enable_checkbox:false,mapKey:'field_name',searching:true,
+				callback:{
+					creationComplete:function(){
+						_dt2.setDp(dataSet2);
+					}
+				}
+			});
+			_dt2.init();
+			_dt2.setCols(buttonColsDp);
+			_dt2.redrawColumn();
+			
+			
+		});
+		
+		
+		
+		
+		
+		
+		
+
+	});
+	
+  </script>
+   
+</body>
+</html>
