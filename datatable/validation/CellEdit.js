@@ -7,11 +7,15 @@ jQuery.fn.dataTable.Api.register('MakeCellsEditable()', function (settings) {
         updateEditableCell: function (callingElement) {
             // Need to redeclare table here for situations where we have more than one datatable on the page. See issue6 on github
             var table = $(callingElement.closest("table")).DataTable().table();
-            var row = table.row($(callingElement).parents('tr'));
+            //var row = table.row($(callingElement).parents('tr'));
+			
+			var row = table.row($(this).parents('tr')).data();
+			
+						
             var cell = table.cell($(callingElement).parent());
             var columnIndex = cell.index().column;
             var inputField =getInputField(callingElement);
-
+			var data_field =$("#ejbeatycelledit").attr('data_field');			
             // Update
             var newValue = inputField.val();
             if (!newValue && ((settings.allowNulls) && settings.allowNulls != true)) {
@@ -32,7 +36,7 @@ jQuery.fn.dataTable.Api.register('MakeCellsEditable()', function (settings) {
                 _update(newValue);
             }
             function _addValidationCss() {
-                // Show validation error
+                // Show validation error				
                 if (settings.allowNulls.errorClass) {
                     $(inputField).addClass(settings.allowNulls.errorClass)
                 } else {
@@ -43,7 +47,8 @@ jQuery.fn.dataTable.Api.register('MakeCellsEditable()', function (settings) {
                 var oldValue = cell.data();
                 cell.data(newValue);
                 //Return cell & row.
-                settings.onUpdate(cell, row, oldValue);
+                //settings.onUpdate(cell, row, oldValue);
+				settings.onUpdate(cell,row,data_field);
             }
             // Get current page
             var currentPageIndex = table.page.info().page;
@@ -139,15 +144,18 @@ function getInputHtml(currentColumnIndex, settings, oldValue,jD) {
     var inputSetting, inputType, input, inputCss, confirmCss, cancelCss;
 
     input = {"focus":true,"html":null}
+	var data_field;
 
     if(settings.inputTypes){
 		$.each(settings.inputTypes, function (index, setting) {
 			if (setting.column == currentColumnIndex) {
 				inputSetting = setting;
 				inputType = inputSetting.type.toLowerCase();
+				data_field = setting.data_field;
 			}
 		});
 	}
+	
     
     if (settings.inputCss) { inputCss = settings.inputCss; }
     if (settings.confirmationButton) {
@@ -164,7 +172,7 @@ function getInputHtml(currentColumnIndex, settings, oldValue,jD) {
 			if(jD)
 				jQuery(".datepick").datepicker("destroy");	     	
 				
-			input.html = "<input id='ejbeatycelledit' type='text' name='date' class='datepick'  onchange='$(this).updateEditableCell(this);'  value='" + oldValue + "' style='width:100px;height:30px' ></input> ";
+			input.html = "<input id='ejbeatycelledit' data_field ='"+data_field+"' type='text' name='date' class='datepick'  onchange='$(this).updateEditableCell(this);'  value='" + oldValue + "' style='width:100px;height:30px' ></input> ";
 			
 	        setTimeout(function () { //Set timeout to allow the script to write the input.html before triggering the datepicker 
 	            var icon = "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif";

@@ -15,6 +15,7 @@ function RBaseTable(options){
 		buttons:false,
 		toolbar:false,
 		rowReorder: false,
+		colRowStatus: false,
 		callback:{
 			creationComplete:null,
 			buttonsClickEvent:null,
@@ -39,7 +40,7 @@ function RBaseTable(options){
 			this.addEventListenerRowCheckBoxChangeTrigger();
 			this.addEventListenerRowHeaderCheckBoxChangeTrigger();
 			
-			this.addEventListenerItemRenderSelectCustomTrigger();*/
+			this.addEventListenerItemRenderSelectCustomTrigger();*/			
 			this.addEventListenerItemRenderSelectDefaultTrigger();
 			this.addEventListenerTextInput();
 		}		
@@ -210,7 +211,7 @@ function RBaseTable(options){
 		}
 		
 		
-		this.addEventListenerItemRenderSelectDefaultTrigger = function(){
+		this.addEventListenerItemRenderSelectDefaultTrigger = function(){			
 			$(document).on("change","#"+dgObject.tag_name+"_datagrid tbody td select#sn_sel_box",function(e){			
 				var fSelFname = $(this).parents().attr('data_field');
 				var cb_value = $(this).val();
@@ -292,15 +293,21 @@ function RBaseTable(options){
 				dgObject.error_datepicker_renderer = $(template).filter('#error_datepicker_renderer').html();
 				dgObject.sn_number_input_renderer = $(template).filter('#sn_number_input_renderer').html();
 				dgObject.sn_checkbox_renderer = $(template).filter('#sn_checkbox_renderer').html();
+				dgObject.sn_row_status = $(template).filter('#sn_row_status').html();
+				
 				
 								
 
 				var params = new Object;
 				columns = defaults.cols;
-				
+				var finalCols = [];
+				for(let col of columns){
+					if(col['isVisible'] == undefined)
+						finalCols.push(col);
+				}				
 				
 				var datagrid_str = '<div class="form-inline" id="'+tag_name+'_dtgrid_box">';
-				dgObject.cols = columns;
+				dgObject.cols = finalCols;
 
 				datagrid_str += Mustache.render(sn_datagrid,dgObject);
 				datagrid_str += "</div>";

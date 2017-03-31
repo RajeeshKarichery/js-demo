@@ -9,8 +9,11 @@
 				{{#defaults.enable_checkbox}}
 					<th><div class="checkbox"><label><input type="checkbox" id="{{tag_name}}_dt_select_all_btn" aria-label="..."/></label></div></th>
 				{{/defaults.enable_checkbox}}
+				{{#defaults.colRowStatus}}
+					<th style="width:5px"></th>
+				{{/defaults.colRowStatus}}
                 {{#cols}}
-					<th column="{{field_name}}" style="text-align:center"><div id="{{star_req}}" style="border-top-width: 13px;border-left-width: 18px;border-right-width: 13px;"></div> {{field_label}} </th>
+					<th column="{{field_name}}"  style="text-align:center;"><div id="{{star_req}}" style="border-top-width: 13px;border-left-width: 18px;border-right-width: 13px;" ></div> {{field_label}} </th>
 				{{/cols}}
 			</tr>
 		</thead>
@@ -88,5 +91,8 @@
 </script>
 <script id="sn_checkbox_renderer" type="text/html">
 	<td ><div class="checkbox" ><input class="{{cls_name}}" id="checkbox_render" type="checkbox" {{checked}} data_field="{{field_name}}" aria-label="..."/></div></td>
+</script>
+<script id="sn_row_status" type="text/html">
+	<td><div class="{{row_cls_name}}" ></div></td>
 </script>
 
