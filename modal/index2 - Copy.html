@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+	
+	.nav-tabs { 
+		border-bottom: 2px solid #DDD;
+	}
+    .nav-tabs > li.active > a,
+	.nav-tabs > li > a:hover{
+		background-color:#A2A5A1;
+	}
+	.nav-tabs > li.active > a:focus{
+		border-width: 0;
+		background-color:#A2A5A1;
+		font-weight:bolder;
+		border-top-left-radius:7px;
+		border-top-right-radius:7px;
+		color:#ffffff;		
+	}
+    .nav-tabs > li > a {		
+		background-color:#A2A5A1;
+		font-weight:bolder;		
+	    color:#767676;
+		border-color:#d8d8d8;
+		border-radius:3px 3px 0 0
+	}	
+	
+    .nav-tabs > li > a::after {
+		content: ""; 
+		background: #FCA600;
+		height: 2px;
+		position: absolute; 
+		width: 100%; 
+		left: 0px; 
+		bottom: -1px;
+		transition: all 250ms ease 0s;
+		transform: scale(0); 
+	}
+    .nav-tabs > li.active > a::after,
+	.nav-tabs > li:hover > a::after {
+		transform: scale(1);
+		color:#000000;		
+	}
+	
+	
+	
+	
+		.tab-content{
+				border-left: 1px solid #ddd;
+				border-right: 1px solid #ddd;
+				border-bottom: 1px solid #ddd;
+				border-radius: 0px 0px 5px 5px;
+				padding: 10px;
+		}
+
+</style>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>Notification Types</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="demonstration of some noty capabilities">
+    <link rel="stylesheet" href="../dist/bootstrap.min.css">
+		
+	
+	<style>	
+	</style>	
+	<script src="../dist/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.14.0/jquery.validate.min.js"></script>
+	<script src="../dist/bootstrap.min.js"></script>
+	<script src="rk-popup.js"></script>
+	<script src="../tab/mytab.js"></script>  
+	
+	
+	
+	
+</head>
+<body>
+
+		<!-- Trigger the modal with a button -->
+	<button type="button" id="myModal">Open Modal</button>
+
+	
+	
+	<!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#addMyModal">Open Modal</button>-->
+
+<div class="modal fade" id="addMyModal" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Add Stuff</h4>
+      </div>
+      <div class="modal-body">	
+			<ul class="nav nav-tabs">
+				<li class="active">
+					<a  href="#1" data-toggle="tab">Tab1</a>
+				</li>
+				<li><a href="#2" data-toggle="tab">Tab2</a></li>				
+			</ul>
+			<div class="tab-content ">
+				<div class="tab-pane active" id="1">
+					<form  id="frm-catalog" class="form-horizontal">
+					  <!--<div class="form-group">
+						<label class="control-label col-md-3" for="email">A p Name:</label>
+						<div class="col-md-3">
+						  <input type="text" class="form-control" id="name" name="name" placeholder="Enter a p name" require/>
+						</div>
+					  </div>         
+					  <div class="modal-footer">
+						<button type="submit" class="btn btn-success" id="btnSaveIt">Save</button>            
+					  </div>-->
+					</form>			
+				</div>
+				<div class="tab-pane" id="2">
+					<h3>Tab2</h3>
+				</div>       
+			</div>        
+      
+    </div>
+  </div>
+</div>
+
+	
+						
+
+		
+		
+    <script type="text/javascript">   
+        $(document).ready(function (){		
+		
+		
+		
+		$("#frm-catalog").validate({
+			rules: {
+			  name: {
+				required: true,
+				minlength: 2
+			  },
+			  action: "required"
+			},
+			messages: {
+			  name: {
+				required: "Please enter some data",
+				minlength: "Your data must be at least 8 characters"
+			  },
+			  action: "Please provide some data"
+			}
+		});
+		
+		
+			
+		
+			/*var myTab = SNTab({ 	tag_name:'myTab',									
+									callback:{
+										 snTabChangeEvent:function(){
+											console.log("okkk");
+										}
+									}
+								  });
+			var dp = [{'id':'tab1','label':'Tab1','description':'Tab1 page' },
+					  {'id':'tab2','label':'Tab2','description':'Tab2 page' }]
+					  //var pop = RkPopUp({size:'modal-lg'});*/
+					  
+					  
+			var cat_fields = [{'field_name':'name','field_label':'Name','field_type':'text' ,'required':'Y' },
+							  {'field_name':'age','field_label':'Age','field_type':'number' ,'required':'N' }]		  
+			
+			
+			
+	
+			$("#myModal").on("click",function(){			
+					
+				//pop.setTemplate('<myTab></myTab>');	
+				
+				//myTab.dataProvider(dp);	
+			/*var ele1 = '<div id="catalog_fields" >';
+				ele1 += '<form class="form-horizontal" id="frm-catalog">';			
+				$.each(cat_fields, function( index, value ) {
+					var field_name = value['field_name'];
+					var field_label = value['field_label'];
+					var field_type = value['field_type'];
+					var req = value['required'] =='Y'?'required':"";
+					
+					ele1 += '<div class="form-group">';
+						ele1 +='<label class="control-label col-sm-2" for="'+field_name+'">'+field_label+'</label>';
+						ele1 += '<div class="col-sm-10">';
+							if(field_type == 'text'){
+								var req = 
+								ele1 += '<input type="text" class="form-control"  id="'+field_name+'"  name="'+field_name+'" placeholder="'+field_label+'" >';
+							}
+							if(field_type == 'number')
+								ele1 += '<input type="number" class="form-control" id="'+field_name+'" name="'+field_name+'" placeholder="'+field_label+'" >';	
+						ele1 += '</div>';
+					ele1 += '</div>';				
+				});
+				ele1 += '<div class="form-group">'; 
+				ele1 += '<div class="col-sm-offset-2 col-sm-10">';
+				ele1 += '<button type="submit" class="btn btn-default" >Submit</button>';
+				ele1 += '</div>';
+				ele1 += '</div>';
+			ele1 += '</form>';
+			
+			ele1 += '</div>';*/
+			
+			
+  
+
+  
+  
+
+			/*var ele2 = '<div id="copy_fields" >Tab2</div>';
+			myTab.createTab('tab1',ele1);
+			myTab.createTab('tab2',ele2);				
+				pop.show();				
+			});*/
+			
+			
+			
+			
+			 /*$('#addMyModal').modal({
+                backdrop: 'static',
+                keyboard: false,
+				show:true
+            });*/
+			$('#addMyModal').modal('show'); 
+			
+			
+			
+
+	
+		});//document close
+		
+		
+		
+	</script>
+
+
+</body>
+</html>

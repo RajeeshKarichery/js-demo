@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+	
+	.nav-tabs { 
+		border-bottom: 2px solid #DDD;
+	}
+    .nav-tabs > li.active > a,
+	.nav-tabs > li > a:hover{
+		background-color:#A2A5A1;
+	}
+	.nav-tabs > li.active > a:focus{
+		border-width: 0;
+		background-color:#A2A5A1;
+		font-weight:bolder;
+		border-top-left-radius:7px;
+		border-top-right-radius:7px;
+		color:#ffffff;		
+	}
+    .nav-tabs > li > a {		
+		background-color:#A2A5A1;
+		font-weight:bolder;		
+	    color:#767676;
+		border-color:#d8d8d8;
+		border-radius:3px 3px 0 0
+	}	
+	
+    .nav-tabs > li > a::after {
+		content: ""; 
+		background: #FCA600;
+		height: 2px;
+		position: absolute; 
+		width: 100%; 
+		left: 0px; 
+		bottom: -1px;
+		transition: all 250ms ease 0s;
+		transform: scale(0); 
+	}
+    .nav-tabs > li.active > a::after,
+	.nav-tabs > li:hover > a::after {
+		transform: scale(1);
+		color:#000000;		
+	}
+	
+	
+	
+	
+		.tab-content{
+				border-left: 1px solid #ddd;
+				border-right: 1px solid #ddd;
+				border-bottom: 1px solid #ddd;
+				border-radius: 0px 0px 5px 5px;
+				padding: 10px;
+		}
+		
+		.error {
+			color:#a94442;
+		}
+
+		
+		
+
+</style>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>Notification Types</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="demonstration of some noty capabilities">
+    <link rel="stylesheet" href="../dist/bootstrap.min.css">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		
+	
+	<style>	
+	</style>	
+	<script src="../dist/jquery.min.js"></script>
+	<script src="../dist/libs/jquery.serializejson.min.js"></script>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.14.0/jquery.validate.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	
+	<script src="../dist/bootstrap.min.js"></script>
+	<script src="rk-popup.js"></script>
+	<script src="../tab/mytab.js"></script>  
+	
+	
+	
+	
+</head>
+<body>
+
+		<!-- Trigger the modal with a button -->
+	<button type="button" id="myModal">Open Modal</button>
+
+	
+	
+	<!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#addMyModal">Open Modal</button>-->
+
+<div class="modal fade" id="addMyModal" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Add Stuff</h4>
+      </div>
+      <div class="modal-body">	
+			<ul class="nav nav-tabs">
+				<li class="active">
+					<a  href="#1" data-toggle="tab">Tab1</a>
+				</li>
+				<li><a href="#2" data-toggle="tab">Tab2</a></li>				
+			</ul>
+			<div class="tab-content ">
+				<div class="tab-pane active" id="1">
+					<form  id="frm-catalog" >					  
+					  <div id="dynamic-catalog-fields">
+					  </div>					  
+					<div class="row form-group">
+						<div class="col-sm-offset-10">
+							<button type="submit" class="btn btn-primary" >Save</button>
+						</div>
+					</div>					  
+					</form>			
+				</div>
+				<div class="tab-pane" id="2">
+					<div class="collapse" id="collapsePanel">
+						<form  id="frm-copy" >					  
+						  <div id="dynamic-copy-fields">
+						  </div>					  
+							<!--<div class="row form-group">
+								<div class="col-sm-offset-10">
+									<button type="submit" class="btn btn-primary" >Save</button>
+								</div>
+							</div>-->
+
+							<div class="row form-group ">
+								<div class="col-md-4 col-sm-6 col-md-offset-4">
+									<button id="btnSave" type="submit"  class="btn btn-primary">
+										<span class="glyphicon glyphicon-floppy-disk"></span>Save</button>
+									<button id="btnclose" class="btn btn-default" type="button">
+									<span class="glyphicon glyphicon-chevron-down">
+									</span>
+										Close
+									</button>
+								</div>
+							</div>
+							
+						</form>							
+					</div>	
+					<button id="btn-add" class="btn btn-default">Add</button>	
+				</div>       
+			</div>        
+      
+    </div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>         
+	</div>
+  </div>
+</div>
+
+	
+						
+
+		
+		
+    <script type="text/javascript">   
+        $(document).ready(function (){		
+		
+		
+		
+		/*$("#frm-catalog").validate({
+			rules: {
+			  name: {
+				required: true,
+				minlength: 2
+			  },
+			  action: "required"
+			},
+			messages: {
+			  name: {
+				required: "Please enter some data",
+				minlength: "Your data must be at least 8 characters"
+			  },
+			  action: "Please provide some data"
+			}
+		});*/
+		
+		
+			
+		
+			var cat_fields = [{'field_name':'name','field_label':'Name','field_type':'text' ,'required':'Y' },
+							  {'field_name':'age','field_label':'Age','field_type':'number' ,'required':'Y' },
+							  {'field_name':'id','field_label':'Id','field_type':'text' ,'required':'Y' },
+							  {'field_name':'dob','field_label':'Dob','field_type':'date' ,'required':'Y' }]		  
+			
+			
+			var validationRules = new Object();
+			var validationMessages = new Object();
+	
+			$("#myModal").on("click",function(){			
+				var ele1 ="";
+				var colNum=0;
+				$.each(cat_fields, function( index, value ) {
+					var field_name = value['field_name'];
+					var field_label = value['field_label'];
+					var field_type = value['field_type'];
+					var is_required = value['required'];
+					colNum = index+1;
+					var isOdd = colNum % 2;					
+					if(isOdd == 1){
+						ele1 += '<div class="row">';
+					}					
+					ele1 += '<div class="form-group col-md-6">';
+						ele1 +='<label class="control-label" for="'+field_name+'">'+field_label+'</label>';
+						ele1 += '<div>';
+							if(field_type == 'text'){								
+								ele1 += '<input type="text" class="form-control"  id="'+field_name+'"  name="'+field_name+'" placeholder="'+field_label+'" >';
+							}
+							else if(field_type == 'number')
+								ele1 += '<input type="number" class="form-control" id="'+field_name+'" name="'+field_name+'" placeholder="'+field_label+'" >';	
+							else if(field_type == 'date')
+								ele1 += '<input type="text" class="form-control" id="datepicker" name="'+field_name+'" placeholder="'+field_label+'" >';	
+																
+						ele1 += '</div>';
+					ele1 += '</div>';
+					
+					if(isOdd == 0)
+						ele1 += '</div>';
+										
+					if(is_required == 'Y'){
+						validationRules[field_name] = {required:true};
+						validationMessages[field_name] = {required:"Please Enter "+field_label};	
+					}					
+				});			
+				$("#dynamic-catalog-fields").html(ele1);
+			
+						
+			/*$('#frm-catalog').find('input').each(function(){
+				var field_name = ($(this).attr('id');			
+			});*/
+			
+			
+			
+			
+			$("#frm-catalog").validate({
+				rules: validationRules,
+				messages: validationMessages,
+				highlight: function (element) {
+					$(element)
+                            .closest('.form-group')
+                            .removeClass('form-group')
+                            .addClass('has-error');
+				},
+				success: function (element) {
+					$(element)
+                            .closest('.has-error')
+                            .removeClass('has-error')
+                            .addClass('form-group');
+				},
+				submitHandler: function(form) { // for demo only
+					var _json = $("#frm-catalog").serializeJSON();
+					return false;
+				}
+			});			
+			$( "#datepicker" ).datepicker();
+			
+			
+			
+			var validationCopyRules = new Object();
+			var validationCopyMessages = new Object();
+			ele1="";
+			$.each(copy_fields, function( index, value ) {
+					var field_name = value['field_name'];
+					var field_label = value['field_label'];
+					var field_type = value['field_type'];
+					var is_required = value['required'];
+					colNum = index+1;
+					var isOdd = colNum % 2;					
+					if(isOdd == 1){
+						ele1 += '<div class="row">';
+					}					
+					ele1 += '<div class="form-group col-md-6">';
+						ele1 +='<label class="control-label" for="'+field_name+'">'+field_label+'</label>';
+						ele1 += '<div>';
+							if(field_type == 'text'){								
+								ele1 += '<input type="text" class="form-control"  id="'+field_name+'"  name="'+field_name+'" placeholder="'+field_label+'" >';
+							}
+							else if(field_type == 'number')
+								ele1 += '<input type="number" class="form-control" id="'+field_name+'" name="'+field_name+'" placeholder="'+field_label+'" >';	
+							else if(field_type == 'date')
+								ele1 += '<input type="text" class="form-control" id="datepicker" name="'+field_name+'" placeholder="'+field_label+'" >';	
+																
+						ele1 += '</div>';
+					ele1 += '</div>';
+					
+					if(isOdd == 0)
+						ele1 += '</div>';
+										
+					if(is_required == 'Y'){
+						validationCopyRules[field_name] = {required:true};
+						validationCopyMessages[field_name] = {required:"Please Enter "+field_label};	
+					}					
+				});			
+				$("#dynamic-copy-fields").html(ele1);
+				
+				$("#frm-copy").validate({
+					rules: validationCopyRules,
+					messages: validationCopyMessages,
+					highlight: function (element) {
+						$(element)
+								.closest('.form-group')
+								.removeClass('form-group')
+								.addClass('has-error');
+					},
+					success: function (element) {
+						$(element)
+								.closest('.has-error')
+								.removeClass('has-error')
+								.addClass('form-group');
+					},
+					submitHandler: function(form) { // for demo only
+						var _json = $("#frm-copy").serializeJSON();
+						return false;
+					}
+				});	
+				
+		
+			 $('#addMyModal').modal({
+                backdrop: 'static',
+                keyboard: false
+            });
+			
+			
+		});
+		
+		
+			/*$('form').on('submit', function (evt) {
+                evt.preventDefault();
+				alert("ok");
+			});*/
+			
+			
+			var copy_fields = [{'field_name':'name','field_label':'Name','field_type':'text' ,'required':'Y' },
+							  {'field_name':'pin','field_label':'Pin','field_type':'number' ,'required':'Y' },
+							  {'field_name':'id','field_label':'Id','field_type':'text' ,'required':'N' } ]	
+				
+
+				
+			$("#btn-add").on("click",function(){
+				$('#collapsePanel').collapse('show');
+			});	
+	
+		});//document close
+		
+		
+		
+	</script>
+
+
+</body>
+</html>

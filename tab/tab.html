@@ -182,12 +182,7 @@
 				myTab.dataProvider(dp);				
 				
 				$.each(dp, function( index, value ) {
-					var el ='';
-					if(index ==0)
-						el = '<div id="'+value['id']+'" class="tab-pane fade in active"><h5>'+value['label']+'</h5><p>'+value['description']+'</p></div>';
-					else
-						el = '<div id="'+value['id']+'" class="tab-pane fade"><h5>'+value['label']+'</h5><p>'+value['description']+'</p></div>';
-					$(".tab-content").append(el);				
+					myTab.createTab();	
 				});
 				
 								

@@ -172,7 +172,7 @@
     function RkPopUp(options){
         return $.popRenderer.init(options);
     }
-    window.SNPopUp = SNPopUp;
+    window.RkPopUp = RkPopUp;
 
 })( window );
 
