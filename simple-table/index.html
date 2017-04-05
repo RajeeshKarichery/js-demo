@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>Simple Table</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="demonstration of some noty capabilities">
+    
+	
+	<link rel="stylesheet" href="../dist/bootstrap.min.css">
+	<script src="../dist/jquery.min.js"></script>
+	<script src="../dist/bootstrap.min.js"></script>
+	
+	
+<body>
+
+
+	
+	<button id="btn1">Age</button>
+	
+   
+        <table class="table table-bordered table-striped " style="margin:10px">
+            <thead>
+                <th>Name</th>
+                <th>Age</th>                
+            </thead>
+            <tbody id="mrows">
+            </tbody>
+        </table>
+    
+
+</div>
+
+
+
+		
+		
+    <script type="text/javascript">   
+        $(document).ready(function (){
+		
+			var dp = [{ name:"AAA" ,age:'4' },{ name:"BBB" ,age:'5' }];
+			var _ele;
+			$.each(dp, function(i,row){				
+				 _ele+='<tr class="item" ><td>'+row.name+'</td>';
+				_ele +='<td><input type="number" class="age form-control" value="'+row.age+'" /></td></tr>';				
+			});
+			$("#mrows").html(_ele);
+			
+			
+			$("#btn1").on("click" ,function(){			
+				$("tr.item").each(function() {
+				  $this = $(this)				  
+				  var age = $this.find("input.age").val();
+				 
+				});			
+			});
+			
+		
+		      
+		});//document close
+		
+	</script>
+
+
+</body>
+</html>

@@ -57,6 +57,10 @@
 		.error {
 			color:#a94442;
 		}
+		
+		.hideMe{
+			display: none !important;
+		}
 
 		
 		
@@ -153,7 +157,8 @@
       
     </div>
 	<div class="modal-footer">
-		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>         
+		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+		    
 	</div>
   </div>
 </div>
@@ -166,33 +171,11 @@
     <script type="text/javascript">   
         $(document).ready(function (){		
 		
-		
-		
-		/*$("#frm-catalog").validate({
-			rules: {
-			  name: {
-				required: true,
-				minlength: 2
-			  },
-			  action: "required"
-			},
-			messages: {
-			  name: {
-				required: "Please enter some data",
-				minlength: "Your data must be at least 8 characters"
-			  },
-			  action: "Please provide some data"
-			}
-		});*/
-		
-		
-			
-		
 			var cat_fields = [{'field_name':'name','field_label':'Name','field_type':'text' ,'required':'Y' },
 							  {'field_name':'age','field_label':'Age','field_type':'number' ,'required':'Y' },
 							  {'field_name':'id','field_label':'Id','field_type':'text' ,'required':'Y' },
-							  {'field_name':'dob','field_label':'Dob','field_type':'date' ,'required':'Y' }]		  
-			
+							  {'field_name':'dob','field_label':'Dob','field_type':'date' ,'required':'Y' }]
+
 			
 			var validationRules = new Object();
 			var validationMessages = new Object();
@@ -200,101 +183,107 @@
 			$("#myModal").on("click",function(){			
 				var ele1 ="";
 				var colNum=0;
+				
 				$.each(cat_fields, function( index, value ) {
+					
 					var field_name = value['field_name'];
 					var field_label = value['field_label'];
 					var field_type = value['field_type'];
 					var is_required = value['required'];
 					colNum = index+1;
 					var isOdd = colNum % 2;					
-					if(isOdd == 1){
-						ele1 += '<div class="row">';
-					}					
-					ele1 += '<div class="form-group col-md-6">';
-						ele1 +='<label class="control-label" for="'+field_name+'">'+field_label+'</label>';
-						ele1 += '<div>';
-							if(field_type == 'text'){								
-								ele1 += '<input type="text" class="form-control"  id="'+field_name+'"  name="'+field_name+'" placeholder="'+field_label+'" >';
-							}
-							else if(field_type == 'number')
-								ele1 += '<input type="number" class="form-control" id="'+field_name+'" name="'+field_name+'" placeholder="'+field_label+'" >';	
-							else if(field_type == 'date')
-								ele1 += '<input type="text" class="form-control" id="datepicker" name="'+field_name+'" placeholder="'+field_label+'" >';	
-																
-						ele1 += '</div>';
-					ele1 += '</div>';
 					
-					if(isOdd == 0)
+						// Double Column Design					
+						if(isOdd == 1){
+							ele1 += '<div class="form-group row">';
+						}
+						ele1 += '<label class="control-label col-md-2" for="'+field_name+'">'+field_label+'</label>';
+						ele1 += '<div class="rk-highlight col-md-4">';
+						if(field_type == 'text')								
+							ele1 += '<input type="text" class="form-control"  id="'+field_name+'"  name="'+field_name+'" placeholder="'+field_label+'" >';
+						else if(field_type == 'number')
+							ele1 += '<input type="number" class="form-control" id="'+field_name+'" name="'+field_name+'" placeholder="'+field_label+'" >';	
+						else if(field_type == 'date')
+								ele1 += '<input type="text" class="form-control" id="datepicker" name="'+field_name+'" placeholder="'+field_label+'" >';
 						ele1 += '</div>';
+						if(isOdd == 0)
+							ele1 += '</div>';					
+					
+					// Single Column Design
+					/*ele1 += '<div class="row form-group">';
+						ele1 += '<label class="control-label col-md-3" for="'+field_name+'">'+field_label+'</label>';
+						ele1 += '<div class="col-md-9">';
+						if(field_type == 'text')								
+							ele1 += '<input type="text" class="form-control"  id="'+field_name+'"  name="'+field_name+'" placeholder="'+field_label+'" >';
+						else if(field_type == 'number')
+							ele1 += '<input type="number" class="form-control" id="'+field_name+'" name="'+field_name+'" placeholder="'+field_label+'" >';	
+						else if(field_type == 'date')
+								ele1 += '<input type="text" class="form-control" id="datepicker" name="'+field_name+'" placeholder="'+field_label+'" >';
+					ele1 += '</div></div>';*/
+					
 										
 					if(is_required == 'Y'){
 						validationRules[field_name] = {required:true};
 						validationMessages[field_name] = {required:"Please Enter "+field_label};	
 					}					
+				});
+								
+				$("#dynamic-catalog-fields").html(ele1);				
+				$("#frm-catalog").validate({
+					rules: validationRules,
+					messages: validationMessages,
+					highlight: function (element) {
+						$(element)
+								.closest('.rk-highlight')
+								.removeClass('rk-highlight')
+								.addClass('has-error');
+						var _id = $(element).attr('id');
+						_id = _id+'-error';					
+						$('#'+_id+'').removeClass('hideMe');
+						$('#'+_id+'').addClass('error');
+					},
+					success: function (element) {
+						$(element)
+								.closest('.has-error')
+								.removeClass('has-error')
+								.addClass('rk-highlight');
+						$(element).addClass('hideMe');
+					},
+					submitHandler: function(form) {
+						var _json = $("#frm-catalog").serializeJSON();
+						return false;
+					}
 				});			
-				$("#dynamic-catalog-fields").html(ele1);
-			
-						
-			/*$('#frm-catalog').find('input').each(function(){
-				var field_name = ($(this).attr('id');			
-			});*/
+				$( "#datepicker" ).datepicker();
 			
 			
 			
-			
-			$("#frm-catalog").validate({
-				rules: validationRules,
-				messages: validationMessages,
-				highlight: function (element) {
-					$(element)
-                            .closest('.form-group')
-                            .removeClass('form-group')
-                            .addClass('has-error');
-				},
-				success: function (element) {
-					$(element)
-                            .closest('.has-error')
-                            .removeClass('has-error')
-                            .addClass('form-group');
-				},
-				submitHandler: function(form) { // for demo only
-					var _json = $("#frm-catalog").serializeJSON();
-					return false;
-				}
-			});			
-			$( "#datepicker" ).datepicker();
-			
-			
-			
-			var validationCopyRules = new Object();
-			var validationCopyMessages = new Object();
-			ele1="";
-			$.each(copy_fields, function( index, value ) {
+				var validationCopyRules = new Object();
+				var validationCopyMessages = new Object();
+				ele1="";
+				$.each(copy_fields, function( index, value ) {
 					var field_name = value['field_name'];
 					var field_label = value['field_label'];
 					var field_type = value['field_type'];
 					var is_required = value['required'];
 					colNum = index+1;
 					var isOdd = colNum % 2;					
-					if(isOdd == 1){
-						ele1 += '<div class="row">';
-					}					
-					ele1 += '<div class="form-group col-md-6">';
-						ele1 +='<label class="control-label" for="'+field_name+'">'+field_label+'</label>';
-						ele1 += '<div>';
-							if(field_type == 'text'){								
-								ele1 += '<input type="text" class="form-control"  id="'+field_name+'"  name="'+field_name+'" placeholder="'+field_label+'" >';
-							}
-							else if(field_type == 'number')
-								ele1 += '<input type="number" class="form-control" id="'+field_name+'" name="'+field_name+'" placeholder="'+field_label+'" >';	
-							else if(field_type == 'date')
-								ele1 += '<input type="text" class="form-control" id="datepicker" name="'+field_name+'" placeholder="'+field_label+'" >';	
-																
-						ele1 += '</div>';
-					ele1 += '</div>';
 					
-					if(isOdd == 0)
+						// Double Column Design					
+						if(isOdd == 1){
+							ele1 += '<div class="form-group row">';
+						}
+						ele1 += '<label class="control-label col-md-2" for="'+field_name+'">'+field_label+'</label>';
+						ele1 += '<div class="rk-highlight col-md-4">';
+						if(field_type == 'text')								
+							ele1 += '<input type="text" class="form-control"  id="'+field_name+'"  name="'+field_name+'" placeholder="'+field_label+'" >';
+						else if(field_type == 'number')
+							ele1 += '<input type="number" class="form-control" id="'+field_name+'" name="'+field_name+'" placeholder="'+field_label+'" >';	
+						else if(field_type == 'date')
+								ele1 += '<input type="text" class="form-control" id="datepicker" name="'+field_name+'" placeholder="'+field_label+'" >';
 						ele1 += '</div>';
+						if(isOdd == 0)
+							ele1 += '</div>';					
 										
 					if(is_required == 'Y'){
 						validationCopyRules[field_name] = {required:true};
@@ -308,17 +297,22 @@
 					messages: validationCopyMessages,
 					highlight: function (element) {
 						$(element)
-								.closest('.form-group')
-								.removeClass('form-group')
+								.closest('.rk-highlight')
+								.removeClass('rk-highlight')
 								.addClass('has-error');
+						var _id = $(element).attr('id');
+						_id = _id+'-error';					
+						$('#'+_id+'').removeClass('hideMe');
+						$('#'+_id+'').addClass('error');
 					},
 					success: function (element) {
 						$(element)
 								.closest('.has-error')
 								.removeClass('has-error')
-								.addClass('form-group');
+								.addClass('rk-highlight');
+						$(element).addClass('hideMe');
 					},
-					submitHandler: function(form) { // for demo only
+					submitHandler: function(form) {
 						var _json = $("#frm-copy").serializeJSON();
 						return false;
 					}
@@ -349,6 +343,10 @@
 			$("#btn-add").on("click",function(){
 				$('#collapsePanel').collapse('show');
 			});	
+			
+			
+			
+			
 	
 		});//document close
 		
