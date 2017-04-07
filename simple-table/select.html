@@ -5,11 +5,11 @@
     <title>Jquery Select2 - Select Box with Search Option</title>  
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-	<!--<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>-->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 	
-	<link href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.0/select2.css" rel="stylesheet" />
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.0/select2.min.js"></script>
+	<!--<link href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.0/select2.css" rel="stylesheet" />
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.0/select2.min.js"></script>-->
 	
 
 </head>
@@ -18,32 +18,89 @@
 
 <div style="width:520px;margin:0px auto;margin-top:30px;height:500px;">
 
-  <h2>Select Box with Search Option Jquery Select2.js</h2>
+  
+<!--  <select id="state" class="js-example-basic-single" type="text" style="width:90%">
+  <option value="AL">Alabama</option>
+  <option value="WY">Wyoming</option>
+</select>
+<br>
+<br>
 
-  <select class="myselect" style="width:500px;">
-	  <option>Laravel</option>
-	  <option>Laravel ACL</option>
-	  <option>Laravel PDF</option>
-	  <option>Laravel Helper</option>
-	  <option>Laravel API</option>
-	  <option>Laravel CRUD</option>
-	  <option>Laravel Angural JS Crud</option>
-	  <option>C++</option>
-  </select>
+<button type="button" id="btn-add-state">Set state value</button>-->
+
+
+
+<form action="" id="tagForm">
+    <select  id="tagSelector" class="form-control select2" style="width:90%">
+        <option value="1">Awsome</option>
+        <option value="2">Cool</option>
+        <option value="3">Balls</option>
+    </select>
+</form>
+<div class="well" id="console">
+     <h3>Tag events:</h3>
+</div>
+
+
+
 
 </div>
 
 <script type="text/javascript">
-      $(".myselect").select2({
-			createSearchChoice:function(term, data) {
-				/*if ( $(data).filter( function() {
-				  return this.text.localeCompare(term)===0;
-				}).length===0) {
-				  return {id:term, text:term};
-				}*/
-				alert("a");
-			},
-	  });
+
+	$(document).ready(function() {
+     
+	  
+	  
+	/*$("#state").select2({
+		tags: true
+    });      
+    $("#btn-add-state").on("click", function(){	
+		  var newStateVal = $("#state").val()
+		 
+		  if ($("#state").find("option[value='" + newStateVal + "']").length) {
+			$("#state").val(newStateVal).trigger("change");
+		  } else {
+			var newState = new Option(newStateVal, newStateVal, true, true);		 
+			$("#state").append(newState).trigger('change');
+		  }
+		  
+		  var newState = new Option(newStateVal, newStateVal, true, true);		 
+			$("#state").append(newState).trigger('change');
+		  
+    });*/  
+	
+	
+	
+	
+	
+	$('.select2').select2({
+    tags: true,   
+    createTag: function (tag) {
+        return {
+            id: tag.term,
+            text: tag.term,
+            isNew : true
+        };
+    }
+}).on("select2:select", function(e) {
+    if(e.params.data.isNew){
+        $('#console').append('<code>New tag: {"' + e.params.data.id + '":"' + e.params.data.text + '"}</code><br>');
+        $(this).find('[value="'+e.params.data.id+'"]').replaceWith('<option selected value="'+e.params.data.id+'">'+e.params.data.text+'</option>');
+    }
+});
+	
+	
+	
+	
+	
+	
+	
+	
+});
+	  
+	  
+	  
 </script>
 
 </body>

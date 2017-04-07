@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<style>
+
+fieldset.scheduler-border {
+    border: 1px groove #ddd !important;
+    padding: 0 1.4em 1.4em 1.4em !important;
+    margin: 0 0 1.5em 0 !important;
+    -webkit-box-shadow:  0px 0px 0px 0px #000;
+            box-shadow:  0px 0px 0px 0px #000;
+}
+
+    legend.scheduler-border {
+        font-size: 1.2em !important;
+        font-weight: bold !important;
+        text-align: left !important;
+        width:auto;
+        padding:0 10px;
+        border-bottom:none;
+    }
+	
+	
+</style>
+        
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="../dist/jquery.min.js"></script>
+	<script src="../dist/bootstrap.min.js"></script>
+    
+<!--
+<fieldset id="mine1">
+	<legend  role="button" tabindex="0">
+		</span><button>Add</button>
+	</legend>	
+		 Testing
+		 
+</fieldset>		 -->
+
+
+<body style="margin-top: 21px;border-left-width: 0px;border-left-style: solid;margin-left: 39px;margin-right: 300px;">
+
+
+ <fieldset class="scheduler-border">
+	<legend class="scheduler-border" style="margin-top: 20px;padding-left: 0px;padding-right: 0px;">
+	<button id="btn-add" class="btn btn-default glyphicon glyphicon-plus glyphicon" >Add</button></legend>
+		
+					<div class="collapse" id="collapsePanel">
+						<form  id="frm-copy" >					  
+						  <div id="dynamic-copy-fields">
+						  </div>
+							<div class="row form-group ">
+								<div class="col-md-4 col-sm-6 col-md-offset-4">
+									<button id="btnSave" type="submit"  class="btn btn-primary">
+										<span class="glyphicon glyphicon-floppy-disk"></span>Save</button>
+									<button id="btnclose" class="btn btn-default" type="button">
+									<span class="glyphicon glyphicon-chevron-down">
+									</span>
+										Close
+									</button>
+								</div>
+							</div>
+							
+						</form>							
+					</div>	
+		
+ </fieldset>
+
+
+  <script type="text/javascript">   
+        $(document).ready(function (){
+		
+			$("#btn-add").on("click",function(){
+				
+				
+				if($(this).is('.btn btn-default glyphicon glyphicon-plus glyphicon')){
+					$('#collapsePanel').collapse('show');
+					$(this).removeClass('btn btn-default glyphicon glyphicon-plus glyphicon');
+					$(this).addClass('btn btn-default glyphicon glyphicon-minus');
+				}
+				else{
+					$(this).removeClass('btn btn-default glyphicon glyphicon-minus');
+					$(this).addClass('btn btn-default glyphicon glyphicon-plus glyphicon');
+					$('#collapsePanel').collapse('hide');
+				}
+				
+				
+			});		
+			
+			$("#btnclose").on("click",function(){				
+				$('#collapsePanel').collapse('hide');
+			});		
+			
+			
+	
+		});//document close
+	</script>	
+
+</body>
+</html>

@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+	
+	.nav-tabs { 
+		border-bottom: 2px solid #DDD;
+	}
+    .nav-tabs > li.active > a,
+	.nav-tabs > li > a:hover{
+		background-color:#A2A5A1;
+	}
+	.nav-tabs > li.active > a:focus{
+		border-width: 0;
+		background-color:#A2A5A1;
+		font-weight:bolder;
+		border-top-left-radius:7px;
+		border-top-right-radius:7px;
+		color:#ffffff;		
+	}
+    .nav-tabs > li > a {		
+		background-color:#A2A5A1;
+		font-weight:bolder;		
+	    color:#767676;
+		border-color:#d8d8d8;
+		border-radius:3px 3px 0 0
+	}	
+	
+    .nav-tabs > li > a::after {
+		content: ""; 
+		background: #FCA600;
+		height: 2px;
+		position: absolute; 
+		width: 100%; 
+		left: 0px; 
+		bottom: -1px;
+		transition: all 250ms ease 0s;
+		transform: scale(0); 
+	}
+    .nav-tabs > li.active > a::after,
+	.nav-tabs > li:hover > a::after {
+		transform: scale(1);
+		color:#000000;		
+	}
+	
+	
+	
+	
+		.tab-content{
+				border-left: 1px solid #ddd;
+				border-right: 1px solid #ddd;
+				border-bottom: 1px solid #ddd;
+				border-radius: 0px 0px 5px 5px;
+				padding: 10px;
+		}
+		
+		
+		
+		.tab-content-tile>.tab-pane {
+			display:none
+		}
+		.tab-content-tile>.active {
+			display:block
+		}
+		
+		.error {
+			color:#a94442;
+		}
+		
+		.hideMe{
+			display: none !important;
+		}
+
+		
+		
+
+</style>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>Notification Types</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="demonstration of some noty capabilities">
+    <link rel="stylesheet" href="../dist/bootstrap.min.css">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+	
+		
+	
+	<style>	
+	</style>	
+	<script src="../dist/jquery.min.js"></script>
+	<script src="../dist/libs/jquery.serializejson.min.js"></script>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.14.0/jquery.validate.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+	
+	<script src="../dist/bootstrap.min.js"></script>
+	<script src="rk-popup.js"></script>
+	<script src="../tab/mytab.js"></script>  
+	
+	
+	
+	
+</head>
+<body>
+
+		<!-- Trigger the modal with a button -->
+	<button type="button" id="myModal">Open Modal</button>
+	
+	
+	
+
+	
+	
+	<!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#addMyModal">Open Modal</button>-->
+
+<div class="modal fade" id="addMyModal" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Add Stuff</h4>
+      </div>
+      <div class="modal-body">	
+			<ul class="nav nav-tabs">
+				<li class="active">
+					<a  href="#1" data-toggle="tab">Tab1</a>
+				</li>
+				<li><a href="#2" data-toggle="tab">Tab2</a></li>				
+			</ul>
+			<div class="tab-content ">
+				<div class="tab-pane active" id="1">
+					<form  id="frm-catalog" >					  
+					  <div id="dynamic-catalog-fields">
+					  </div>					  
+					<div class="row form-group">
+						<div class="col-sm-offset-11">
+							<button type="submit" class="btn btn-primary" >Save</button>
+						</div>
+					</div>					  
+					</form>			
+				</div>
+				<div class="tab-pane" id="2">
+					<div class="collapse" id="collapsePanel">
+						<form  id="frm-copy" >					  
+						  <div id="dynamic-copy-fields">
+						  </div>
+							<div class="row form-group ">
+								<div class="col-md-4 col-sm-6 col-md-offset-4">
+									<button id="btnSave" type="submit"  class="btn btn-primary">
+										<span class="glyphicon glyphicon-floppy-disk"></span>Save</button>
+									<button id="btnclose" class="btn btn-default" type="button">
+									<span class="glyphicon glyphicon-chevron-down">
+									</span>
+										Close
+									</button>
+								</div>
+							</div>
+							
+						</form>							
+					</div>	
+					<button id="btn-add" class="btn btn-default">Add</button>	
+				</div>       
+			</div>        
+      
+    </div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+		    
+	</div>
+  </div>
+</div>
+
+	
+						
+
+		
+		
+    <script type="text/javascript">   
+        $(document).ready(function (){		
+		
+			var cat_fields = [{'tab':'first','field_name':'name','field_label':'Name','field_type':'text' ,'required':'Y' },
+							  {'tab':'first','field_name':'age','field_label':'Age','field_type':'number' ,'required':'Y' },
+							  {'tab':'first','field_name':'id','field_label':'Id','field_type':'text' ,'required':'Y' },
+							  {'tab':'first','field_name':'dob','field_label':'Dob','field_type':'date' ,'required':'Y' },
+							  {'tab':'second','field_name':'doj','field_label':'DoJ','field_type':'date' ,'required':'Y' },	
+							  {'tab':'first','field_name':'state','field_label':'State','field_type':'autofill' ,'required':'Y' ,
+							  'dp':[{'list_key' :'KL','list_val':'Kerala'  },{'list_key' :'KA','list_val':'Karnataka'  } ]  } ,
+							
+							{'tab':'second','field_name':'district','field_label':'District','field_type':'autofill' ,'required':'Y' ,
+							  'dp':[{'list_key' :'KSD','list_val':'Kasaragod'  },{'list_key' :'BLR','list_val':'Bangalore'  } ]  },
+							  {'tab':'second','field_name':'desc','field_label':'Desc','field_type':'textarea' ,'required':'Y' },
+									
+							  ]
+			var copy_fields = [{'field_name':'name','field_label':'Name','field_type':'text' ,'required':'Y' },
+							  {'field_name':'pin','field_label':'Pin','field_type':'number' ,'required':'Y' },
+							  {'field_name':'id','field_label':'Id','field_type':'text' ,'required':'N' } ]	
+							  
+			var tileArray = [{'id':'first','name':'First'},{'id':'second' ,'name':'Second'}] ;
+			//var tileArray = [{'id':'first','name':'First'}] ;
+			
+			
+			var validationRules = new Object();
+			var validationMessages = new Object();
+	
+			$("#myModal").on("click",function(){			
+				var ele1 ="";
+				var colNum=0;
+				
+				if(tileArray.length>1){
+					ele1 +='<nav class="navbar navbar-default"><ul class="nav navbar-nav">';
+					for(var i=0;i<tileArray.length;i++){
+						var tileId = tileArray[i]['id'];
+						var tileName = tileArray[i]['name'];
+						if (i==0){
+							ele1 +='<li class="active">';
+								ele1 +='<a  href="#'+tileId+'" data-toggle="pill">'+tileName+'</a>';
+							ele1 +='</li>';
+						}
+						else{
+							ele1 +='<li>';
+								ele1 +='<a  href="#'+tileId+'" data-toggle="pill">'+tileName+'</a>';
+							ele1 +='</li>';
+						}
+					}
+					ele1 +='</ul></nav>';
+					ele1 +='<div class="tab-content-tile">';
+				}			
+				
+				for(var i=0;i<tileArray.length;i++){
+					var tileId = tileArray[i]['id'];
+					var tileName = tileArray[i]['name'];
+					if(tileArray.length>1){
+						if(i==0)
+							ele1 +='<div class="tab-pane active" id="'+tileId+'">';
+						else	
+							ele1 +='<div class="tab-pane" id="'+tileId+'">';	
+					}					
+					var cntFirstTab =0;
+					$.each(cat_fields, function( index, value ) {
+						if(value['tab'] == tileId)
+						{						
+							cntFirstTab++;
+							var field_name = value['field_name'];
+							var field_label = value['field_label'];
+							var field_type = value['field_type'];
+							var is_required = value['required'];
+							//colNum = index+1;
+							colNum = cntFirstTab;
+							var isOdd = colNum % 2;					
+							
+								// Double Column Design					
+								if(isOdd == 1){
+									ele1 += '<div class="form-group row">';
+								}
+								ele1 += '<label class="control-label col-md-2" for="'+field_name+'">'+field_label+'</label>';
+								ele1 += '<div class="rk-highlight col-md-4">';
+								if(field_type == 'text')								
+									ele1 += '<input type="text" class="form-control"  id="'+field_name+'"  name="'+field_name+'" placeholder="'+field_label+'" >';
+								else if(field_type == 'number')
+									ele1 += '<input type="number" class="form-control" id="'+field_name+'" name="'+field_name+'" placeholder="'+field_label+'" >';	
+								else if(field_type == 'date'){
+									var date_id = 'datepicker_'+field_name;
+									ele1 += '<input type="text" class="form-control" id="'+date_id+'" name="'+field_name+'" placeholder="'+field_label+'" >';
+								}
+								else if(field_type == 'select'){
+									ele1 += '<select id="'+field_name+'" class="form-control" name="'+field_name+'"  >';
+									var _dp = value['dp'];
+									ele1 += '<option value="">Select</option>';
+									$.each(_dp, function( dpIndex, dpRow ) {
+										ele1 += '<option value="'+dpRow['list_key']+'">'+dpRow['list_val']+'</option>';
+									});								
+									ele1 += '</select>';
+								}
+								else if(field_type == 'autofill'){
+									ele1 += '<select id="'+field_name+'" class="form-control select2" style="width:100%" name="'+field_name+'"  >';
+									var _dp = value['dp'];
+									ele1 += '<option value="">Select</option>';
+									$.each(_dp, function( dpIndex, dpRow ) {
+										ele1 += '<option value="'+dpRow['list_key']+'">'+dpRow['list_val']+'</option>';
+									});								
+									ele1 += '</select>';
+								}
+								else if(field_type == 'textarea')								
+									ele1 += '<textarea class="form-control" rows="4" id="'+field_name+'"  name="'+field_name+'" placeholder="'+field_label+'" ></textarea>';	
+								ele1 += '</div>';
+								if(isOdd == 0)
+									ele1 += '</div>';										
+								if(is_required == 'Y'){
+									validationRules[field_name] = {required:true};
+									validationMessages[field_name] = {required:"Please Enter "+field_label};	
+								}
+						}	
+					});
+					if(cntFirstTab%2 == 1)
+						ele1 += '</div>';
+					ele1 +='</div>';
+				}
+				
+				if(tileArray.length>1)
+					ele1 +='</div>';								
+								
+				$("#dynamic-catalog-fields").html(ele1);				
+				$("#frm-catalog").validate({
+					rules: validationRules,
+					messages: validationMessages,
+					highlight: function (element) {
+						$(element)
+								.closest('.rk-highlight')
+								.removeClass('rk-highlight')
+								.addClass('has-error');
+						var _id = $(element).attr('id');
+						_id = _id+'-error';					
+						$('#'+_id+'').removeClass('hideMe');
+						$('#'+_id+'').addClass('error');
+					},
+					success: function (element) {
+						$(element)
+								.closest('.has-error')
+								.removeClass('has-error')
+								.addClass('rk-highlight');
+						$(element).addClass('hideMe');
+					},
+					submitHandler: function(form) {
+						var _json = $("#frm-catalog").serializeJSON();
+						var _boolExec = true;
+						var _tabName  = "";
+						if(tileArray.length>1){
+							for (var j=0;j<cat_fields.length;j++){
+								var fName  = cat_fields[j]['field_name'];
+								var fReq   = cat_fields[j]['required'];								
+								if(fReq == 'Y' && _json[fName] ==""){
+									_boolExec = false;
+									_tabName = cat_fields[j]['tab'];
+									break;
+								}
+							}
+							if(!_boolExec){
+								var _hid = "#"+_tabName;
+								$('ul li a[href="'+_hid+'"]').trigger('click');
+							}							
+						}					
+						return false;
+					}
+				});	
+				
+							
+				var validationCopyRules = new Object();
+				var validationCopyMessages = new Object();
+				ele1="";
+				$.each(copy_fields, function( index, value ) {
+					var field_name = value['field_name'];
+					var field_label = value['field_label'];
+					var field_type = value['field_type'];
+					var is_required = value['required'];
+					colNum = index+1;
+					var isOdd = colNum % 2;					
+					
+						// Double Column Design					
+						if(isOdd == 1){
+							ele1 += '<div class="form-group row">';
+						}
+						ele1 += '<label class="control-label col-md-2" for="'+field_name+'">'+field_label+'</label>';
+						ele1 += '<div class="rk-highlight col-md-4">';
+						if(field_type == 'text')								
+							ele1 += '<input type="text" class="form-control"  id="'+field_name+'"  name="'+field_name+'" placeholder="'+field_label+'" >';
+						else if(field_type == 'number')
+							ele1 += '<input type="number" class="form-control" id="'+field_name+'" name="'+field_name+'" placeholder="'+field_label+'" >';	
+						else if(field_type == 'date'){
+							var date_id = 'datepicker_'+field_name;
+							ele1 += '<input type="text" class="form-control" id="'+date_id+'" name="'+field_name+'" placeholder="'+field_label+'" >';
+						}
+						else if(field_type == 'select'){
+							ele1 += '<select id="'+field_name+'" class="form-control" name="'+field_name+'"  >';
+							var _dp = value['dp'];
+							ele1 += '<option value="">Select</option>';
+							$.each(_dp, function( dpIndex, dpRow ) {
+								ele1 += '<option value="'+dpRow['list_key']+'">'+dpRow['list_val']+'</option>';
+							});								
+							ele1 += '</select>';
+						}
+						else if(field_type == 'autofill'){
+							ele1 += '<select id="'+field_name+'" class="form-control select2" style="width:100%" name="'+field_name+'"  >';
+							var _dp = value['dp'];
+							ele1 += '<option value="">Select</option>';
+							$.each(_dp, function( dpIndex, dpRow ) {
+								ele1 += '<option value="'+dpRow['list_key']+'">'+dpRow['list_val']+'</option>';
+							});								
+							ele1 += '</select>';
+						}
+						ele1 += '</div>';
+						if(isOdd == 0)
+							ele1 += '</div>';					
+										
+					if(is_required == 'Y'){
+						validationCopyRules[field_name] = {required:true};
+						validationCopyMessages[field_name] = {required:"Please Enter "+field_label};	
+					}					
+				});			
+				$("#dynamic-copy-fields").html(ele1);				
+				$("#frm-copy").validate({
+					rules: validationCopyRules,
+					messages: validationCopyMessages,
+					highlight: function (element) {
+						$(element)
+								.closest('.rk-highlight')
+								.removeClass('rk-highlight')
+								.addClass('has-error');
+						var _id = $(element).attr('id');
+						_id = _id+'-error';					
+						$('#'+_id+'').removeClass('hideMe');
+						$('#'+_id+'').addClass('error');
+					},
+					success: function (element) {
+						$(element)
+								.closest('.has-error')
+								.removeClass('has-error')
+								.addClass('rk-highlight');
+						$(element).addClass('hideMe');
+					},
+					submitHandler: function(form) {
+						var _json = $("#frm-copy").serializeJSON();
+						return false;
+					}
+				});	
+				
+				$('[id^="datepicker_"]').datepicker();				
+				$('[id^="datepicker_"]').on('change',function(){					
+					if($(this).val() !=""){
+						$(this)
+								.closest('.has-error')
+								.removeClass('has-error')
+								.addClass('rk-highlight');								
+						var _id = $(this).attr('id');
+						_id = _id+'-error';					
+						$('#'+_id+'').removeClass('error');
+						$('#'+_id+'').addClass('hideMe');		
+					}
+				});
+				
+				$('.select2').select2({
+					tags: true,   
+					createTag: function (tag) {
+						return {
+							id: tag.term,
+							text: tag.term,
+							isNew : true
+						};
+					}
+					}).on("select2:select", function(e) {
+						if(e.params.data.isNew){					
+							$(this).find('[value="'+e.params.data.id+'"]').replaceWith('<option selected value="'+e.params.data.id+'">'+e.params.data.text+'</option>');
+						}						
+						$(this)
+								.closest('.has-error')
+								.removeClass('has-error')
+								.addClass('rk-highlight');								
+						var _id = $(this).attr('id');
+						_id = _id+'-error';						
+						$('#'+_id+'').removeClass('error');
+						$('#'+_id+'').addClass('hideMe');	
+						
+				});
+
+								
+		
+				$('#addMyModal').modal({
+					backdrop: 'static',
+					keyboard: false
+				});
+			});
+								
+			$("#btn-add").on("click",function(){
+				$('#collapsePanel').collapse('show');
+			});	
+			
+			
+			
+	
+		});//document close
+		
+		
+		
+	</script>
+
+
+</body>
+</html>

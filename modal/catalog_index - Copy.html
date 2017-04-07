@@ -73,6 +73,8 @@
     <meta name="description" content="demonstration of some noty capabilities">
     <link rel="stylesheet" href="../dist/bootstrap.min.css">
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+	
 		
 	
 	<style>	
@@ -82,6 +84,7 @@
 	
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.14.0/jquery.validate.min.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 	
 	<script src="../dist/bootstrap.min.js"></script>
 	<script src="rk-popup.js"></script>
@@ -95,6 +98,9 @@
 
 		<!-- Trigger the modal with a button -->
 	<button type="button" id="myModal">Open Modal</button>
+	
+	
+	
 
 	
 	
@@ -174,8 +180,18 @@
 			var cat_fields = [{'field_name':'name','field_label':'Name','field_type':'text' ,'required':'Y' },
 							  {'field_name':'age','field_label':'Age','field_type':'number' ,'required':'Y' },
 							  {'field_name':'id','field_label':'Id','field_type':'text' ,'required':'Y' },
-							  {'field_name':'dob','field_label':'Dob','field_type':'date' ,'required':'Y' }]
-
+							  {'field_name':'dob','field_label':'Dob','field_type':'date' ,'required':'Y' },
+							  {'field_name':'doj','field_label':'DoJ','field_type':'date' ,'required':'Y' },	
+							  {'field_name':'state','field_label':'State','field_type':'autofill' ,'required':'Y' ,
+							  'dp':[{'list_key' :'KL','list_val':'Kerala'  },{'list_key' :'KA','list_val':'Karnataka'  } ]  } ,
+							
+							{'field_name':'district','field_label':'District','field_type':'autofill' ,'required':'Y' ,
+							  'dp':[{'list_key' :'KSD','list_val':'Kasaragod'  },{'list_key' :'BLR','list_val':'Bangalore'  } ]  }
+									
+							  ]
+			var copy_fields = [{'field_name':'name','field_label':'Name','field_type':'text' ,'required':'Y' },
+							  {'field_name':'pin','field_label':'Pin','field_type':'number' ,'required':'Y' },
+							  {'field_name':'id','field_label':'Id','field_type':'text' ,'required':'N' } ]	
 			
 			var validationRules = new Object();
 			var validationMessages = new Object();
@@ -183,9 +199,8 @@
 			$("#myModal").on("click",function(){			
 				var ele1 ="";
 				var colNum=0;
-				
-				$.each(cat_fields, function( index, value ) {
-					
+								
+				$.each(cat_fields, function( index, value ) {					
 					var field_name = value['field_name'];
 					var field_label = value['field_label'];
 					var field_type = value['field_type'];
@@ -203,8 +218,28 @@
 							ele1 += '<input type="text" class="form-control"  id="'+field_name+'"  name="'+field_name+'" placeholder="'+field_label+'" >';
 						else if(field_type == 'number')
 							ele1 += '<input type="number" class="form-control" id="'+field_name+'" name="'+field_name+'" placeholder="'+field_label+'" >';	
-						else if(field_type == 'date')
-								ele1 += '<input type="text" class="form-control" id="datepicker" name="'+field_name+'" placeholder="'+field_label+'" >';
+						else if(field_type == 'date'){
+							var date_id = 'datepicker_'+field_name;
+							ele1 += '<input type="text" class="form-control" id="'+date_id+'" name="'+field_name+'" placeholder="'+field_label+'" >';
+						}
+						else if(field_type == 'select'){
+							ele1 += '<select id="'+field_name+'" class="form-control" name="'+field_name+'"  >';
+							var _dp = value['dp'];
+							ele1 += '<option value="">Select</option>';
+							$.each(_dp, function( index, dpRow ) {
+								ele1 += '<option value="'+dpRow['list_key']+'">'+dpRow['list_val']+'</option>';
+							});								
+							ele1 += '</select>';
+						}
+						else if(field_type == 'autofill'){
+							ele1 += '<select id="'+field_name+'" class="form-control select2" style="width:100%" name="'+field_name+'"  >';
+							var _dp = value['dp'];
+							ele1 += '<option value="">Select</option>';
+							$.each(_dp, function( index, dpRow ) {
+								ele1 += '<option value="'+dpRow['list_key']+'">'+dpRow['list_val']+'</option>';
+							});								
+							ele1 += '</select>';
+						}							
 						ele1 += '</div>';
 						if(isOdd == 0)
 							ele1 += '</div>';					
@@ -253,11 +288,9 @@
 						var _json = $("#frm-catalog").serializeJSON();
 						return false;
 					}
-				});			
-				$( "#datepicker" ).datepicker();
-			
-			
-			
+				});	
+				
+							
 				var validationCopyRules = new Object();
 				var validationCopyMessages = new Object();
 				ele1="";
@@ -279,8 +312,28 @@
 							ele1 += '<input type="text" class="form-control"  id="'+field_name+'"  name="'+field_name+'" placeholder="'+field_label+'" >';
 						else if(field_type == 'number')
 							ele1 += '<input type="number" class="form-control" id="'+field_name+'" name="'+field_name+'" placeholder="'+field_label+'" >';	
-						else if(field_type == 'date')
-								ele1 += '<input type="text" class="form-control" id="datepicker" name="'+field_name+'" placeholder="'+field_label+'" >';
+						else if(field_type == 'date'){
+							var date_id = 'datepicker_'+field_name;
+							ele1 += '<input type="text" class="form-control" id="'+date_id+'" name="'+field_name+'" placeholder="'+field_label+'" >';
+						}
+						else if(field_type == 'select'){
+							ele1 += '<select id="'+field_name+'" class="form-control" name="'+field_name+'"  >';
+							var _dp = value['dp'];
+							ele1 += '<option value="">Select</option>';
+							$.each(_dp, function( index, dpRow ) {
+								ele1 += '<option value="'+dpRow['list_key']+'">'+dpRow['list_val']+'</option>';
+							});								
+							ele1 += '</select>';
+						}
+						else if(field_type == 'autofill'){
+							ele1 += '<select id="'+field_name+'" class="form-control select2" style="width:100%" name="'+field_name+'"  >';
+							var _dp = value['dp'];
+							ele1 += '<option value="">Select</option>';
+							$.each(_dp, function( index, dpRow ) {
+								ele1 += '<option value="'+dpRow['list_key']+'">'+dpRow['list_val']+'</option>';
+							});								
+							ele1 += '</select>';
+						}
 						ele1 += '</div>';
 						if(isOdd == 0)
 							ele1 += '</div>';					
@@ -290,8 +343,7 @@
 						validationCopyMessages[field_name] = {required:"Please Enter "+field_label};	
 					}					
 				});			
-				$("#dynamic-copy-fields").html(ele1);
-				
+				$("#dynamic-copy-fields").html(ele1);				
 				$("#frm-copy").validate({
 					rules: validationCopyRules,
 					messages: validationCopyMessages,
@@ -318,32 +370,53 @@
 					}
 				});	
 				
-		
-			 $('#addMyModal').modal({
-                backdrop: 'static',
-                keyboard: false
-            });
-			
-			
-		});
-		
-		
-			/*$('form').on('submit', function (evt) {
-                evt.preventDefault();
-				alert("ok");
-			});*/
-			
-			
-			var copy_fields = [{'field_name':'name','field_label':'Name','field_type':'text' ,'required':'Y' },
-							  {'field_name':'pin','field_label':'Pin','field_type':'number' ,'required':'Y' },
-							  {'field_name':'id','field_label':'Id','field_type':'text' ,'required':'N' } ]	
+				$('[id^="datepicker_"]').datepicker();				
+				$('[id^="datepicker_"]').on('change',function(){					
+					if($(this).val() !=""){
+						$(this)
+								.closest('.has-error')
+								.removeClass('has-error')
+								.addClass('rk-highlight');								
+						var _id = $(this).attr('id');
+						_id = _id+'-error';					
+						$('#'+_id+'').removeClass('error');
+						$('#'+_id+'').addClass('hideMe');		
+					}
+				});
 				
-
-				
+				$('.select2').select2({
+					tags: true,   
+					createTag: function (tag) {
+						return {
+							id: tag.term,
+							text: tag.term,
+							isNew : true
+						};
+					}
+					}).on("select2:select", function(e) {
+						if(e.params.data.isNew){					
+							$(this).find('[value="'+e.params.data.id+'"]').replaceWith('<option selected value="'+e.params.data.id+'">'+e.params.data.text+'</option>');
+						}						
+						$(this)
+								.closest('.has-error')
+								.removeClass('has-error')
+								.addClass('rk-highlight');								
+						var _id = $(this).attr('id');
+						_id = _id+'-error';						
+						$('#'+_id+'').removeClass('error');
+						$('#'+_id+'').addClass('hideMe');	
+						
+				});				
+		
+				$('#addMyModal').modal({
+					backdrop: 'static',
+					keyboard: false
+				});
+			});
+								
 			$("#btn-add").on("click",function(){
 				$('#collapsePanel').collapse('show');
 			});	
-			
 			
 			
 			

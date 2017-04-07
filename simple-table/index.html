@@ -21,9 +21,15 @@
 	
    
         <table class="table table-bordered table-striped " style="margin:10px">
-            <thead>
-                <th>Name</th>
-                <th>Age</th>                
+            <thead >
+				<tr>
+					<th rowspan="2" style="text-align:center;">Name</th>					
+					<th colspan="3" style="text-align:center;">Check</th>
+				</tr>
+				<tr>					
+					<th style="text-align:center;">Limit</th>
+					<th style="text-align:center;">Days</th>					
+				</tr>
             </thead>
             <tbody id="mrows">
             </tbody>
@@ -39,23 +45,49 @@
     <script type="text/javascript">   
         $(document).ready(function (){
 		
-			var dp = [{ name:"AAA" ,age:'4' },{ name:"BBB" ,age:'5' }];
+			var dp = [{ media:"AAA" ,check_limit:'4',check_days:'10' },{ media:"BBB" ,check_limit:'',check_days:'15' }];
 			var _ele;
+			var resultDp = [];
 			$.each(dp, function(i,row){				
-				 _ele+='<tr class="item" ><td>'+row.name+'</td>';
-				_ele +='<td><input type="number" class="age form-control" value="'+row.age+'" /></td></tr>';				
+				 _ele+='<tr class="item" ><td class="media">'+row.media+'</td>';
+				_ele +='<td><input type="text" class="check_limit form-control" value="'+row.check_limit+'" /></td>';
+				_ele +='<td><input type="text" class="check_days form-control" value="'+row.check_days+'" /></td>';
+				_ele +='</tr>';
+					
 			});
 			$("#mrows").html(_ele);
 			
 			
-			$("#btn1").on("click" ,function(){			
+			$("#btn1").on("click" ,function(){
+				resultDp = [];
+				var row = Object();
 				$("tr.item").each(function() {
-				  $this = $(this)				  
-				  var age = $this.find("input.age").val();
-				 
+				  $this = $(this);
+				  	
+				  var check_limit = $this.find("input.check_limit").val();
+				  var check_days = $this.find("input.check_days").val();
+				  console.log(check_limit);
+				  console.log(check_days);				 
+				  row['media'] = $this.find("td.media").text();
+				  row['check_limit'] =  check_limit;
+				  row['check_days'] =  check_days;
+				  resultDp.push(row);
 				});			
 			});
 			
+			
+			
+		$(document).on("keypress","input",function(event){
+			var key = window.event ? event.keyCode : event.which;
+			if (event.keyCode === 8 || event.keyCode === 46) {
+				return true;
+			} else if ( key < 48 || key > 57 ) {
+				return false;
+			} 
+			else {				
+				return true;
+			}
+		});
 		
 		      
 		});//document close
