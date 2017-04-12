@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+   <style>
+	tr {
+		border:1px inset white;
+	}
+	tr.focused {
+		border:1px solid #a94442; 
+	}
+	
+	
+	
+	#rk_table2_datagrid.dataTable tr.odd { background-color: white;  border:1px lightgrey;}
+    #rk_table2_datagrid.dataTable tr.even{ background-color: white; border:1px lightgrey; }
+		
+	.error {
+            border: solid 1px;
+            border-color: #a94442;
+    }	
+
+	#triangle-topleft { 
+	   width: 0; 
+	   height: 0; 
+	   border-top: 100px solid red; 
+	   border-right: 100px solid transparent; 
+	}
+	
+	.row-status-valid{
+		width:10px;
+		height:30px;
+		background-color: #00FF00;
+	}
+	.row-status-invalid{
+		width:10px;
+		height:30px;
+		background-color: #a94442;
+	}
+		
+	
+	
+	
+  </style>
+    
+  <link rel="stylesheet" type="text/css" href="../../dist/css/bootstrap/bootstrap.min.css" >  
+  <link rel="stylesheet" type="text/css" href="../../dist/libs/datatable/css/dataTables.bootstrap.min.css" >
+  <link rel="stylesheet" type="text/css" href="../../dist/libs/datatable/css/responsive.dataTables.min.css" >
+  <link rel="stylesheet" type="text/css" href="../../dist/libs/datatable/css/buttons.dataTables.min.css" >  
+  
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  
+  <link rel="stylesheet" type="text/css" href="val.css" >  
+  
+  
+  
+  <script src="../../dist/libs/jquery.min.js"></script>
+  <script src="../../dist/libs/mustache.min.js"></script>
+  <script src="../../dist/libs/datatable/js/jquery.dataTables.min.js"></script>
+  <script src="../../dist/libs/datatable/js/dataTables.responsive.min.js"></script>
+  <script src="../../dist/libs/datatable/js/dataTables.bootstrap.min.js"></script>
+  <script src="../../dist/libs/datatable/js/dataTables.buttons.min.js"></script>
+  <script src="../../dist/bootstrap.min.js"></script>
+  
+  
+       
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  
+  <script src="../r-base-table.js"></script>
+  <script src="CellEdit.js"></script>
+  <script src="r-vali-table.js"></script>
+
+	
+</head>
+<body>
+
+    
+<div>
+
+		<form id="frm-entity">
+			
+			<button id="btnDownload" type="submit" class="btn btn-primary">				
+				Test1
+			</button>
+
+			<!--<button id="btnUpload"  class="btn btn-primary">
+				<span class="glyphicon glyphicon-floppy-disk"></span>
+				Upload
+			</button>
+			<button id="btnValidate"  class="btn btn-primary">
+				<span class="glyphicon glyphicon-floppy-disk"></span>
+				Validate
+			</button>
+			<button id="btnImport"  class="btn btn-primary">
+				<span class="glyphicon glyphicon-floppy-disk"></span>
+				Import
+			</button>-->
+
+		</form>
+
+
+	<form id="uploadform" method="post" enctype="multipart/form-data">
+		<label for="file"></label>
+		<input name="file" type="file">
+		<input name="entity" id="entity" style="display:none" />
+		<button id="submit" type="button">Test2</button>
+	</form>
+	<rk_table2></rk_table2>
+</div>
+<script type="text/javascript">
+      $(document).ready(function (){
+              
+        $('#frm-entity').on('submit', function (e) {
+			e.preventDefault();
+            $.ajax({
+                type: 'GET',
+                url: 'http://127.0.0.1:5000/api/v1/excell/download',
+                contentType: false,
+                processData: false,
+                dataType: 'json'
+            }).done(function(data, textStatus, jqXHR){
+                console.log(data);
+                console.log(textStatus);
+                console.log(jqXHR);
+                console.log('Success!');
+
+            }).fail(function(data){
+                alert('error!');
+            });
+			
+			
+			
+		
+			
+			
+        });
+		
+		
+
+        $('#btn').click(function(e){
+           alert("ok");
+        });
+		
+		var _resDp = [];
+
+        $('#submit').click(function() {
+			$("#entity").val("student");
+            var form_data = new FormData($('#uploadform')[0]);
+            $.ajax({
+                type: 'POST',
+                url: 'http://127.0.0.1:5000/api/v1/excell/import',
+                data: form_data,
+                contentType: false,
+                processData: false,
+                dataType: 'json'
+            }).done(function(response, textStatus, jqXHR){
+                console.log(response);
+                console.log(textStatus);
+                console.log(jqXHR);
+                console.log('Success!');
+                $("#resultFilename").text(response['name']);
+                $("#resultFilesize").text(response['size']);
+				var data = response['data'];
+				_dt2.setCols(data['cols']);
+				_dt2.redrawColumn();
+				_resDp = data['dp'];
+            }).fail(function(data){
+                alert('error!');
+            });
+        });
+		
+		
+		
+		_dt2 = new RValiTable({tag_name:"rk_table2",colRowStatus:true,enable_checkbox:false,mapKey:'field_name',searching:true,
+			callback:{
+					creationComplete:function(){
+						_dt2.setDp(_resDp);
+					}
+				}
+		});
+		_dt2.init();		
+		
+
+
+
+
+
+
+
+
+
+    });
+</script>
+</body>
+</html>

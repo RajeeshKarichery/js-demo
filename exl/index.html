@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    
+    <style>
+
+	.new-tab-opener
+	{
+		display: none;
+	}
+
+    </style>
+
+	<script src="../dist/jquery.min.js"></script>
+	<script src="../dist/libs/jquery.serializejson.min.js"></script>	
+	<script src="../dist/bootstrap.min.js"></script>
+	
+</head>
+<body>
+
+    
+<div>
+
+		<form id="frm-entity">
+			
+			<!--<button id="btnDownload" type="submit" class="btn btn-primary">				
+				Test1
+			</button>-->
+
+			<!--<button id="btnUpload"  class="btn btn-primary">
+				<span class="glyphicon glyphicon-floppy-disk"></span>
+				Upload
+			</button>
+			<button id="btnValidate"  class="btn btn-primary">
+				<span class="glyphicon glyphicon-floppy-disk"></span>
+				Validate
+			</button>
+			<button id="btnImport"  class="btn btn-primary">
+				<span class="glyphicon glyphicon-floppy-disk"></span>
+				Import
+			</button>-->
+
+		</form>
+
+
+	<form id="uploadform" method="post" enctype="multipart/form-data">
+		<label for="file"></label>
+		<input name="file" type="file">
+		<input name="entity" id="entity" style="display:none" />
+		<button id="submit" type="button">Test2</button>
+	</form>
+	
+	
+	<!--<a data-href="http://127.0.0.1:5000/api/v1/excell/download" href="javascript:">Click here</a>
+	<form class="new-tab-opener" method="post" target="_blank">
+		<input name="entity" id="entity" style="display:none" />
+	</form>
+	
+	
+	
+	<form action="http://127.0.0.1:5000/api/v1/excell/download" method="POST" target="_blank" id="myform" >
+		<input type="hidden" name="list" id="list-data"/>
+		<input type="submit" value="Submit">
+	</form>-->
+	
+	<button id="btnD" >D1</button>
+	
+	
+</div>
+<script type="text/javascript">
+      $(document).ready(function (){
+	  
+		$("#btnD").on('click' ,function(e){
+			var form = $('<form></form>').attr('action','http://127.0.0.1:5000/api/v1/excell/download').attr('method', 'post');
+			form.append($("<input></input>").attr('type', 'hidden').attr('name', 'entity').attr('value', "student"));
+			form.appendTo('body').submit().remove();
+		});
+	  
+		/*$('a').on('click', function (e) {
+			$("#entity").val("student");
+			var f = $('.new-tab-opener');
+			f.attr('action', $(this).attr('data-href'));			
+			f.submit();
+		});
+		
+		$("#myform").on('submit',function(e){
+			jQuery('#list-data').val("Applica");
+			jQuery('#myform').submit();
+		});*/
+		
+              
+        /*$('#frm-entity').on('submit', function (e) {
+			e.preventDefault();			
+            $.ajax({
+                type: 'POST',
+                url: 'http://127.0.0.1:5000/api/v1/excell/download',
+                contentType: false,
+                processData: false,
+                dataType: 'json'
+            }).done(function(data, textStatus, jqXHR){
+                console.log(data);
+                console.log(textStatus);
+                console.log(jqXHR);
+                console.log('Success!');
+
+            }).fail(function(data){
+                alert('error!');
+            });			
+			
+        });*/
+		
+		
+		
+		
+		
+		
+
+        
+
+        $('#submit').click(function() {
+			$("#entity").val("student");
+            var form_data = new FormData($('#uploadform')[0]);
+            $.ajax({
+                type: 'POST',
+                url: 'http://127.0.0.1:5000/api/v1/excell/import',
+                data: form_data,
+                contentType: false,
+                processData: false,
+                dataType: 'json'
+            }).done(function(data, textStatus, jqXHR){
+                console.log(data);
+                console.log(textStatus);
+                console.log(jqXHR);
+                console.log('Success!');
+                $("#resultFilename").text(data['name']);
+                $("#resultFilesize").text(data['size']);
+            }).fail(function(data){
+                //alert('error!');
+            });
+        });
+
+
+
+
+
+
+
+
+
+    });
+</script>
+</body>
+</html>

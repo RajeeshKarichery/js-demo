@@ -77,9 +77,11 @@ function RValiTable(options){
 	function rowCheckFillRequiredData(_data){		
 		var _bool = true;
 		$.each(dgObject.cols,function(i,col){
-			if(col['is_required'] == true){
+			if(col['is_required'] == true || col['is_required'] == 'true'){
 				if(col['item_renderer'] != undefined && col['item_renderer'] =='sn_datagrid_select_renderer'){
-					if(_data[col['field_name']] =="-1")
+					if(_data[col['field_name']] == undefined)
+						_bool = false;
+					else if(_data[col['field_name']] =="-1")
 						_bool = false;
 				}
 				else{
@@ -310,6 +312,11 @@ function RValiTable(options){
 					fVal ="";
 				else
 					fVal = result[col.field_name];
+				
+				if(col.is_itemrenderer =='true')
+					col.is_itemrenderer =true;
+				if(col.is_required =='true')
+					col.is_required =true;
 					
 				if(col.is_itemrenderer){
 					if(col.item_renderer == "sn_row_status"){	
@@ -375,10 +382,11 @@ function RValiTable(options){
 								return _item['pkey'] == result[col.colDepended];
 							});
 						}
-						var fc_value = result[col.field_name];
+						var fValPresent=false;	
 						$.each(_dp,function(i,row){
-							if(row['key_val'] == fc_value){
+							if(row['key_val'] == fVal){
 								row['selected'] = 'selected';
+								fValPresent = true;
 							}
 							else
 								row['selected'] = '';
@@ -386,8 +394,10 @@ function RValiTable(options){
 						col['_dp'] = _dp;
 						if(col.item_renderer == "sn_datagrid_select_renderer"){
 							var cls_name ="text_input_renderer_blank";
-							if(col.is_required == true && fVal =="")
-								cls_name ="text_input_renderer";
+							if(col.is_required == true){							
+								if(fVal =="" || fValPresent == false)
+									cls_name ="text_input_renderer";
+							}								
 							row.push(Mustache.render(dgObject.sn_datagrid_select_renderer,$.extend(col,{"cls_name": cls_name,"field_name":col.field_name})));
 						}
 						else	
