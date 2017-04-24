@@ -1,0 +1,157 @@
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+  
+  <style>
+	
+  </style>
+  
+  <link rel="stylesheet" href="../dist/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+  
+    <!-- Themes -->
+    <link rel="stylesheet" href="themes/bars-1to10.css">	
+    <link rel="stylesheet" href="themes/bars-movie.css">
+	<link rel="stylesheet" href="themes/bootstrap-stars.css">
+	<link rel="stylesheet" href="themes/bars-reversed.css">
+	
+	
+	
+    <script src="../dist/jquery.min.js"></script>
+	<script src="../dist/bootstrap.min.js"></script>
+	<script src="jquery.barrating.js"></script>
+    
+    
+   
+  </head>
+	<body class="container">
+	
+	
+		<!--	
+              <div class="box-body">
+                <select id="example-1to10" name="rating" autocomplete="off">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>				  
+                </select>
+              </div>
+            
+			
+			  <div class="box-body">
+                <select id="example-movie" name="rating" autocomplete="off">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>				  
+                </select>
+              </div>
+            
+			
+			  
+		  <br>
+		  <br>
+		  <br>
+		  <br>
+			-->
+			
+			<!--<div class="box-body">
+                <select id="example-bootstrap" name="rating" autocomplete="off">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>                
+              </div>-->
+			  
+			  
+			  
+			  
+		  
+		  
+		  <br>
+		  <br>
+		  <br>
+		  <br>
+		  
+            
+			
+			
+			
+			<div class="box-body">
+                <select id="example-reversed" name="rating" autocomplete="off">
+                  <option value="Strongly Agree">Strongly Agree</option>
+                  <option value="Agree">Agree</option>
+                  <option value="Neither Agree or Disagree">Neither Agree or Disagree</option>
+                  <option value="Disagree">Disagree</option>
+                  <option value="Strongly Disagree">Strongly Disagree</option>
+                </select>
+              </div>
+
+          
+	
+  
+   
+	
+	<script>
+		$(document).ready(function(){
+			
+			
+			/*$('#example-1to10').barrating('show', {
+				theme: 'bars-1to10',				
+				onSelect: function(value, text) {
+					alert('Selected rating: ' + value);
+				}
+			});
+			$('#example-1to10').barrating('clear');			
+			$('.br-current-rating').text("");*/
+			
+			//$( ".br-widget a" ).first().addClass("myCls");
+			
+			//alert($( ".br-widget a" ).first().attr('class'));
+			//$( ".br-widget a" ).first().removeClass('br-selected br-current')
+			
+			
+			
+
+			/*$('#example-movie').barrating('show', {
+				theme: 'bars-movie',
+				onSelect: function(value, text) {
+					alert('Selected rating: ' + value);
+				}
+			});
+			$('#example-movie').barrating('clear');*/
+			
+			//alert($( ".br-widget a" ).first().attr('class'));
+			//$( ".br-widget a" ).first().removeClass('br-selected br-current');
+		
+
+        
+       /* $('#example-bootstrap').barrating({
+            theme: 'bootstrap-stars'            
+        });
+		$( ".br-widget a" ).first().removeClass('br-selected br-current');
+		$('.br-current-rating').text("");*/
+		
+		
+		
+		
+		 $('#example-reversed').barrating('show', {
+            theme: 'bars-reversed',
+            showSelectedRating: true,
+            reverse: false
+        });
+		$( ".br-widget a" ).first().removeClass('br-selected br-current');		
+		$('.br-current-rating').text("");
+
+			
+			
+			
+		});
+	</script>
+  </body>
+</html>

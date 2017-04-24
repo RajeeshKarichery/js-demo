@@ -1,0 +1,470 @@
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+  
+  <!--<style>
+	#panel, #flip {
+    padding: 5px;
+    text-align: center;
+    background-color: #fff;
+    border: solid 1px #c3c3c3;
+}
+
+#panel {
+    padding: 50px;
+    display: none;
+}
+
+
+
+	.myDiv {
+		border: 2px solid #a1a1a1;
+		padding: 10px 40px; 
+		background: #fff;
+		width: 100%;
+		border-radius: 7px;
+	}
+	
+	
+	
+	
+	 div.vtab-tab-container {
+            z-index: 10;
+            background-color: #ffffff;
+            padding: 0 !important;
+            border-radius: 4px;
+            -moz-border-radius: 4px;           
+            margin-top: 20px;           
+			box-shadow: 0 1px 10px rgba(0, 0, 0, .1);	
+        }
+        
+        div.vtab-tab-menu {
+            padding-right: 0;
+            padding-left: 0;
+            padding-bottom: 0;
+        }
+        
+        div.vtab-tab-menu div.list-group {
+            margin-bottom: 0;
+        }
+        
+        div.vtab-tab-menu div.list-group>a {
+            margin-bottom: 0;
+        }
+        
+        div.vtab-tab-container div.list-group>a .glyphicon
+        {
+            color: #E7E2E2;
+        }
+				
+        
+        div.vtab-tab-menu div.list-group>a:first-child {
+            border-top-right-radius: 0;
+            -moz-border-top-right-radius: 0;
+        }
+        
+        div.vtab-tab-menu div.list-group>a:last-child {
+            border-bottom-right-radius: 0;
+            -moz-border-bottom-right-radius: 0;
+        }
+        
+        div.vtab-tab-container div.list-group>a.active,
+        div.vtab-tab-container div.list-group>a.active .glyphicon,
+        div.vtab-tab-container div.list-group>a.active .fa {
+            background-color: #E7E2E2;
+            background-image: #E7E2E2;
+            color: #ffffff;
+        }        
+      
+		div.list-group > a.active:after {
+			z-index: -1;
+	        position: absolute;
+            top: 98.1%;
+            left: 70%;
+            margin-left: -22%;
+            content: '';
+            width: 0;
+            height: 0;
+                        
+            border-top: solid 13px #E7E2E2;
+            border-left: solid 13px transparent;
+            border-right: solid 13px transparent;
+		}
+	  
+        div.vtab-tab-content {
+            background-color: #ffffff;           
+            padding-left: 1px;
+            padding-top: 13px;			
+        }
+        
+        div.vtab-tab div.vtab-tab-content:not(.active) {
+            display: none;
+        }
+		
+		
+		
+		
+		.list-group-item.active, .list-group{
+			background-color: #5A55A3;
+			border-color: #5A55A3;
+		}
+		
+		.list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {
+			color: #fff;
+			background-color: #5A55A3;
+			border-color: #5A55A3;
+		}
+		
+		
+		
+
+  </style>-->
+  
+  <style>
+	
+	
+	
+	
+	
+	
+	.mylabel {
+		display:inline-block;
+		padding:.2em .6em .3em;
+		font-size:75%;
+		font-weight:bold;
+		line-height:1;
+		color:#fff;			
+		vertical-align:baseline;
+		border-radius:.25em;		
+		overflow:hidden !important;
+		text-overflow: ellipsis;
+	}
+	
+	.dClass{
+		display:inline;
+	}
+	.tdClass{
+		width:100px;
+	}
+	
+	.mRow{
+		
+	}
+	
+
+		
+	
+  </style>  
+	<link rel="stylesheet" type="text/css" href="../dist/css/bootstrap/bootstrap.min.css" > 	
+	<script src="../dist/jquery.min.js"></script>
+	<script src="../dist/bootstrap.min.js"></script>   
+  </head>
+	<body class="container">
+	
+	
+	
+	<div class="dClass">
+		<label>Row1</label>
+		<label>Row1</label>
+	</div>
+		
+	
+	
+								  
+		  
+		<div class="row" >
+			<div class="col-md-6" >
+				<div class="row">
+					<button id="btn-on" >On</button>
+					<button id="btn-off">off</button>
+				</div>
+				<div class="row">					
+					<div class="collapse" id="collapsePanel">					
+							<div class="row " >
+								<div class="col-md-6" style="border: solid 1px #c3c3c3;">
+									
+									<!--<table cellspacing="0">
+										<tr class="mRow">
+											<td class="tdClass">Name</td>
+											<td><h4><span class="mylabel label-default" data-toggle="tooltip" title="Hooray!" >rejeesh karichery mangad 11111111111 22222222 333333333</span></h4></td>
+										</tr>
+										<tr>
+											<td class="tdClass">Id</td>
+											<td><h4><span class="mylabel label-default" >Rk100</span></h4></td>
+										</tr>
+									</table>-->
+									
+									<ul style="list-style-type:none;padding-left: 0px;padding-top:5px">
+										<li>
+											<div class="row">
+												<div class="col-md-4">
+													Name of Stu
+												</div><div class="col-md-8">
+													<span class="mylabel label-default" id="mName"
+														data-toggle="tooltip" ></span>
+												</div>
+											</div>											
+										</li>
+										<li>
+											<div class="row">
+												<div class="col-md-4">
+													Id
+												</div><div class="col-md-8">
+													<span class="mylabel label-default"  >ST001</span>
+												</div>
+											</div>											
+										</li>
+									</ul>
+									
+								</div>	
+								<!--<div class="col-md-6" >
+									<ul class="list-group">
+									  <a href="#" class="list-group-item disabled">Heading</a>
+									  <li class="list-group-item">Cras justo odio<span class="badge">Rejeesh Karichery</span></li>
+									  <li class="list-group-item">Dapibus ac facilisis in<span class="badge">Rejeesh Karichery</span></li>
+									  <li class="list-group-item">Morbi leo risus<span class="badge">Rejeesh Karichery</span></li>
+									  <li class="list-group-item">Porta ac consectetur ac<span class="badge">Rejeesh Karichery</span></li>
+									  <li class="list-group-item">Vestibulum at eros<span class="badge">Rejeesh Karichery</span></li>
+									</ul>								
+								</div>-->
+							</div>
+					</div>
+					<div id="bottom-div">
+						<!--<table class="table table-bordered">
+							<thead>
+							  <tr>
+								<th>Firstname</th>
+								<th>Lastname</th>
+								<th>Email</th>
+							  </tr>
+							</thead>
+							<tbody>
+							  <tr>
+								<td>John</td>
+								<td>Doe</td>
+								<td>john@example.com</td>
+							  </tr>
+							  <tr>
+								<td>Mary</td>
+								<td>Moe</td>
+								<td>mary@example.com</td>
+							  </tr>
+							  <tr>
+								<td>July</td>
+								<td>Dooley</td>
+								<td>july@example.com</td>
+							  </tr>
+							</tbody>
+						</table>-->
+					</div>					
+					
+					
+				</div>				 
+				 
+				 
+			</div>
+
+
+			
+			<div class="col-md-6">			
+				<!--<div class="row">					
+					<div class="col-md-12 vtab-tab-container"  >	
+						<div class="list-group"  >											
+							<a href="#" class="col-md-4 list-group-item active text-center "  style="height:50px;font-size:14px;">							
+								<span class="glyphicon glyphicon-plane" ></span><font style="padding-left: 5px;">Flight</font>								
+							</a>					
+							<a href="#" class="col-md-4 list-group-item text-center " style="height:50px;font-size:14px">							
+								<span class="glyphicon glyphicon-road" ><font style="padding-left: 5px;"></span>Menu2</font>	
+							</a>
+							<a href="#" class="col-md-4 list-group-item text-center " style="height:50px;font-size:14px">							
+								<font style="padding-left: 5px;">Menu3</font>
+							</a>
+						</div>						
+					</div>			
+					<div class="row">
+						<div class="col-md-12 vtab-tab" >						
+							<div class="vtab-tab-content active">															
+									<table class="table table-bordered">
+										<thead>
+										  <tr>
+											<th>Firstname</th>
+											<th>Lastname</th>
+											<th>Email</th>
+										  </tr>
+										</thead>
+										<tbody>
+										  <tr>
+											<td>John</td>
+											<td>Doe</td>
+											<td>john@example.com</td>
+										  </tr>
+										  <tr>
+											<td>Mary</td>
+											<td>Moe</td>
+											<td>mary@example.com</td>
+										  </tr>
+										  <tr>
+											<td>July</td>
+											<td>Dooley</td>
+											<td>july@example.com</td>
+										  </tr>
+										</tbody>
+									 </table>
+								
+							</div>						
+							<div class="vtab-tab-content">
+								<table class="table table-bordered">
+									<thead>
+									  <tr>
+										<th>Col1</th>
+										<th>Col2</th>
+										<th>Col3</th>
+									  </tr>
+									</thead>
+									<tbody>
+									  <tr>
+										<td>John</td>
+										<td>Doe</td>
+										<td>john@example.com</td>
+									  </tr>
+									  <tr>
+										<td>Mary</td>
+										<td>Moe</td>
+										<td>mary@example.com</td>
+									  </tr>								  
+									</tbody>
+								 </table>
+								
+							</div>
+							<div class="vtab-tab-content">
+								<table class="table table-bordered">
+									<thead>
+									  <tr>
+										<th>AA</th>
+										<th>BB</th>
+										<th>CC</th>
+									  </tr>
+									</thead>
+									<tbody>
+									  <tr>
+										<td>John</td>
+										<td>Doe</td>
+										<td>john@example.com</td>
+									  </tr>
+									  <tr>
+										<td>Mary</td>
+										<td>Moe</td>
+										<td>mary@example.com</td>
+									  </tr>								  
+									</tbody>
+								 </table>
+							</div>		
+						</div>
+					</div>			
+					
+					
+				</div>
+				<div class="row">					
+					<table class="table table-bordered">
+						<thead>
+						  <tr>
+							<th>Firstname</th>
+							<th>Lastname</th>
+							<th>Email</th>
+						  </tr>
+						</thead>
+						<tbody>
+						  <tr>
+							<td>John</td>
+							<td>Doe</td>
+							<td>john@example.com</td>
+						  </tr>
+						  <tr>
+							<td>Mary</td>
+							<td>Moe</td>
+							<td>mary@example.com</td>
+						  </tr>
+						  <tr>
+							<td>July</td>
+							<td>Dooley</td>
+							<td>july@example.com</td>
+						  </tr>
+						</tbody>
+					  </table>					
+				 </div>-->
+			</div>		
+		</div>
+		
+		
+	
+  
+   
+	
+	<script>
+		$(document).ready(function(){
+		
+			 $('#collapsePanel').collapse('show');
+			 
+			 $("#mName").text("Rejeesh Karichery 111111111111 2222222222222 444");
+			 $("#mName").attr('title','Rejeesh Karichery 111111111111 2222222222222 444');
+			 $('[data-toggle="tooltip"]').tooltip(); 
+			
+			$("#btn-test").click(function(){
+				if ( $("#btn-icon").hasClass("glyphicon-plus") ) {
+					console.log("class name......... plus");
+					$("#btn-icon").removeClass("glyphicon glyphicon-plus");
+					$("#btn-icon").addClass("glyphicon glyphicon-pencil");
+				}
+				else if ( $("#btn-icon").hasClass("glyphicon-pencil") ) {
+					console.log("class name......... pencil");
+					$("#btn-icon").removeClass("glyphicon glyphicon-pencil");
+					$("#btn-icon").addClass("glyphicon glyphicon-plus");
+				}
+			});
+			
+			$("#btn-icon").click(function(){
+				
+				console.log($(this).attr('class'));
+				if ( $( this ).hasClass("glyphicon glyphicon-plus") ) {
+					console.log("class name......... exist");
+					$( this ).removeClass("glyphicon glyphicon-plus");
+					$( this ).addClass("glyphicon glyphicon-pencil");
+				}
+				else if ( $( this ).hasClass("glyphicon glyphicon-pencil") ) {
+					console.log("class name......... exist");
+					$( this ).removeClass("glyphicon glyphicon-pencil");
+					$( this ).addClass("glyphicon glyphicon-plus");
+				}
+			});
+			
+			
+			$("#btn-on").click(function(){
+				//$("#panel").slideDown("slow");
+				 $('#collapsePanel').collapse('show');
+			});
+			$("#btn-off").click(function(){
+				//$("#panel").slideUp("slow");
+				 $('#collapsePanel').collapse('hide');
+			});
+			
+			
+			
+				$("div.vtab-tab-container>div.list-group >a").click(function (e) {
+                    e.preventDefault();					
+					if ( $( this ).hasClass( "disabled" ) ) {
+						event.stopImmediatePropagation();
+					}
+					
+                    $(this).siblings('a.active').removeClass("active");
+                    $(this).addClass("active");
+					var index = $(this).index();
+					$("div.vtab-tab>div.vtab-tab-content").removeClass("active");
+					$("div.vtab-tab>div.vtab-tab-content").eq(index).addClass("active");					
+                });
+			
+			
+			
+		});
+	</script>
+  </body>
+</html>

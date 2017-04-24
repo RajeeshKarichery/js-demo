@@ -1,0 +1,385 @@
+<html>
+  <head>
+	<style>
+		.boxSlider { width: 300px; height: 200px; margin-left: 9px; float: left; border: 2px solid #fff; padding: 10px; background: #fff; font-family: Arial; }
+.boxSlider .sliderWrap { position: relative; width: 300px; height: 200px; overflow: hidden; }
+.boxSlider .sliderWrap .slider { width: 1000px; float: left }
+.boxSlider .sliderWrap .newSlide { width: 300px; float: left; height: 105px; position: relative }
+.boxSlider .sliderWrap .newSlide p { font-size: 12px; color: #000; margin: 0 0 8px 0; padding: 0; float: left; width: 100% }
+.boxSlider .sliderWrap .newSlide p.dateFormat { font-size: 10px; color: #ffcb05; font-weight: bold; }
+.boxSlider .sliderWrap .newSlide a {   float: left; color: #000; font-size: 12px; text-decoration: underline }
+.boxSlider .sliderWrap .prev, .boxSlider .sliderWrap .next { position: absolute; cursor: pointer; background:#fff; padding:2px }
+.boxSlider .sliderWrap .prev { top: 0; right: 15px; }
+.boxSlider .sliderWrap .next { right: 0; top: 0;  }
+.boxSlider .sliderWrap h3 { width: auto; float: left; padding: 0; color: #000; font-size: 13px; font-weight: normal; margin: 0 0 15px 0; }
+
+
+
+	.alert-box {
+		color:#555;
+		border-radius:10px;
+		font-family:Tahoma,Geneva,Arial,sans-serif;font-size:11px;
+		padding:10px 36px;
+		margin:10px;
+	}
+	.alert-box span {
+		font-weight:bold;
+		text-transform:uppercase;
+	}	
+	.success {
+		background:#e9ffd9 url('tick_circle.png') no-repeat 10px 50%;
+		border:1px solid #a6ca8a;
+	}
+	
+	
+	 
+	
+	
+	
+
+	</style>
+	<link rel="stylesheet" href="../dist/bootstrap.min.css">    
+    <script src="../dist/jquery.min.js"></script>
+	<script src="../dist/bootstrap.min.js"></script>
+	<script type = "text/javascript" src = "https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+	
+	
+    
+    
+    
+  </head>
+  <body style="margin:10px">
+  
+	<!--<div class="container">  
+		<div class="row">
+			<div class="col-md-4">
+				<div class="panel panel-default">
+				  <div class="panel-heading" id="of_title"></div>
+				  <div class="panel-body">
+					<div class="boxSlider slide2" >
+						<div class="sliderWrap">						
+							<div class="slider" id="q_items">
+							</div>	
+						</div>
+					</div> 
+				  
+				  </div>
+				</div>
+			</div>	
+			<div class="col-md-8">
+			</div>	
+		</div>
+	</div>-->
+
+		
+  <!--
+	<div class="boxSlider slide2" >
+	  <div class="sliderWrap" >
+		<h3 id="of_title"></h3>
+		<div class="slider" id="q_items" >
+		  
+		</div>
+		
+	  </div>
+	</div>-->
+	
+	<!--<div class="newSlide" id="statusSlide" hidden >			
+			<p id='completed'></p>
+			<div class="next" hidden>	
+		  </div>-->		  
+	<!-- 
+	//31bbf1 light blue
+	<div class="next"></div>
+		<div class="prev"></div>-->
+		
+		
+				
+	  <button id = "hide"> Hide </button>
+      <button id = "show"> Show</button> 
+  
+  
+  
+  <div class="container">  
+		<div class="row">
+			<div class="col-md-4">
+				<div class="panel panel-default">
+				  <div class="panel-heading" id="of_title"></div>
+				  <div class="panel-body">
+					<div class = "target" id="q_items">
+					</div>				  
+				  </div>
+				</div>
+			</div>	
+			<div class="col-md-8">
+			</div>	
+		</div>
+	</div>
+	
+      
+		
+	
+<script type="text/javascript">	
+	$(document).ready(function (){
+
+			var ofDp =[{'of_title':"OF1","q_dp": [{'q_order':'0','question_title':"Are You From Bangalore?",
+			'options_dp':[{'option_title':"Yes",'option_id':"q1_op1" },{'option_title':"No",'option_id':"q1_op2" } ]  } ,    
+			{'q_order':'1','question_title':"Is 1 is Odd? ",
+			'options_dp':[{'option_title':"Yes",'option_id':"q2_op1" },{'option_title':"No",'option_id':"q2_op2" } ]  }
+			]      } ,
+
+			{'of_title':"OF2","q_dp": [{'q_order':'2','question_title':"Hello Letter?",
+			'options_dp':[{'option_title':"Yes",'option_id':"q2_op1" },{'option_title':"No",'option_id':"q2_op2" } ]  } ,    
+			
+			]      }
+			]
+	
+			var q_dp = [];			
+			/*$.each(ofDp,function(i,row){
+				$("#of_title").text(row['of_title']);
+				q_dp = row['q_dp'];
+				$.each(q_dp,function(j,q_row){
+					var ele ="";
+					ele += '<div class="newSlide">';				
+						ele += '<p class="dateFormat" id="'+(j+1)+'">'+q_row['question_title']+'</p>';
+				
+						var options_dp = q_row['options_dp'];
+						$.each(options_dp,function(k,op_row){
+							ele += '<div class="control-group">';            
+								ele += '<div clas="controls">';						  
+									ele += '<div class="radio">';
+										ele += '<label>';
+											var opid = op_row['option_id'];
+											ele +='<input class="rk-chk" id="'+opid+'" name="user[role]" type="radio" value="'+opid+'"><span style="color:#000">'+op_row['option_title']+'</span>';
+										ele += '</label>';
+									ele += '</div>';
+								ele += '</div>';
+							ele += '</div>';
+						});
+					
+					ele += '</div>';
+					$("#q_items").append(ele);
+				});
+				
+				
+			});*/
+			
+			
+			/*$(".rk-chk").change(function() {
+				console.log($(this).attr('value'));
+				var id =$(this).parents('.sliderWrap').find('.dateFormat').attr('id');
+				console.log("Q order ="+id);
+							
+				
+				var ths =$(this).parents('.sliderWrap').find('.slider');
+				if (!ths.is(':animated'))
+				{
+					if(parseInt(id) == q_dp.length){
+						var ele ="";
+						ele +='<div class="newSlide">';
+							ele +='<div class="alert-box success" ><span>success: </span>Write your success message here.</div>';
+						ele +='</div>';
+						$("#q_items").html(ele);
+						
+					}
+					else{	
+						ths.animate({marginLeft:'-='+wid},300, function(){
+							ths.append(ths.parents('.sliderWrap').find('.slider .newSlide').eq(0).clone());					
+							ths.children('.newSlide').eq(0).remove();
+							ths.css('margin-left',0);
+							
+						})
+					}
+				}				
+			});*/
+			
+			
+	
+			var wid, len;
+			len = $('.boxSlider').eq(0).find('.newSlide').length;
+			wid = $('.boxSlider').eq(0).find('.newSlide').width();
+			$('.boxSlider').eq(0).find('.slider').css('width',len * wid);
+			
+			
+			
+			
+		
+		/*$('.boxSlider .next').click(function(){
+			var ths =$(this).parents('.sliderWrap').find('.slider');
+			if (!ths.is(':animated'))
+			{
+				ths.animate({marginLeft:'-='+wid},500, function(){
+					ths.append(ths.parents('.sliderWrap').find('.slider .newSlide').eq(0).clone());					
+					ths.children('.newSlide').eq(0).remove();
+					ths.css('margin-left',0);
+					
+				})
+			}
+		}).click()*/
+		
+		/*$('.boxSlider .prev').click(function(){				
+			var ths =$(this).parents('.sliderWrap').find('.slider');
+			if (!ths.is(':animated'))
+			{
+				ths.prepend(ths.parents('.sliderWrap').find('.slider .newSlide:last').clone());	
+				ths.css('margin-left',-wid);
+				ths.children('.newSlide:last-child').remove();				
+				ths.animate({marginLeft:0},500)		
+			}
+		})*/
+		
+		
+		
+			
+		
+		
+			init();
+			function init(){			
+				var row = ofDp[0];
+				$("#of_title").text(row['of_title']);
+				q_dp = row['q_dp'];
+				q_row = q_dp[0];				
+				var ele ="";
+				ele += '<div class="newSlide">';				
+					ele += '<p class="dateFormat" id="0">'+q_row['question_title']+'</p>';			
+					var options_dp = q_row['options_dp'];
+					$.each(options_dp,function(k,op_row){
+						ele += '<div class="control-group">';            
+							ele += '<div clas="controls">';						  
+								ele += '<div class="radio">';
+									ele += '<label>';
+										var opid = op_row['option_id'];
+										ele +='<input class="rk-chk" id="'+opid+'" name="user[role]" type="radio" value="'+opid+'"><span style="color:#000">'+op_row['option_title']+'</span>';
+									ele += '</label>';
+								ele += '</div>';
+							ele += '</div>';
+						ele += '</div>';
+					});
+				
+				ele += '</div>';
+				$("#q_items").html(ele);
+			}
+			
+			
+			
+			
+			$(document).on("change",".rk-chk",function() {
+				console.log($(this).attr('value'));
+				var id =$(this).parents('.target').find('.dateFormat').attr('id');
+				console.log("Q order ="+id);
+				
+					$(".target").hide("slide", {direction: "left" }, 1000 ,function() {					
+					//single OlineForm Created For This User
+					id = parseInt(id);
+					id++;
+					if(ofDp.length == 1){
+						var onlineFObj = ofDp[0];
+						var q_dp = onlineFObj['q_dp'];						
+						//Last Question  
+						if(id == q_dp.length){
+							var ele = getPollCompleted();
+						}
+						else{
+							var q_row = q_dp[id];
+							var ele   = getOptionsForQ(q_row,id);
+						}						
+					}
+					else{
+						var oa_obj;
+						var q_obj;
+						$.each(ofDp,function(i,row){							
+							var q_dp = row['q_dp'];
+							$.each(q_dp,function(j,q_row){						
+								//var ele   = getOptionsForQ(q_row,id);
+								if(id == q_row['q_order']){
+									oa_obj = row;
+									q_obj = q_row;									
+								}
+								
+							});
+						});
+						$("#of_title").text(oa_obj['of_title']);
+						
+						if(id == 3){
+							var ele = getPollCompleted();
+						}
+						else{							
+							var ele   = getOptionsForQ(q_obj,id);
+						}						
+					}					
+					$("#q_items").html(ele);
+					$(".target").show( "slide", {direction: "right" }, 500 );
+					
+				});
+					
+					
+							
+				
+				/*var ths =$(this).parents('.sliderWrap').find('.slider');
+				if (!ths.is(':animated'))
+				{
+					if(parseInt(id) == q_dp.length){
+						var ele ="";
+						ele +='<div class="newSlide">';
+							ele +='<div class="alert-box success" ><span>success: </span>Write your success message here.</div>';
+						ele +='</div>';
+						$("#q_items").html(ele);
+						
+					}
+					else{	
+						ths.animate({marginLeft:'-='+wid},300, function(){
+							ths.append(ths.parents('.sliderWrap').find('.slider .newSlide').eq(0).clone());					
+							ths.children('.newSlide').eq(0).remove();
+							ths.css('margin-left',0);
+							
+						})
+					}
+				}*/
+				
+			});
+			
+			function getOptionsForQ(q_row,id){
+				var ele ="";
+				ele += '<div class="newSlide">';				
+					ele += '<p class="dateFormat" id="'+id+'">'+q_row['question_title']+'</p>';						
+					var options_dp = q_row['options_dp'];
+					$.each(options_dp,function(k,op_row){
+						ele += '<div class="control-group">';            
+							ele += '<div clas="controls">';						  
+								ele += '<div class="radio">';
+									ele += '<label>';
+										var opid = op_row['option_id'];
+										ele +='<input class="rk-chk" id="'+opid+'" name="user[role]" type="radio" value="'+opid+'"><span style="color:#000">'+op_row['option_title']+'</span>';
+									ele += '</label>';
+								ele += '</div>';
+							ele += '</div>';
+						ele += '</div>';
+					});							
+				ele += '</div>';
+				return ele;
+			}
+			function getPollCompleted(){
+				var ele ="";	
+				ele +='<div class="newSlide">';
+				ele +='<div class="alert-box success" ><span>success: </span>Write your success message here.</div>';
+				ele +='</div>';
+				return ele;
+			}
+
+			
+			
+		
+			$("#hide").click(function(){
+               $(".target").hide( "slide", { direction: "left"  }, 500 );
+            });
+
+            $("#show").click(function(){
+               $(".target").show( "slide", {direction: "right" }, 500 );
+            });
+			
+		
+    });
+	
+</script>	
+	
+</body>
+</html>

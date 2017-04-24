@@ -61,6 +61,9 @@ function RBaseTable(options){
 		this.redrawColumn = function(){
 			this.execDownloadTemplate();			
 		}
+		this.getDp = function(){
+			return dgObject.results;			
+		}
 		this.setDp = function(results){
 			dgObject.results = results;
 			var rows = [];

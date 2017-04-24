@@ -9,7 +9,8 @@ function RValiTable(options){
 	var addEventListenerTextInput = this.addEventListenerTextInput;	
 	var addEventListenerItemRenderSelectDefaultTrigger = this.addEventListenerItemRenderSelectDefaultTrigger;	
 	
-	var setDp = this.setDp;	
+	var setDp = this.setDp;
+	//var getDp = this.getDp;	
 	
 	this.init = function() {
 		//init.call();
@@ -92,6 +93,20 @@ function RValiTable(options){
 			}			
 		});
 		return _bool;
+	}
+	
+	this.showErrorTop = function(){
+		//var _currentDp = getDp.call();
+		var _currentDp = dgObject.results;
+		var _errorDp = [];
+		var _validDp = [];
+		$.each(_currentDp,function(i,item){
+			 if(!rowCheckFillRequiredData(item))
+				_errorDp.push(item);
+			 else
+				 _validDp.push(item);
+		});
+		return $.merge(_errorDp,_validDp);		
 	}
 	
 	this.addEventListenerItemRenderNumberTrigger = function(){		
@@ -425,7 +440,7 @@ function RValiTable(options){
 							select: {style: 'os', selector: 'td:first-child'},
 							order: [[ 1, 'asc' ]],
 							bSort : false,
-							paging: false,
+							paging: true,
 							searching: dgObject.defaults.searching,
 							bInfo:false
 							

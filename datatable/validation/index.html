@@ -89,7 +89,7 @@
   <script>
 	 $(document).ready(function() {	
 	 			
-		var dataSet2 = [ {'game':'Football' } ,{'game':'' ,'count':10,'active' :"Y",'dob':'21-11-1972'},
+		/*var dataSet2 = [ {'game':'Football' } ,{'game':'' ,'count':10,'active' :"Y",'dob':'21-11-1972'},
 		{'game':'Cricket' ,'count':11,'active' :"Y" ,'country':'IND', 'dob':'31-10-1982','doj':'21-01-2011'} ];
         var buttonColsDp =[{'field_label':'','field_name':'row_status','is_itemrenderer':'true','item_renderer':'sn_row_status','isVisible':false },{'field_label':'Game' ,'field_name':'game','is_required':true,'star_req':'triangle-topleft','is_itemrenderer':'true','item_renderer' :'sn_text_input_renderer' },
 							{'field_label':'Count' ,'field_name':'count','is_required':true,'is_itemrenderer':'true','item_renderer' :'sn_number_input_renderer' },
@@ -99,14 +99,22 @@
 								{'field_label':'DOJ' ,'field_name':'doj','is_required':true,'is_itemrenderer':'true','item_renderer' :'datagrid_date_renderer' },
 								{'field_label':'Active' ,'field_name':'active','is_required':true,'is_itemrenderer':'true','item_renderer' :'sn_checkbox_renderer'}
 								
-								];
+								];*/
 								
-		/*var dataSet2 = [ {'game':'Football', 'status':'Y'} ,{'game':'' ,'status' :'N'} ];
-		var buttonColsDp =[{'field_label':'Game' ,'field_name':'game','is_itemrenderer':true ,'item_renderer' :'sn_text_input_renderer' },
-			{'field_label':'Status' ,'field_name':'status','is_itemrenderer':true ,'item_renderer' :'sn_image_renderer',
-			'dp':[{'key':'Y','value':'tick_circle.png'},{'key':'N','value':'red_x_mark.png'} ]  }];*/
+								
+		var dataSet2 = [ {'game':'Football' },{'game':'' ,'count':10},{'game':'Cricket' ,'count':11},
+						 {'game':'Test1' },{'game':'' ,'count':44},{'game':'Hocky' ,'count':56} ,
+						 {'game':'Test2' },{'game':'' ,'count':444},{'game':'Hocky' ,'count':456},
+						 {'game':'','count':''},{'game':'' ,'count':178},{'game':'Bascket' ,'count':34}	];
 		
 		
+		
+		
+        var buttonColsDp =[{'field_label':'','field_name':'row_status','is_itemrenderer':'true','item_renderer':'sn_row_status','isVisible':false },
+							{'field_label':'Game' ,'field_name':'game','is_required':true,'star_req':'triangle-topleft','is_itemrenderer':'true','item_renderer' :'sn_text_input_renderer' },
+							{'field_label':'Count' ,'field_name':'count','is_required':true,'is_itemrenderer':'true','item_renderer' :'sn_number_input_renderer' }								
+								];
+			
 		
 		_dt2 = new RValiTable({tag_name:"rk_table2",colRowStatus:true,enable_checkbox:false,mapKey:'field_name',searching:true,
 				callback:{
@@ -126,7 +134,11 @@
 			//var list = _dt2.getSelectedObjects();
 			
 			
-			
+			//var mDp = _dt2.getDp();
+			//console.log(mDp);
+			//_dt2.setErrorFirst();
+			_dt2.setDp(_dt2.showErrorTop());
+			 console.log(_dt2.getDp());
 			
 			
 			
