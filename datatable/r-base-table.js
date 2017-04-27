@@ -37,12 +37,13 @@ function RBaseTable(options){
 		this.addEvents = function(){
 			//this.addEventListenerItemRenderSelectTrigger();
 			/*this.addEventListenerRowChangeTrigger();
-			this.addEventListenerRowCheckBoxChangeTrigger();
+			
 			this.addEventListenerRowHeaderCheckBoxChangeTrigger();
 			
 			this.addEventListenerItemRenderSelectCustomTrigger();*/			
 			this.addEventListenerItemRenderSelectDefaultTrigger();
 			this.addEventListenerTextInput();
+			this.addEventListenerRowCheckBoxChangeTrigger();
 		}		
 		
 		
@@ -209,7 +210,7 @@ function RBaseTable(options){
 		
 		this.addEventListenerTextInput = function(){
 			$(document).on("change","#"+dgObject.tag_name+"_datagrid tbody input",function(e){
-				alert("ppppp");		
+				//alert("ppppp");		
 			});
 		}
 		
@@ -244,7 +245,8 @@ function RBaseTable(options){
 					if($("#"+tag_name+"_datagrid tbody tr td input[type='checkbox']:not(:checked)").length == 0)
 						$("#"+tag_name+"_dt_select_all_btn").prop('checked', true);
 				}
-				$( document ).trigger(tag_name+"ChangeEvent","");
+				//$( document ).trigger(tag_name+"ChangeEvent","");
+				
 			});
 		}
 		this.addEventListenerRowCheckBoxChangeTrigger = function(){
@@ -259,7 +261,12 @@ function RBaseTable(options){
 						$(this).parent("tr").removeClass("selected");
 						if($("#"+tag_name+"_datagrid tbody tr td:first-child input[type='checkbox']:not(:checked)").length == 0)
 							$("#"+tag_name+"_dt_select_all_btn").prop('checked', true);
-					}
+					}					
+					if(dgObject.defaults.callback.itemRenderCheckBoxTrigger !=undefined){
+						var _reponse = new Object();
+						_reponse['data'] =  "";
+						dgObject.defaults.callback.itemRenderCheckBoxTrigger.call(this,_reponse);
+					}				
 			});		
 		}
 		this.addEventListenerRowHeaderCheckBoxChangeTrigger = function(){			

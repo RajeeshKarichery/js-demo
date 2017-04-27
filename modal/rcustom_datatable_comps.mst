@@ -1,0 +1,62 @@
+<script id="sn_datagrid" type="text/html">
+	<table id="{{tag_name}}_datagrid" class="table table-striped table-bordered" cellspacing="0" width="100%">
+		<thead>
+			<tr>
+			    <th>Sl.No</th>
+				{{#defaults.enable_checkbox}}
+					<th><div class="checkbox"><label><input type="checkbox" id="{{tag_name}}_dt_select_all_btn" aria-label="..."/></label></div></th>
+				{{/defaults.enable_checkbox}}
+                {{#cols}}
+					<th column="{{field_name}}">{{field_label}}</th>
+				{{/cols}}
+			</tr>
+		</thead>
+		<tbody id="{{tag_name}}_datagrid_body">
+
+		</tbody>
+	</table>	
+</script>
+<script id="sn_default_renderer" type="text/html">
+	<td><div class="default_renderer {{textAlign}}" data_field="{{field_name}}">{{field_value}}</div></td>
+</script>
+<script id="sn_datagrid_text_input_renderer" type="text/html">
+	<td><input type="text" value="{{field_value}}" class="text_input_renderer text-center" data_field="{{field_name}}"/></td>
+</script>
+<script id="sn_datagrid_image_renderer" type="text/html">
+	<td><image src="{{field_value}}" /></td>
+</script>
+<script id="sn_select_box" type="text/html">
+	<div class="form-group col-sm-12 col-md-4" id="sn_div_select">
+		<select class="form-control entity-rest" name="{{sn_field_id}}" id="{{sn_field_id}}" >
+			<option value="-1">Select</option>
+			{{#dp}}
+				<option value="{{list_key}}">{{list_value}}</option>
+			{{/dp}}
+		</select>
+	</div>
+</script>
+
+<script id="sn_datagrid_select_renderer" type="text/html">
+	<td>
+		<div class="default_renderer" data_field="{{field_name}}">
+		<select id="sn_sel_box" class="form-control">
+			<option value="-1">Select</option>
+			{{#_dp}}
+				<option value="{{key_val}}" {{selected}}>{{key_label}}</option>
+			{{/_dp}}
+		</select>
+		</div>
+	</td>
+</script>
+<script id="dep_sn_datagrid_select_renderer" type="text/html">
+	<td>
+		<div class="dep_default_renderer" data_field="{{field_name}}">
+		<select id="dep_sn_sel_box" class="form-control">
+			<option value="-1">Select</option>
+			{{#_dp}}
+				<option value="{{key_val}}" {{selected}}>{{key_label}}</option>
+			{{/_dp}}
+		</select>
+		</div>
+	</td>
+</script>

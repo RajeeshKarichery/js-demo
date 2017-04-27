@@ -2,7 +2,7 @@
 <html class="no-js" lang="">
   <head>
   
-  <!--<style>
+  <style>
 	#panel, #flip {
     padding: 5px;
     text-align: center;
@@ -118,7 +118,7 @@
 		
 		
 
-  </style>-->
+  </style>
   
   <style>
 	
@@ -147,27 +147,16 @@
 		width:100px;
 	}
 	
-	.mRow{
-		
-	}
+	
 	
 	.mw3-card-4{
 		box-shadow:1px 1px 1.5px .5px rgba(0,0,0,0.1),0 1px  rgba(0,0,0,0)
 	}
 	
-	.mw3-container,.w3-panel{
+	.mw3-container{
 		padding:0.01em 16px
-	}
-	.mw3-panel{
-		margin-top:16px;margin-bottom:16px
 	}
 	
-	.mw3-panel{
-		padding:0.01em 16px
-	}
-	.mw3-panel{
-		margin-top:16px;margin-bottom:16px
-	}
 	
 	
 	
@@ -176,7 +165,7 @@
 	
   </style>  
 	<link  rel="stylesheet" type="text/css" href="../dist/css/bootstrap/bootstrap.min.css" >
-	<link  rel="stylesheet" type="text/css" href="../dist/w3.css" >
+	<!--<link  rel="stylesheet" type="text/css" href="../dist/w3.css" >-->
  	
 	<script src="../dist/jquery.min.js"></script>
 	<script src="../dist/bootstrap.min.js"></script>
@@ -214,33 +203,44 @@
 		  
 
 		  <div class="mw3-card-4" style="width:40%">
-			<header class="mw3-container">
-				<h3>Name</h3>
-			</header>
-			<div class="mw3-container">
-			  <ul style="list-style-type:none;padding-left: 0px;padding-top:5px">
-										<li>
-											<div class="row">
-												<div class="col-md-4">
-													Name of Stu
-												</div><div class="col-md-8">
-													<span class="mylabel label-default" id="mName"
-														data-toggle="tooltip" ></span>
-												</div>
-											</div>											
-										</li>
-										<li>
-											<div class="row">
-												<div class="col-md-4">
-													Id
-												</div><div class="col-md-8">
-													<span class="mylabel label-default"  >ST001</span>
-												</div>
-											</div>											
-										</li>
-									</ul>
-			  
-			</div>
+				<header class="mw3-container">
+					<h3>Name</h3>
+				</header>
+				<div class="mw3-container">
+					<div class="row">
+						<div class="col-md-4">
+							<img class="img-circle" src="noimage.jpg" style="width:70px;height:70px">
+						</div>
+						<div class="col-md-8">
+							<ul style="list-style-type:none;padding-left: 0px;padding-top:5px">
+								<li>
+									<div class="row">
+										<div class="col-md-4">
+											Student Name
+										</div><div class="col-md-8">
+											<span class="mylabel label-default" id="mName"
+												data-toggle="tooltip" ></span>
+										</div>
+									</div>											
+								</li>
+								<li>
+									<div class="row">
+										<div class="col-md-4">
+											Id
+										</div><div class="col-md-8">
+											<span class="mylabel label-default"  >ST001</span>
+										</div>
+									</div>											
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="row" style="padding-top:10px">
+						
+					</div>
+					
+				  
+				</div>
 			
 		  </div>
 		
@@ -259,9 +259,9 @@
 				<div class="row">					
 					<div class="collapse" id="collapsePanel">					
 							<div class="row " >
-								<div class="col-md-6" style="border: solid 1px #c3c3c3;">
+								<!--<div class="col-md-6" style="border: solid 1px #c3c3c3;">
 									
-									<ul style="list-style-type:none;padding-left: 0px;padding-top:5px">
+									<<ul style="list-style-type:none;padding-left: 0px;padding-top:5px">
 										<li>
 											<div class="row">
 												<div class="col-md-4">
@@ -282,7 +282,7 @@
 											</div>											
 										</li>
 									</ul>
-								</div>	
+								</div>	-->
 								<!--<div class="col-md-6" >
 									<ul class="list-group">
 									  <a href="#" class="list-group-item disabled">Heading</a>
@@ -332,17 +332,17 @@
 
 
 			
-			<div class="col-md-6">			
-				<!--<div class="row">					
+		<!--	<div class="col-md-6">			
+				<div class="row">					
 					<div class="col-md-12 vtab-tab-container"  >	
 						<div class="list-group"  >											
-							<a href="#" class="col-md-4 list-group-item active text-center "  style="height:50px;font-size:14px;">							
-								<span class="glyphicon glyphicon-plane" ></span><font style="padding-left: 5px;">Flight</font>								
+							<a href="#" class="col-md-4 list-group-item active text-center "  style="height:40px;font-size:14px;">							
+								<span ></span><font style="padding-left: 5px;">Flight</font>								
 							</a>					
-							<a href="#" class="col-md-4 list-group-item text-center " style="height:50px;font-size:14px">							
-								<span class="glyphicon glyphicon-road" ><font style="padding-left: 5px;"></span>Menu2</font>	
+							<a href="#" class="col-md-4 list-group-item text-center " style="height:40px;font-size:14px">							
+								<span ><font style="padding-left: 5px;"></span>Menu2</font>	
 							</a>
-							<a href="#" class="col-md-4 list-group-item text-center " style="height:50px;font-size:14px">							
+							<a href="#" class="col-md-4 list-group-item text-center " style="height:40px;font-size:14px">							
 								<font style="padding-left: 5px;">Menu3</font>
 							</a>
 						</div>						
@@ -457,8 +457,10 @@
 						  </tr>
 						</tbody>
 					  </table>					
-				 </div>-->
-			</div>		
+				 </div>
+			</div>		-->
+			
+			
 		</div>
 		
 		

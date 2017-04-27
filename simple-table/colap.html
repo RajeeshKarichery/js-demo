@@ -41,7 +41,7 @@ fieldset.scheduler-border {
 
  <fieldset class="scheduler-border">
 	<legend class="scheduler-border" style="margin-top: 20px;padding-left: 0px;padding-right: 0px;">
-	<button id="btn-add" class="btn btn-default glyphicon glyphicon-plus glyphicon" >Add</button></legend>
+	<button id="btn-add" class="btn btn-default glyphicon glyphicon-plus"></button></legend>
 		
 					<div class="collapse" id="collapsePanel">
 						<form  id="frm-copy" >					  
@@ -71,22 +71,17 @@ fieldset.scheduler-border {
 			$("#btn-add").on("click",function(){
 				
 				
-				if($(this).is('.btn btn-default glyphicon glyphicon-plus glyphicon')){
+				if($(this).hasClass('glyphicon-plus')){
 					$('#collapsePanel').collapse('show');
-					$(this).removeClass('btn btn-default glyphicon glyphicon-plus glyphicon');
+					$(this).removeClass('glyphicon-plus');
 					$(this).addClass('btn btn-default glyphicon glyphicon-minus');
 				}
-				else{
-					$(this).removeClass('btn btn-default glyphicon glyphicon-minus');
-					$(this).addClass('btn btn-default glyphicon glyphicon-plus glyphicon');
+				else if($(this).hasClass('glyphicon-minus')){				
+					$(this).removeClass('glyphicon-minus');					
 					$('#collapsePanel').collapse('hide');
-				}
+					$(this).addClass('btn btn-default glyphicon glyphicon-plus');
+				}				
 				
-				
-			});		
-			
-			$("#btnclose").on("click",function(){				
-				$('#collapsePanel').collapse('hide');
 			});		
 			
 			
