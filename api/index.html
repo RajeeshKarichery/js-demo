@@ -1,0 +1,111 @@
+<html>
+  <head>
+    <style>
+		.myDiv {
+			border: 2px solid #a1a1a1;
+			padding: 10px 40px; 
+			background: #fff;
+			width: 100%;
+			border-radius: 7px;
+		}
+	</style>
+  </head>
+  <body>
+    <div id="content"></div>
+  <!--  <script>
+     function handleResponse(response) {
+      for (var i = 0; i < response.items.length; i++) {
+        var item = response.items[i];
+        // in production code, item.text should have the HTML entities escaped.
+        document.getElementById("content").innerHTML += "<br>" + item.volumeInfo.title;
+      }
+    }
+	  </script>-->
+	  
+	  <link rel="stylesheet" href="../dist/bootstrap.min.css">
+	  <script src="../dist/jquery.min.js"></script>
+	  <script src="../dist/bootstrap.min.js"></script>
+	
+	<script type="text/javascript" src="//books.google.com/books/previewlib.js">
+	</script>
+	<script type="text/javascript">
+		var isbn ="ISBN:0738531367";
+				
+		$(document).ready(function (){
+			//$("body").append("<div><script>GBS_insertPreviewButtonPopup(\'ISBN:0738531367');<\/script></div>");
+			//GBS_insertPreviewButtonPopup('ISBN:0738531367');
+			
+			
+			//$("#mrows").append(_ele);
+			//$("#drows").append("<div><script>GBS_insertPreviewButtonPopup(\'ISBN:0738531367');<\/script></div>");
+			//$("#drows2").append("<div><script>GBS_insertPreviewButtonPopup(\'ISBN:9780672324604');<\/script></div>");
+			
+			
+
+			$("#btn-one").on("click",function(e){
+				//openMe();
+				//isbn = '0738531367';
+				//isbn = "ISBN:"+isbn;			
+				$("#collapsePanel").show();
+				//goo();
+			});
+			$("#btn-two").on("click",function(e){			
+				//isbn = '0738531367';
+				//isbn = "ISBN:"+isbn;
+				//alert(isbn);				
+				isbn ="ISBN:9780672324604";
+			});
+			
+		});
+
+	</script>
+	
+	
+	
+	
+	<div class="collapse myDiv" id="collapsePanel" >
+		<label>Name</label>
+		<script>
+			//function goo(){
+				
+				GBS_insertPreviewButtonPopup(isbn);
+			//}
+			
+		</script>
+	</div>
+	
+	
+	
+	<button id="btn-one">One</button>
+	<button id="btn-two">Two</button>
+	
+	<div id="drows">
+		
+	</div>
+	<div id="drows2">		
+	</div>
+	
+	<!--<table class="table table-bordered">
+		<thead>
+		  <tr>
+			<th>Id</th>
+			<th>Name</th>
+			<th>Preview</th>
+		  </tr>
+		</thead>
+		<tbody id="mrows">
+		  
+		</tbody>
+   </table>-->
+   
+   
+   
+
+	
+  </body>
+  <script>
+		//function openMe(){
+			//GBS_insertPreviewButtonPopup('ISBN:0738531367');			
+		//}
+	</script>
+</html>

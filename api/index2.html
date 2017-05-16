@@ -1,0 +1,83 @@
+<!DOCTYPE html "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    
+	
+	<link rel="stylesheet" href="../dist/bootstrap.min.css">
+	<script src="../dist/jquery.min.js"></script>	
+	  
+    <script type="text/javascript" src="https://www.google.com/books/jsapi.js"></script>
+    <script type="text/javascript">
+      google.books.load();
+	  var viewer;
+      /*function initialize() {
+        viewer = new google.books.DefaultViewer(document.getElementById('viewerCanvas'));
+        //viewer.load('ISBN:9780672324604');
+		viewer.load(isbn);	
+      }
+	  google.books.setOnLoadCallback(initialize);
+	  */
+      
+	  
+	  
+		$(document).ready(function (){
+			var books = [{'id':'100','name':'Doe','isbn':'0738531367'} ,{'id':'200','name':'Moe','isbn':'9780672324604'},{'id':'300','Dooley':'100','isbn':''} ];
+			var _ele="";
+			$.each(books,function(i,row){
+				_ele +="<tr>";
+					_ele +="<td>"+row['id']+"</td>";
+					_ele +="<td>"+row['name']+"</td>";
+					_ele +="<td><button class='mbutton' id='"+row['isbn']+"' >preview</button></td>";					
+				_ele +="</tr>";
+			});
+			$("#mrows").append(_ele);			
+			var isbn="";
+			$('.mbutton').on("click",function(e){				
+				isbn = e.target.id;
+				console.log(isbn);
+				isbn = "ISBN:"+isbn
+				viewer = new google.books.DefaultViewer(document.getElementById('viewerCanvas'));
+				viewer.load(isbn);	
+							
+			});
+			
+			
+			$('.btn-rem').on("click",function(e){
+				//$("#viewerCanvas").empty();				
+				var list = document.getElementById("viewerCanvas");
+				list.removeChild(list.childNodes[0]);   
+			});
+			
+		
+		});	
+		
+	  
+    </script>
+	
+	
+	
+	
+	
+  </head>
+  <body>
+    <div id="viewerCanvas" style="width: 400px; height: 300px"></div>
+	
+	
+	<table class="table table-bordered">
+		<thead>
+		  <tr>
+			<th>Id</th>
+			<th>Name</th>
+			<th>Preview</th>
+		  </tr>
+		</thead>
+		<tbody id="mrows">
+		  
+		</tbody>
+  </table>
+  <button class='btn-rem' >Remove</button></td>
+  
+  </body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+	
+	
+
+</style>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>Notification Types</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="demonstration of some noty capabilities">
+    	
+	<link rel="stylesheet" type="text/css" href="../dist/css/bootstrap/bootstrap.min.css" >  
+	<link rel="stylesheet" type="text/css" href="../dist/libs/datatable/css/dataTables.bootstrap.min.css" >
+	<link rel="stylesheet" type="text/css" href="../dist/libs/datatable/css/responsive.dataTables.min.css" >
+	
+	
+	
+	<script src="../dist/jquery.min.js"></script>	
+	<script src="../dist/libs/mustache.min.js"></script>
+	<!--<script src="../dist/libs/jquery.serializejson.min.js"></script>-->
+	
+	<script src="../dist/bootstrap.min.js"></script>	
+	<script src="../dist/libs/datatable/js/jquery.dataTables.js"></script>	
+	<script src="../dist/libs/datatable/js/dataTables.responsive.min.js"></script>
+	<script src="../dist/libs/datatable/js/dataTables.bootstrap.min.js"></script>	
+	
+	
+	<script src="../datatable/r-base-table.js"></script>
+	<script src="r-scroll-table.js"></script>	
+	
+	
+	
+	
+</head>
+<body>
+
+		<!-- Trigger the modal with a button -->
+	<button type="button" id="myModal">Open Modal</button>
+	
+	
+	
+	
+
+	
+	
+	<!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#addMyModal">Open Modal</button>-->
+
+<div class="modal fade" id="addMyModal" role="dialog">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Add Stuff</h4>
+			</div>
+			<div class="modal-body" style="height: 300px; overflow-y: scroll;">
+					<rk_mobile></rk_mobile>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+						
+
+		
+		
+    <script type="text/javascript">   
+        $(document).ready(function (){		
+		
+			
+			var colsMobile =[{'field_label':'Name' ,'field_name':'game'},{'field_label':'Company' ,'field_name':'comp' } ];
+	
+			$("#myModal").on("click",function(){
+				$('#addMyModal').modal({
+					backdrop: 'static',
+					keyboard: false
+				});
+				
+				
+				//$('#rk_mobile_dtgrid_box').closest('.dataTables_scroll').find('.dataTables_scrollHeadInner, .dataTables_scrollHeadInner > table.dataTable').css('width', '423px');
+				
+				/*$('.dataTables_scrollHeadInner').css("width","100%");				
+				var mEl ='<table class="table table-striped table-bordered dataTable no-footer" role="grid" style="margin-left: 0px; width: 100%;" cellspacing="0" width="100%"><thead>';
+				mEl +='<tr role="row"><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 0px;"><div class="checkbox"><label>';
+				mEl +='<input id="rk_mobile_dt_select_all_btn" aria-label="..." type="checkbox"></label></div></th>';
+				mEl +='<th column="game" class="sorting_disabled" rowspan="1" colspan="1" style="width: 0px;">Name</th>';
+				mEl +='<th column="comp" class="sorting_disabled" rowspan="1" colspan="1" style="width: 0px;">Company</th></tr></thead></table>';			
+				$('.dataTables_scrollHeadInner').html(mEl);*/
+				
+				/*var tableEl =  $('.dataTables_scrollHeadInner').html();
+				var t_cont = $(tableEl).html();				
+				var mEl ='<table class="table table-striped table-bordered dataTable no-footer" role="grid" style="margin-left: 0px; width: 100%;" cellspacing="0" width="100%">';
+				mEl +=t_cont;				
+				mEl +='</table>';
+				
+				$('.dataTables_scrollHeadInner').css("width","100%");
+				$('.dataTables_scrollHeadInner').html(mEl);*/
+				
+				
+				
+				
+				
+				//var el = $('.dataTables_scrollHeadInner').attr('style');
+				//$(el).removeAttr("style");
+				//var el = $('.dataTables_scrollHeadInner').html();
+				//alert($(el).attr('style'));
+				
+				//$(el).css("width","344px");
+				
+				
+				//$('.dataTables_scrollHeadInner').html().removeAttr("style");
+				//alert($(el).attr('style'));
+				//$('.table table-striped table-bordered dataTable no-footer').css("width","100%");
+			});
+			
+			
+			_dtMobile = new RScrollTable({tag_name:"rk_mobile",cols:colsMobile,enable_checkbox:true,mapKey:'field_name',searching:true,
+				callback:{
+					creationComplete:function(){
+						var dpForMobile = [];
+						var ob;
+						for(var i=0;i<100;i++){
+							ob = new Object();
+							ob['name'] ='Android';
+							ob['comp'] = 'google';
+							dpForMobile.push(ob);
+						}					
+						_dtMobile.setDp(dpForMobile);
+					}
+				}
+			});
+			_dtMobile.init();
+			
+			
+						
+			
+			
+			
+			
+			
+		
+
+		
+		
+		//$(window).bind('resize', function () {
+							//var obj = _dtMobile.getBaseObject();
+							//obj.datagrid.columns.adjust().draw();
+						//} );	
+		
+			
+			
+	
+		});//document close
+		
+		
+		
+	</script>
+
+
+</body>
+</html>

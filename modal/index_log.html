@@ -229,10 +229,14 @@
 							  ]
 			var copy_fields = [{'field_name':'name','field_label':'Name','field_type':'text' ,'required':'Y' },
 							  {'field_name':'pin','field_label':'Pin','field_type':'number' ,'required':'Y' },
-							  {'field_name':'id','field_label':'Id','field_type':'text' ,'required':'N' } ]	
+							  {'field_name':'id','field_label':'Id','field_type':'text' ,'required':'N' },
+							  {'field_name':'cast','field_label':'Cast','field_type':'select' ,'required':'N',
+							  'dp':[{'list_key' :'HIN','list_val':'Hindu'},{'list_key' :'MUS','list_val':'Muslim'} ]   } ]	
 							  
 			var tileArray = [{'id':'first','name':'First'},{'id':'second' ,'name':'Second'}] ;
 			//var tileArray = [{'id':'first','name':'First'}] ;
+			
+			var fieldValObj = [{'name':'rejeesh','pin':'5678282','id':'' ,'cast':'HIN'}];
 			
 			
 			var validationRules = new Object();
@@ -299,7 +303,7 @@
 									ele1 += '<input type="text" class="form-control" id="'+date_id+'" name="'+field_name+'" placeholder="'+field_label+'" >';
 								}
 								else if(field_type == 'select'){
-									ele1 += '<select id="'+field_name+'" class="form-control" name="'+field_name+'"  >';
+									ele1 += '<select id="'+field_name+'" class="form-control mine" name="'+field_name+'"  >';
 									var _dp = value['dp'];
 									ele1 += '<option value="">Select</option>';
 									$.each(_dp, function( dpIndex, dpRow ) {
@@ -406,7 +410,7 @@
 							ele1 += '<input type="text" class="form-control" id="'+date_id+'" name="'+field_name+'" placeholder="'+field_label+'" >';
 						}
 						else if(field_type == 'select'){
-							ele1 += '<select id="'+field_name+'" class="form-control" name="'+field_name+'"  >';
+							ele1 += '<select id="'+field_name+'" type="select" class="form-control" name="'+field_name+'"  >';
 							var _dp = value['dp'];
 							ele1 += '<option value="">Select</option>';
 							$.each(_dp, function( dpIndex, dpRow ) {
@@ -415,7 +419,7 @@
 							ele1 += '</select>';
 						}
 						else if(field_type == 'autofill'){
-							ele1 += '<select id="'+field_name+'" class="form-control select2" style="width:100%" name="'+field_name+'"  >';
+							ele1 += '<select id="'+field_name+'" type="autofill" class="form-control select2" style="width:100%" name="'+field_name+'"  >';
 							var _dp = value['dp'];
 							ele1 += '<option value="">Select</option>';
 							$.each(_dp, function( dpIndex, dpRow ) {
@@ -554,6 +558,36 @@
 				$("#btn-add").removeClass('glyphicon-plus');
 				$("#btn-add").addClass('btn btn-default glyphicon glyphicon-pencil');
 			}
+			
+			$('#dynamic-copy-fields').find('.rk-highlight ').each(function(){
+				var par =$(this);
+				var chil = $(this).children()[0];
+				//var type = $(chil).attr('type');
+				var id = $(chil).attr('id');
+				var fvalObj = fieldValObj[0];
+				var fval = fvalObj[id];
+				$(chil).val(fval);
+					
+				
+				
+			});
+			
+			/*$('#dynamic-copy-fields').find(':input').each(function(){				
+				var id = $(this).attr("id");
+				var fvalObj = fieldValObj[0];
+				var fval = fvalObj[id];
+				$(this).val(fval);
+			});*/	
+			
+			/*$('#dynamic-copy-fields').find('.form-control mine').each(function(){				
+				//alert("ok");
+				//var id = $(this).attr("id");
+				//alert(id);
+				//var fvalObj = fieldValObj[0];
+				//var fval = fvalObj[id];
+				//$(this).val(fval);
+			});*/
+			
 		}	
 			
 			

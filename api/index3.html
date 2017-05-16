@@ -1,0 +1,58 @@
+<html>
+<head>
+<link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/themes/ui-darkness/jquery-ui.css" rel="stylesheet">
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/jquery-ui.min.js"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+ 
+<style>
+      .ui-dialog,.ui-dialog, .ui-widget, .ui-widget-content, .ui-corner-all, .foo, .ui-draggable, .ui-resizable {}
+</style>
+</head>
+<body>
+<div id="viewerCanvass" style="width: 88px; height: 31px"></div>
+<script type="text/javascript">
+    //google.load("books", "0");
+    //var bookFound=0;
+    function alertNotFound() {
+    //alert("could not embed the book!");
+ 
+    }
+ 
+    function alertInitialized() {
+      //var msg="book found!";
+      //bookfound=1;
+      //alert(msg);
+      document.getElementById('viewerCanvass').innerHTML='<input type="image" src="https://www.google.com/intl/en/googlebooks/images/gbs_preview_button1.gif?hl=ja" id="googlePreview" onClick="showDialog();" />';
+    }
+ 
+    /*function initialize() {
+    var viewer = new google.books.DefaultViewer(document.getElementById('viewerCanvass'));
+    viewer.load('ISBN:0738531367', alertNotFound, alertInitialized);
+    }
+ 
+    google.setOnLoadCallback(initialize);*/
+	
+	alertInitialized();
+ 
+</script>
+ 
+<script type="text/javascript">
+function showDialog()
+{
+ 
+    $('<iframe scrolling="no" id="googlePreviewIframe" src="googlePreview.html?isbn=0738531367"/>').dialog(
+    {
+        title: 'Book Preview',
+        width: 600,
+        height: 500,
+        modal: true,
+        resizable: false,
+        autoResize: false,
+        open: function(event, ui){}
+     });
+}
+</script>
+<style>#googlePreviewIframe {width:510px !important; height:600px !important;}</style>
+</body>
+</html>
