@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+	<head>		
+		
+		<style>
+		
+		
+		.tabs nav {
+			text-align: center;
+		}
+		.tab-content{
+				border-left: 1px solid #ddd;
+				border-right: 1px solid #ddd;
+				border-bottom: 1px solid #ddd;
+				border-radius: 0px 0px 5px 5px;
+				padding: 10px;
+		}
+		
+		.tabs nav ul {
+	position: relative;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: flex;
+	margin: 0 auto;
+	padding: 0;
+	max-width: 1200px;
+	list-style: none;
+	-ms-box-orient: horizontal;
+	-ms-box-pack: center;
+	-webkit-flex-flow: row wrap;
+	-moz-flex-flow: row wrap;
+	-ms-flex-flow: row wrap;
+	flex-flow: row wrap;
+	-webkit-justify-content: center;
+	-moz-justify-content: center;
+	-ms-justify-content: center;
+	justify-content: center;
+}
+
+.tabs nav ul li {
+	position: relative;
+	
+	display: block;
+	margin: 0;
+	text-align: center;
+	-webkit-flex: 1;
+	-moz-flex: 1;
+	-ms-flex: 1;
+	flex: 1;
+}
+
+
+
+	
+		
+		
+  
+    .topnav > li > a::after {
+		content: ""; background: #4285F4;
+		height: 4px; 
+		position: absolute; 
+		width: 100%; 
+		left: 0px; 
+		bottom: -1px; 
+		transition: all 250ms ease 0s; 
+		transform: scale(0);
+	}
+    .topnav > li.active > a::after, .topnav > li:hover > a::after { 
+		transform: scale(1); 
+	}
+	.tab-content{
+		padding:20px
+	}	
+	.nav-tabs > li > a:hover{	 
+		border:0px solid white;	 
+	}
+	
+	
+	
+	
+	
+
+	
+	
+	
+	
+.thumbnail{	
+	background:#fff;
+	border-radius:5px;
+	box-shadow:0px 2px 3px -1px rgba(151, 171, 187, 0.7);	
+	transform-style: preserve-3d;
+}
+.thumbnail:hover{
+	box-shadow:0px 4px 10px -1px rgba(151, 171, 187, 0.7);
+	.transition(all 400ms ease);
+}
+#tile1{
+	margin-right:20px;
+}
+.header{
+	border-bottom:1px solid #ebeff2;
+	padding:7px 0;
+	text-align:center;
+	color:#59687f;	
+	font-size:17px;	
+	margin: 5px;
+}
+
+
+.mdates{
+	margin:10px;
+}
+.mdates strong{	
+	color:#adb8c2;
+	font-size:11px;
+	font-weight:700;
+}
+.badge{
+	margin-left:10px;
+}
+
+
+
+
+
+	
+		</style>
+		
+		
+		
+		<link rel="stylesheet" type="text/css" href="../dist/css/bootstrap/bootstrap.min.css" > 
+		<script src="../dist/libs/jquery.min.js"></script>
+		<script src="../dist/libs/bootstrap.min.js"></script>
+		
+	
+		
+	</head>
+	<body>
+	
+	
+		
+		
+		
+		<div class="container">
+		
+		
+		
+		
+
+			
+			<div class="tabs">
+				
+			</div>
+			
+		</div>
+		
+		<script>
+			
+			$(document).ready(function (){
+			
+				
+								
+				$(".nav").on('click', "li.disabled a", function(event) {
+					event.stopImmediatePropagation();
+					return false;
+				});
+
+			
+				var tabs = [{'label':'Home','id':'home'},{'label':'Menu1','id':'menu1'}];
+				
+				var ele ="";
+				ele +='<nav>';
+				ele +='<ul class="nav nav-tabs topnav">';
+				for (var i=0;i<tabs.length;i++){
+					var label = tabs[i]['label'];
+					var id = tabs[i]['id'];
+					if (i ==0)
+						ele +='<li class="active"><a data-toggle="tab" href="#'+id+'">'+label+'</a></li>';
+					else	
+						ele +='<li ><a data-toggle="tab" href="#'+id+'">'+label+'</a></li>';
+				}
+				ele +='</ul></nav>';
+				
+				ele +='<div class="tab-content">';
+					ele +='<div id="home" class="tab-pane fade in active">';
+						ele +='<div class="row">';						
+							for (var i=0;i<3;i++){
+								ele +='<div class="col-md-4">';									
+								
+									ele +='<div id="tile1" class="thumbnail">';
+										 ele +='<div class="wrapper">';
+										 
+											ele +='<div class="row">';
+												ele +='<div class="header">Event Title</div>';
+											ele +='</div>';											
+											ele +='<div class="row">';
+												ele +='<div class="mdates"> <strong>Toatal Number <span class="badge">5</span> </strong> </div>';												
+													/*ele +='<div class="bottom-right">';
+														ele +='<button type="button" class="btn btn-primary btn-xs">XSmall</button>';
+													ele +='</div>';					*/
+													
+												
+											ele +='</div>';
+											
+											
+											ele +='<div class="row">';
+												ele +='<div class="mdates"> <strong>Toatal Number <span class="badge">5</span> </strong> </div>';												
+											ele +='</div>';
+											
+											ele +='<div class="row">';
+												ele +='<div class="pull-right" style="margin-right: 10px;" > <button type="button" class="btn btn-primary btn-xs">XSmall</button></div>';												
+											ele +='</div>';
+											
+										 
+											
+											/*ele +='<div class="dates">';													
+													ele +='<div class="start">';
+															ele +='<strong>Toatal Number <span class="badge">5</span> </strong> ';
+													ele +='</div>';
+													ele +='<div class="start">';
+															ele +='<strong>Tested Number<span class="badge">3</span> </strong> ';
+													ele +='</div>';
+													ele +='<div class="start">';
+															ele +='<strong>Aval Number<span class="badge">2</span> </strong> ';
+													ele +='</div>';												
+													
+													ele +='<div class="bottom-right">';
+														ele +='<button type="button" class="btn btn-primary btn-xs">XSmall</button>';
+													ele +='</div>';					
+													
+											ele +='</div>';*/											
+																	
+										ele +='</div>';
+										
+									ele +='</div>';
+									
+								ele +='</div>';								
+								if(i ==2){
+									ele +='</div>';
+									ele +='<div class="row" style="padding-top:10px">';
+								}
+								
+							}							
+						ele +='</div>';//row close
+					ele +='</div>';
+					
+					
+					ele +='<div id="menu1" class="tab-pane fade">';					
+						ele +='<h3>Menu1</h3>';
+					ele +='</div>';					
+					
+				ele +='</div>';
+				
+				
+				$('.tabs').append(ele);
+				
+			});
+				
+			
+		</script>
+	</body>
+</html>

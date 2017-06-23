@@ -13,6 +13,12 @@ function RScrollTable(options){
 		this.addEvents();		
 	}
 	
+	this.resizeCols = function(){
+		setTimeout( function () {
+			dgObject.datagrid.resize(); }, 10 );
+			
+	}	
+	
 	this.createTable = function(){
 		dgObject.datagrid = $("#"+dgObject.tag_name+"_datagrid").DataTable({
 							columnDefs: [{ targets: 0, visible: false },{orderable: false, targets: 1}  ],
@@ -21,11 +27,12 @@ function RScrollTable(options){
 							bSort : false,							
 							searching: dgObject.defaults.searching,
 							bInfo:true,
+							scrollY:"200px",
+							scrollCollapse: true
 							//"sDom": '<"H"lfrp>t<"F"i>',
-							"dom": '<"top"flpi>rt<"clear">'
+							//"dom": '<"top"flpi>rt<"clear">'
 							/*,
-							"scrollY":"200px",
-							"scrollCollapse": true*/
+							
 							/*"fnInitComplete": function() {
 								//this.fnAdjustColumnSizing();
 								//alert("oko");
@@ -44,7 +51,9 @@ function RScrollTable(options){
 						
 			/*$('#rk_mobile_datagrid').on( 'fnInitComplete', function () {
 				console.log( 'Redraw occurred at: '+new Date().getTime() );
-			} );*/				
+			} );*/		
+
+				
 						
 	}	
 	

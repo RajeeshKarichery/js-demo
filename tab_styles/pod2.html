@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+	<head>		
+		
+		<style>
+		
+		
+		
+.box{width:300px; height:250px; border:1px solid #000; border-radius:2px; float:left; margin:20px 30px;  }
+.box img{width:300px; height:250px;}
+.box .overlay{width:300px; height:250px; background:#fff; margin:-250px 0px 0px 0px; opacity:0.5; }
+.box a{padding:5px 7px; border:1px solid #000; text-decoration:none; font-family:sans-serif; font-size:14px; margin:-140px 0px 0px 15px; display:inline-block; opacity:0; transition:all 0.5s ease-in-out;    cursor: pointer; position: absolute;}
+
+
+
+.box .overlay:hover{opacity:0.1; transition:all 0.5s ease-in-out; width:300px; margin-left:50px; float:right; }
+.box:hover{box-shadow:0px 0px 10px #6A6A6A; border:1px solid #00DFDF;transition:all 0.5s ease-in-out;}
+.box:hover a{opacity:1; background:#FFFFFF; color:#000000; margin:-40px 0px 0px 15px;  border-radius:1px; }
+.box a:hover{border:1px solid #00DFDF;transition:all 0.5s ease-in-out;   }
+
+	
+	
+		  
+		  
+		  
+				 
+
+
+	
+		</style>
+		
+		
+		
+		<link rel="stylesheet" type="text/css" href="../dist/css/bootstrap/bootstrap.min.css" > 
+		<script src="../dist/libs/jquery.min.js"></script>
+		<script src="../dist/libs/bootstrap.min.js"></script>
+		
+	
+		
+	</head>
+	<body>
+	
+	
+		
+		
+		
+		<div class="container">
+		
+		
+			<div class="main">
+    	<div class="box">
+			
+				<div class="overlay">
+				</div>
+			<a class="more" href="#name">More reading</a>
+			
+			
+		</div>
+		
+		<div class="box">
+			
+				<div class="overlay">
+				</div>
+			<a href="#">More reading</a>
+		</div>
+		
+		<div class="box">
+			
+				<div class="overlay">
+				</div>
+			<a href="#">More reading</a>
+		</div>
+		
+		<div class="box">
+			
+				<div class="overlay">
+				</div>
+			<a href="#">More reading</a>
+		</div>
+		
+		<div class="box">
+			
+			
+  <p class="title">card title</p>
+  <div class="overlay"></div>
+  <div class="button"><a href="#"> BUTTON </a></div>
+			
+			
+		</div>
+		
+		<div class="box">
+			<label>Test</>
+			<h4>Example <span class="label label-default">New</span></h4>			
+			<!--<div class="overlay">
+			</div>-->
+			<a href="#">More reading</a>
+		</div>
+	</div>
+		
+		
+		
+		
+
+			
+			<div class="tabs">				
+			</div>			
+		</div>
+		
+		<script>
+			
+			$(document).ready(function (){
+			
+				/*[].slice.call( document.querySelectorAll( '.tabs' ) ).forEach( function( el ) {
+					new CBPFWTabs( el );
+					
+				});*/
+								
+				$(".nav").on('click', "li.disabled a", function(event) {
+					event.stopImmediatePropagation();
+					return false;
+				});
+
+			
+				/*$('ul li a[href="#menu1"]').on('click' ,function(e){					
+					e.stopimmediatepropagation();
+					return;
+					
+				});*/
+				
+				
+				//var tabs = [{'label':'Home','id':'home'},{'label':'Menu1','id':'menu1'}];
+				
+				var ele ="";
+				ele +='<nav>';
+				ele +='<ul class="nav nav-tabs topnav">';
+				for (var i=0;i<tabs.length;i++){
+					var label = tabs[i]['label'];
+					var id = tabs[i]['id'];
+					if (i ==0)
+						ele +='<li class="active"><a data-toggle="tab" href="#'+id+'">'+label+'</a></li>';
+					else	
+						ele +='<li ><a data-toggle="tab" href="#'+id+'">'+label+'</a></li>';
+				}
+				ele +='</ul></nav>';
+				
+				ele +='<div class="tab-content">';
+					ele +='<div id="home" class="tab-pane fade in active">';
+						ele +='<div class="row">';						
+							for (var i=0;i<3;i++){
+								ele +='<div class="col-md-4">';
+									ele +='<div class="thumbnail">';     
+										ele +='<div class="caption">';
+											ele +='<h4 class=""><b>Title</b></h4>';
+											ele +='<p class="">Lorem ipsum ipit</p>';		
+												ele +='<button class="btn btn-primary btn-sm pull-right glyphicon glyphicon-edit">Testing</button>';
+												ele +='<div class="clearfix"></div>';
+												ele +='<a href="#" ></a>';
+										ele +='</div>';
+									ele +='</div>';
+								ele +='</div>';
+							}							
+						ele +='</div>';//row close
+					ele +='</div>';
+					
+					
+					ele +='<div id="menu1" class="tab-pane fade">';					
+						ele +='<h3>Menu1</h3>';
+					ele +='</div>';					
+					
+				ele +='</div>';
+				
+				
+				$('.tabs').append(ele);
+				
+			});
+				
+			
+		</script>
+	</body>
+</html>

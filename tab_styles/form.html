@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+	<head>		
+		<style>		
+	
+		</style>
+		
+		<link rel="stylesheet" type="text/css" href="../dist/css/bootstrap/bootstrap.min.css" > 
+		<script src="../dist/libs/jquery.min.js"></script>
+		<script src="../dist/libs/bootstrap.min.js"></script>
+		
+	</head>
+	<body>
+		<div class="container">	
+		
+			<div class="row">				
+					<!--<div style="display:inline-block;">
+						<input type="text" class="form-control" id="usr" placeholder="Test" >
+					</div>
+					<div style="display:inline-block;">
+						<div class="form-inline" style="padding-top:10px" id="search_bar" > 
+							<div class="form-group">						
+								<input type="text" class="form-control" id="usr" placeholder="Name">
+							</div>
+							<div class="form-group">						
+								<input type="text" class="form-control" id="usr" placeholder="Age">
+							</div>							
+						</div>				
+					</div>-->
+					
+					<div id='parent-div'>
+					</div>
+					
+					
+					
+			
+		
+			
+		</div>
+		
+		<script>
+			
+			$(document).ready(function (){			
+					var _ele ='';
+					_ele ='<div class="form-inline" style="padding-top:10px" id="search_bar" >';
+					for (var i=0;i<20;i++){
+						_ele += '<div class="form-group">';
+						var _name ='Name'+i;
+							_ele += '<input type="text" class="form-control" id="usr" placeholder="'+_name+'">';
+						_ele += '</div>';						
+					}					 														
+					$("#parent-div").html(_ele);
+				$("#search_bar").prepend('<div class="form-group"><input type="text" class="form-control" id="usr" placeholder="First"></div>');
+				
+				
+			
+
+
+					
+			});
+				
+			
+		</script>
+	</body>
+</html>
