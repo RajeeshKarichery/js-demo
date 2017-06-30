@@ -126,123 +126,6 @@
 
 
 
-.jumbotron {
-			margin-top: 30px;
-		}
-		#content,
-		#sidebar {
-			min-height: 500px;
-		}
-		#row-main {
-			overflow-x: hidden; /* necessary to hide collapsed sidebar */
-		}
-		#content {
-			#background-color: lightyellow;
-			
-			-webkit-transition: width 0.3s ease;
-			-moz-transition: width 0.3s ease;
-			-o-transition: width 0.3s ease;
-			transition: width 0.3s ease;
-		}
-		#content .btn-group {
-			margin-bottom: 10px;
-		}
-		.col-md-9 .width-12,
-		.col-md-12 .width-9 {
-			display: none; /* just hiding labels for demo purposes */
-		}
-		#sidebar {
-			
-			-webkit-transition: margin 0.3s ease;
-			-moz-transition: margin 0.3s ease;
-			-o-transition: margin 0.3s ease;
-			transition: margin 0.3s ease;
-		}
-		.collapsed {
-			display: none; /* hide it for small displays */
-		}
-		@media (min-width: 992px) {
-			.collapsed {
-				display: block;
-				margin-left: -25%; /* same width as sidebar */
-			}
-		}
-
-
-
-
-		
-		
-			.behclick-panel  .list-group {
-    		margin-bottom: 0px;
-		}
-		.behclick-panel .list-group-item:first-child {
-			border-top-left-radius:0px;
-			border-top-right-radius:0px;
-		}
-		.behclick-panel .list-group-item {
-			border-right:0px;
-			border-left:0px;
-		}
-		.behclick-panel .list-group-item:last-child{
-			border-bottom-right-radius:0px;
-			border-bottom-left-radius:0px;
-		}
-		.behclick-panel .list-group-item {
-			padding: 5px;
-		}
-		.behclick-panel .panel-heading {
-			/* 				padding: 10px 15px;
-                            border-bottom: 1px solid transparent; */
-			border-top-right-radius: 0px;
-			border-top-left-radius: 0px;
-			border-bottom: 1px solid darkslategrey;
-		}
-		.behclick-panel .panel-heading:last-child{
-			/* border-bottom: 0px; */
-		}
-		.behclick-panel {
-			border-radius: 0px;
-			border-right: 0px;
-			border-left: 0px;
-			border-bottom: 0px;
-			box-shadow: 0 0px 0px rgba(0, 0, 0, 0);
-		}
-		.behclick-panel .radio, .checkbox {
-			margin: 0px;
-			padding-left: 10px;
-		}
-		.behclick-panel .panel-title > a, .panel-title > small, .panel-title > .small, .panel-title > small > a, .panel-title > .small > a {
-			outline: none;
-		}
-		.behclick-panel .panel-body > .panel-heading{
-			padding:10px 10px;
-		}
-		.behclick-panel .panel-body {
-			padding: 0px;
-		}
-		 /* unvisited link */
-		.behclick-panel a:link {
-		    text-decoration:none;
-		}
-
-		/* visited link */
-		.behclick-panel a:visited {
-		    text-decoration:none;
-		}
-
-		/* mouse over link */
-		.behclick-panel a:hover {
-		    text-decoration:none;
-		}
-
-		/* selected link */
-		.behclick-panel a:active {
-		    text-decoration:none;
-		}
-		
-		
-		
 		
 		/* Moz */
 		
@@ -300,26 +183,33 @@
   overflow: hidden;
 }
 
+.badge1 {
+   position:relative;
+}
+.badge1[data-badge]:after {
+   content:attr(data-badge);
+   position:absolute;
+   top:-10px;
+   right:-10px;
+   font-size:.9em;	 
+   background:red;
+   color:white;
+   width:18px;height:18px;
+   text-align:center;
+   line-height:18px;
+   border-radius:50%;
+   box-shadow:0 0 1px #333;
+}
 
-
-
-.badge:after{
-    content:"100";
-    position: absolute;
+span.change:after { 
+	content:"10";
     background: rgba(0,0,255,1);
-    height:2rem;
-    top:1rem;
-    right:1.5rem;
-    width:2rem;
-    text-align: center;
-    line-height: 2rem;;
-    font-size: 1rem;
     border-radius: 50%;
     color:white;
     border:1px solid blue;
-}
-
-span.change:after { content: 'bar' }
+	position: absolute;
+    top: 15px;	  
+ }
 	
 		</style>		
 		<link rel="stylesheet" type="text/css" href="../dist/css/bootstrap/bootstrap.min.css" > 
@@ -334,8 +224,13 @@ span.change:after { content: 'bar' }
 		
 		<div class="container">
 		
-			<span>example</span>
+			<span><button>Count</button></span>			
 			<button>change</button>
+			
+			
+			
+
+
 				
 			<div class="tabs">				
 			</div>
@@ -348,96 +243,14 @@ span.change:after { content: 'bar' }
 		  </div>
 		 <!-- Modal Body-->	
 		<div class="modal-body">
-
-			<div class="row" id="row-main">
-				<!--<div class="col-md-3" id="sidebar">
-								
-					<div class="container-fluid">
-    <div class="row">
-		<div class="col-md-12">
-			<div id="accordion" class="panel panel-default behclick-panel">
-				<div class="panel-heading">
-					<h3 class="panel-title">Search Filter Car</h3>
-				</div>
-				<div class="panel-body" >					
-
-					<div class="panel-heading " >
-						<h4 class="panel-title">
-							<a data-toggle="collapse" href="#collapse1" style=" margin-left: 0px;">
-								<i class="indicator fa fa-caret-down" aria-hidden="true"></i> Brand
-							</a>
-						</h4>
-					</div>					
-					<div id="collapse1" class="panel-collapse collapse in" >
-						<ul class="list-group">							
-							<li class="list-group-item">
-								<div class="checkbox" >
-									<label>
-										<input type="checkbox" value="">
-										benz
-									</label>
-								</div>
-							</li>
-							<li class="list-group-item">
-								<div class="checkbox"  >
-									<label>
-										<input type="checkbox" value="">
-										bmw
-									</label>
-								</div>
-							</li>
-						</ul>
-					</div>
-					
-					<div class="panel-heading " >
-						<h4 class="panel-title">
-							<a data-toggle="collapse" href="#collapse2" style=" margin-left: 0px;">
-								<i class="indicator fa fa-caret-down" aria-hidden="true"></i> Color
-							</a>
-						</h4>
-					</div>
-					
-					<div id="collapse2" class="panel-collapse collapse in" >
-						<ul class="list-group">							
-							<li class="list-group-item">
-								<div class="checkbox" >
-									<label>
-										<input type="checkbox" value="">
-										Black
-									</label>
-								</div>
-							</li>
-							<li class="list-group-item">
-								<div class="checkbox"  >
-									<label>
-										<input type="checkbox" value="">
-										White
-									</label>
-								</div>
-							</li>
-						</ul>
-					</div>
-										
-					
-					
-				</div>
-			</div>
-		</div>
-	</div>
-</div>			
-					
-				</div>
+			<div class="row" id="row-main">			
 				<!-- Side Bar -->
 				<div class="col-md-12" id="content">
-				
-				
 					<div class="btn-group" role="group" aria-label="Controls">
 						<button type="button" id="openfilter" 
-						class="btn btn-default toggle-sidebar glyphicon glyphicon-filter "
-						data-toggle="collapse" data-target="#newtab-customize-panel" ></button>
+						class="btn btn-default toggle-sidebar glyphicon glyphicon-filter badge1"
+						data-toggle="collapse" data-target="#newtab-customize-panel"  ></button>
 					</div>
-				
-				
 					<!-- Moz -->
 					  <div class="newtab-customize-panel-container">
 						
@@ -450,11 +263,9 @@ span.change:after { content: 'bar' }
 									<div id ="m_cont">
 									</div>
 								</div>
-							</div>	
-						
+							</div>
 					  </div>
 					<!-- -->
-					
 					<form>
   <div class="form-group">
     <label for="email">Email address:</label>
@@ -469,12 +280,6 @@ span.change:after { content: 'bar' }
   </div>
   <button type="submit" class="btn btn-default">Submit</button>
 </form>
-				
-							
-
-
-			
-
 					
 				</div>
 			</div>
@@ -491,17 +296,7 @@ span.change:after { content: 'bar' }
 		
   </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-			
+	
 			
 </div>
 		
@@ -509,9 +304,30 @@ span.change:after { content: 'bar' }
 			
 			$(document).ready(function (){		
 
-				$('button').click(function(){
-    $('span').addClass('change');
-});
+				$('#openfilter').click(function(){
+					//alert("ok");
+					//$('span').addClass('change');
+					//$("#openfilter").attr("data-badge","6");					
+				});
+				
+				
+				
+				$(document).on("click",".mCb",function(){				
+					
+					var cnt=0;
+					$("#accordion .mCb").each(function(){						
+						if ($(this).is(":checked")){
+							//alert($(this).attr("id") + "is a checkbox!");
+							cnt++;
+						}
+							
+					});
+					if(cnt>0)
+						$("#openfilter").attr("data-badge",cnt);	
+					else	
+						$("#openfilter").removeAttr("data-badge");						
+				
+				});
 
 			
 				var _el='';
@@ -530,13 +346,13 @@ span.change:after { content: 'bar' }
 									_el +='<li class="list-group-item">';
 										_el +='<div class="checkbox" >';
 											_el +='<label>';
-												_el +='<input type="checkbox" value="">benz</label>';
+												_el +='<input type="checkbox" class="mCb" id="benz" value="">benz</label>';
 										_el +='</div>';
 									_el +='</li>';
 									_el +='<li class="list-group-item">';
 										_el +='<div class="checkbox"  >';
 											_el +='<label>';
-												_el +='<input type="checkbox" value="">bmw</label>';
+												_el +='<input type="checkbox" class="mCb" id="bmw" value="">bmw</label>';
 										_el +='</div>';
 									_el +='</li>';
 								_el +='</ul>';
@@ -554,13 +370,13 @@ span.change:after { content: 'bar' }
 									_el +='<li class="list-group-item">';
 										_el +='<div class="checkbox" >';
 											_el +='<label>';
-												_el +='<input type="checkbox" value="">White</label>';
+												_el +='<input type="checkbox" class="mCb" id="white" value="">White</label>';
 										_el +='</div>';
 									_el +='</li>';
 									_el +='<li class="list-group-item">';
 										_el +='<div class="checkbox"  >';
 											_el +='<label>';
-												_el +='<input type="checkbox" value="">Black</label>';
+												_el +='<input type="checkbox" class="mCb" id="black" value="">Black</label>';
 										_el +='</div>';
 									_el +='</li>';
 								_el +='</ul>';
@@ -569,43 +385,6 @@ span.change:after { content: 'bar' }
 							$("#m_cont").html(_el);
 			
 			
-				/*var _bool = false;
-				$("#m_cont").html('');
-				$(document).on('click','#openfilter',function (e) {
-				if(_bool){
-					_bool = false;
-					_el ='';						
-				}
-				else{
-						_bool = true;
-						var _el ='<div id="newtab-customize-panel" orient="vertical" open="true" >';
-					_el +='<div id="newtab-customize-panel-anchor"></div>';
-					_el +='<div id="newtab-customize-panel-inner-wrapper">';
-						_el +='<div id="newtab-customize-title" class="newtab-customize-panel-item">';
-						_el +='<label>NEW TAB CONTROLS</label>';
-						_el +='</div>';
-						
-						
-						
-						
-						
-					_el +='</div>';
-					_el +='</div>';				
-				}			
-				$("#m_cont").html(_el);
-				$('#accordion').on('hidden.bs.collapse', toggleChevron);
-				$('#accordion').on('shown.bs.collapse', toggleChevron);
-					
-				});
-				
-				*/
-				
-				
-				/*$(".toggle-sidebar").click(function () {
-					$("#sidebar").toggleClass("collapsed");
-					$("#content").toggleClass("col-md-12 col-md-9");					
-					return false;
-				});*/
 				
 				function toggleChevron(e) {
 					$(e.target)

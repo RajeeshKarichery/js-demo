@@ -1,0 +1,78 @@
+
+
+/* CUSTOMIZE */
+#newtab-customize-button {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  z-index: 101;
+}
+#newtab-customize-overlay {
+  opacity: 0;
+  display: none;
+  width: 100%;
+  height: 100%;
+  background: #F9F9F9;
+  z-index: 100;
+  position: fixed;
+  transition: opacity .07s linear;
+}
+.newtab-customize-panel-container {
+  position: absolute;
+  margin-right: 40px;
+  right: 0;
+}
+
+#newtab-customize-panel {
+  z-index: 999;
+  margin-top: 55px;
+  min-width: 270px;
+  position: absolute;
+  top: 100%;
+  right: -25px;
+  filter: drop-shadow(0 0 1px rgba(0,0,0,0.4)) drop-shadow(0 3px 4px rgba(0,0,0,0.4));
+  transition: all 200ms ease-in-out;
+  transform-origin: top right;
+  transform: translate(-30px, -20px) scale(0) translate(30px, 20px);
+}
+
+
+
+#newtab-customize-panel[open="true"] {
+  transform: translate(-30px, -20px) scale(1) translate(30px, 20px);
+}
+
+
+
+#newtab-customize-panel-anchor {
+  width: 18px;
+  height: 18px;
+  background-color: white;
+  transform: rotate(45deg);
+  position: absolute;
+  top: -6px;
+  right: 15px;
+}
+
+#newtab-customize-title {
+  color: #7A7A7A;
+  font-size: 14px;
+  background-color: #FFFFFF;
+  line-height: 25px;
+  padding: 15px;
+  font-weight: 600;
+  cursor: default;
+  border-radius: 5px 5px 0px 0px;
+  max-width: 300px;
+  overflow: hidden;
+  display: table-cell;
+  border-top: none;
+}
+
+#newtab-customize-panel-inner-wrapper {
+  background-color: #FFFFFF;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+

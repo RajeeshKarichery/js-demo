@@ -1,0 +1,120 @@
+<html xmlns="http://www.w3.org/1999/xhtml" hasBrowserHandlers="true">
+<head>
+  <title>New Tab</title>
+	<link rel="stylesheet" type="text/css" media="all" href="fx/newTab.css" />
+	<link rel="stylesheet" type="text/css" href="../dist/css/bootstrap/bootstrap.min.css" > 
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">  
+</head>
+		<script src="../dist/libs/jquery.min.js"></script>
+		<script src="../dist/libs/bootstrap.min.js"></script>
+		
+
+<body dir="ltr">
+  
+
+  <div class="newtab-customize-panel-container">
+    <div id ="m_cont">		
+	</div>
+  </div>
+
+  <input id="newtab-customize-button" dir="ltr" value="filter" title="Customise your New Tab page" type="button" />
+</body>
+<script type="text/javascript" src="fx/contentSearchUI.js"></script>
+<script type="text/javascript" src="fx/newTab.js"></script>
+
+<script>
+	
+	$(document).ready(function (){
+
+		var _bool = false;
+	
+		$(document).on('click','#newtab-customize-button',function(e){
+			//$("#newtab-customize-panel").attr("open":true);
+			
+			if(_bool){
+				_bool = false;
+				var _el ='<div id="newtab-customize-panel" orient="vertical"  >';
+			_el +='<div id="newtab-customize-panel-anchor"></div>';
+			_el +='<div id="newtab-customize-panel-inner-wrapper">';
+				_el +='<div id="newtab-customize-title" class="newtab-customize-panel-item">';
+				_el +='<label>NEW TAB CONTROLS</label>';
+				_el +='</div>';
+			_el +='</div>';
+			_el +='</div>';
+			}
+			else{
+				_bool = true;
+				var _el ='<div id="newtab-customize-panel" orient="vertical" open="true" >';
+			_el +='<div id="newtab-customize-panel-anchor"></div>';
+			_el +='<div id="newtab-customize-panel-inner-wrapper">';
+				_el +='<div id="newtab-customize-title" class="newtab-customize-panel-item">';
+				_el +='<label>NEW TAB CONTROLS</label>';
+				_el +='</div>';
+				
+				
+				
+					_el +='<div class="panel-heading " >';
+						_el +='<h4 class="panel-title">';
+							_el +='<a data-toggle="collapse" href="#collapse1" style=" margin-left: 0px;">';
+								_el +='<i class="indicator fa fa-caret-down" aria-hidden="true"></i> Brand</a>';
+						_el +='</h4>';
+					_el +='</div>';
+					
+										
+					_el +='<div id="collapse1" class="panel-collapse collapse in" >';
+						_el +='<ul class="list-group">';
+							_el +='<li class="list-group-item">';
+								_el +='<div class="checkbox" >';
+									_el +='<label>';
+										_el +='<input type="checkbox" value="">benz</label>';
+								_el +='</div>';
+							_el +='</li>';
+							_el +='<li class="list-group-item">';
+								_el +='<div class="checkbox"  >';
+									_el +='<label>';
+										_el +='<input type="checkbox" value="">bmw</label>';
+								_el +='</div>';
+							_el +='</li>';
+						_el +='</ul>';
+					_el +='</div>';
+					
+					_el +='<div class="panel-heading " >';
+						_el +='<h4 class="panel-title">';
+							_el +='<a data-toggle="collapse" href="#collapse2" style=" margin-left: 0px;">';
+								_el +='<i class="indicator fa fa-caret-down" aria-hidden="true"></i> Color</a>';
+						_el +='</h4>';
+					_el +='</div>';
+					
+					_el +='<div id="collapse2" class="panel-collapse collapse in" >';
+						_el +='<ul class="list-group">';
+							_el +='<li class="list-group-item">';
+								_el +='<div class="checkbox" >';
+									_el +='<label>';
+										_el +='<input type="checkbox" value="">White</label>';
+								_el +='</div>';
+							_el +='</li>';
+							_el +='<li class="list-group-item">';
+								_el +='<div class="checkbox"  >';
+									_el +='<label>';
+										_el +='<input type="checkbox" value=""></label>';
+								_el +='</div>';
+							_el +='</li>';
+						_el +='</ul>';
+					_el +='</div>';
+				
+				
+				
+			_el +='</div>';
+			_el +='</div>';
+				
+			}
+			
+			$("#m_cont").html(_el);
+			
+			
+			
+		});
+	});
+</script>
+
+</html>
